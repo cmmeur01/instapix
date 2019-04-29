@@ -38,13 +38,13 @@ Simple clone of Instagram where users can share photos, follow users to see thei
 - Initial skeletons for features - Everyone 
 - Deciding on routes for the whole app - Everyone
 - Models / associations - Everyone 
-- Build Sign up - Pair #1
-- Build Log in - Pair #2
+- Basic photo skeleton - Chris / Sergey
+- Build Sign up / Log in - Martin / Koy
 - Seeding AWS with pictures / users - Sergey
  
 ### Tuesday
+- Users able to upload / edit photos - finish from yesterday - Sergey / Chris
 - User profile - Sergey / Chris
-- Users able to upload / edit photos - Sergey / Chris
 - Build image feed - Martin / Koy
 
 ### Wednesday
