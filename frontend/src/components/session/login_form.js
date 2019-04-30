@@ -1,12 +1,12 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
+      username: '',
       password: '',
       errors: {}
     };
@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     let user = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password
     };
 
@@ -54,14 +54,17 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
+      <div className='login-form-container'>
+        <div className='login-form-header'>
+          <span className='app-title'><h1>Instapix</h1></span>
+        </div>
+        <form onSubmit={this.handleSubmit} className='login-form'>
+          <div className='login-form-inputs'>
             <br/>
               <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
+                value={this.state.username}
+                onChange={this.update('username')}
+                placeholder="Username"
               />
             <br/>
               <input type="password"
@@ -70,10 +73,17 @@ class LoginForm extends React.Component {
                 placeholder="Password"
               />
             <br/>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Log In" />
             {this.renderErrors()}
           </div>
         </form>
+        <div className='login-form-footer'>
+          <span className='form-or'>OR</span>
+          <button onClick={this.props.demoLogin}>Log in as Demo User</button>
+          <h4>
+            Don't have an account? <Link to='/signup'>Sign up</Link>
+          </h4>
+        </div>
       </div>
     );
   }

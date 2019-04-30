@@ -10,9 +10,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: user => dispatch(login(user))
-  }
-}
+    login: user => dispatch(login(user)),
+    demoLogin: () => dispatch(login({username: 'DemoUser', password: 'instapix2019'}))
+  };
+};
 
 export default connect(
   mapStateToProps,
