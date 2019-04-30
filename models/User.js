@@ -12,6 +12,9 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },
+    name: {
+      type: String,
+    },
     password: {
       type: String,
       required: true
@@ -21,7 +24,7 @@ const UserSchema = new Schema({
     },
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
-    posts: [Post.Schema],
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'posts' }],
     date: {
       type: Date,
       default: Date.now

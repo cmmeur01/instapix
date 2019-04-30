@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   description: {
     type: String
   },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'likes' }],
   imgUrl: {
     type: String,
     required: true
@@ -18,8 +19,7 @@ const PostSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  likes: [Like.Schema]
+  }
 });
 
 module.exports = Post = mongoose.model('posts', PostSchema);
