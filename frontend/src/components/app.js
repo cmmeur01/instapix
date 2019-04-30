@@ -14,7 +14,7 @@ import LoginForm from './../components/session/login_form_container';
 
 
 const App = () => (
-  <div>    
+  <div className="app-div">    
     <Switch>
       <Route exact path='/' component={Splash} />
       <Route exact path='/signup' component={SignupForm} />

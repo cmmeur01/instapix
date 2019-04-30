@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import './../../assets/stylesheets/login.css';
 
 class LoginForm extends React.Component {
   constructor(props) {

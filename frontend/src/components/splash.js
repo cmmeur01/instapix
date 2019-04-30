@@ -1,14 +1,15 @@
-import React from 'react';
-import SignupForm from './../components/session/signup_form_container';
+import React from "react";
+import SignupForm from "./../components/session/signup_form_container";
+import ImageAnimation from "../components/image_animation";
 
 const Splash = () => {
   return (
-    <div>
+    <div className="splash-main">
       <article>
-        <div>
-          <img src='https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png' alt='instapix' />
+        <div className="img-container container">
+          <ImageAnimation />
         </div>
-        <div>
+        <div className="form-component container">
           <SignupForm />
         </div>
       </article>
