@@ -13,7 +13,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !!action.currentUser,
-        user: action.currentUser
+        user: action.currentUser,
+        isSignedIn: true
       };
     case RECEIVE_USER_LOGOUT:
       return {

@@ -1,0 +1,443 @@
+/* footer css */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 12px;
+  font-weight: 600;
+  /* margin: 0 425px; */
+  margin-left: auto;
+  margin-right: auto;
+  text-transform: uppercase;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  /* text-align: center; */
+  justify-content: center;
+  padding: 38px 0;
+  /* max-width: 935px; */
+}
+
+.footer-links {
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.footer-links-list {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  margin-bottom: 3px;
+}
+
+.footer-li {
+  display: inline-block;
+  margin-bottom: 7px;
+  margin-right: 16px;
+}
+
+.copyright {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 70px;
+  text-transform: uppercase;
+  top: 12px;
+  /* width: 100%; */
+  position: relative;
+  color: #999;
+}
+
+/* Splash phone css */
+
+#root {
+  height: 950px;
+  position: relative;
+  background: #fafafa;
+  /* display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  align-content: center; */
+  /* text-align: center; */
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+article {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+}
+
+.img-container {
+  height: 618px;
+  width: 454px;
+  background-image: url("https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png");
+  position: relative;
+  top: 110px;
+  /* box-sizing: border-box; */
+}
+
+/* form css */
+
+.signup-form-container {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  left: -30px;
+  top: 45px;
+}
+
+.form-component {
+  width: 350px;
+  height: 756px;
+}
+
+.form-section {
+  width: 350px;
+  height: 584px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  margin: 0 auto 10px;
+  padding: 10px 0;
+  text-align: center;
+  position: relative;
+}
+
+.header-logo {
+  margin: 22px auto 22px;
+  width: 175px;
+  height: 51px;
+  display: block;
+  white-space: nowrap;
+  font-family: Cookie;
+  font-size: 55px;
+}
+
+.form-content {
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+
+.form-h2 {
+  font-weight: 600;
+  line-height: 20px;
+  font-size: 17px;
+  margin: 0 40px 10px;
+  color: #999;
+  text-align: center;
+}
+
+.fb-section {
+  margin-top: 8px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 8px;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  justify-content: start;
+  -webkit-box-align: stretch;
+  align-content: stretch;
+  box-sizing: border-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  padding: 0;
+  position: relative;
+}
+
+.fb-btn {
+  outline: 0 !important;
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  padding: 5px 9px;
+  text-align: center;
+  width: auto;
+  font-size: 14px;
+}
+
+.fb-btn > a {
+  color: white;
+  text-decoration: none;
+}
+
+.separator {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  margin: 10px 40px 18px;
+  display: flex;
+}
+
+.border-line {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  background-color: #efefef;
+  height: 1px;
+  position: relative;
+  top: 0.45em;
+}
+
+.or {
+  color: #999;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15px;
+  margin: 0 18px;
+  text-transform: uppercase;
+}
+
+.form-input {
+  font-size: 12px;
+  -webkit-appearance: none;
+  background: #fafafa;
+  border: 0;
+  -webkit-box-flex: 1;
+  flex: 1 0 0px;
+  margin: 0;
+  outline: 0;
+  overflow: hidden;
+  padding: 9px 0 7px 8px;
+  text-overflow: ellipsis;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  line-height: 18px;
+  color: black;
+}
+
+.input-div {
+  height: 36px;
+  -webkit-box-flex: 1;
+  flex: 1 0 0;
+  padding: 0;
+  position: relative;
+  min-width: 0;
+  display: flex;
+  border: 1px solid #efefef;
+  margin: 7px 40px;
+}
+
+.input-div > input {
+  width: 100%;
+}
+
+.input-div > input::placeholder {
+  width: 100%;
+  color: gray;
+}
+
+.signup-btn-div {
+  margin-top: 8px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 8px;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+}
+
+.signup-btn {
+  outline: 0 !important;
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  padding: 5px 9px;
+  text-align: center;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 15px 0;
+}
+
+.login-section {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  /* margin: 0 0 10px; */
+  margin: 0 auto 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 350px;
+  position: relative;
+}
+
+.login-section > p {
+  color: #262626;
+  font-size: 14px;
+  margin: 15px;
+  text-align: center;
+}
+
+.app-section {
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  box-sizing: border-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.app-p {
+  color: #262626;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 20px;
+  text-align: center;
+}
+
+.apps {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin: 10px 0;
+  position: relative;
+  
+}
+
+.z1VUo {
+  margin-right: 8px;
+}
+
+.Rt8TI {
+  height: 40px;
+}
+
+/* animated phone css */
+
+.image-div {
+  height: 428px;
+  width: 242px;
+  position: relative;
+  top: 100px;
+  left: 150px;
+}
+
+.image-fade-out {
+  opacity: 80;
+  animation-name: fade-out;
+  animation-duration: 1.5s;
+}
+
+.image-fade-in {
+  opacity: 100;
+  animation-name: fade-in;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
+/* media queries */
+/* @media only screen and (max-width: 1500px) {
+  .footer {
+    margin: 0 200px;
+  }
+
+  article {
+    left: 50px;
+  }
+} */
+/* @media only screen and (max-width: 1190px) {
+  .footer {
+    margin: 0 auto;
+    display: block;
+  }
+
+  article {
+    margin: 0 auto;
+  }
+
+  .img-container {
+    display: none;
+  }
+} */
+
+.main-app-div {
+  align-items: center;
+  width: 100%;
+  margin: auto;
+ 
+}
+/* inside splash.js */
+.splash-main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* errors */
+
+.errors {
+  text-align: center;
+}
+
+.list-errors {
+  text-align: center;
+  list-style-type: none;
+}
+
