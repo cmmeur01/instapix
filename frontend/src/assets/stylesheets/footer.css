@@ -177,6 +177,7 @@ article {
   padding: 5px 9px;
   text-align: center;
   width: auto;
+  font-size: 14px;
 }
 
 .fb-btn > a {
@@ -429,11 +430,14 @@ article {
   box-sizing: border-box;
 }
 
-/* inside App.js */
-/* .app-div {
-  width: 100%;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
-  align-content: center;
-} */
+/* errors */
+
+.errors {
+  text-align: center;
+}
+
+.list-errors {
+  text-align: center;
+  list-style-type: none;
+}
+

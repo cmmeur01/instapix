@@ -19,10 +19,10 @@ class SignupForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.signedIn === true) {
-      this.props.history.push('/');
+      this.props.history.push('/login');
     }
 
-    // this.setState({errors: nextProps.errors})
+    this.setState({errors: nextProps.errors})
   }
 
   update(field) {
@@ -49,7 +49,7 @@ class SignupForm extends React.Component {
 
   renderErrors() {
     return(
-      <ul>
+      <ul className="list-errors">
         {Object.keys(this.state.errors).map((error, i) => (
           <li key={`error-${i}`}>
             {this.state.errors[error]}

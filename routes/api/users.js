@@ -33,26 +33,42 @@ router.post('/register', (req, res) => {
           // Throw a 400 error if the email address already exists
           return res.status(400).json({email: `Another account is using ${req.body.email}.`})
         } else {
-          // Otherwise create a new user
-          const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            name: req.body.name
-          })
+          User.findOne({ username: req.body.username })
+          .then(user => {
+            if (user) {
+              return res.status(400).json({ username: `Username not available` })
+            } else {
+              const newUser = new User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                name: req.body.name
+              })
 
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) throw err;
-              newUser.password = hash;
-              newUser.save()
-                .then(user => res.json(user))
-                .catch(err => console.log(err));
-            })
+              bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                  if (err) throw err;
+                  newUser.password = hash;
+                  newUser
+                    .save()
+                    .then(user => {
+                      const payload = { id: user.id, username: user.username };
+
+                      jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+                        res.json({
+                          success: true,
+                          token: "Bearer " + token
+                        });
+                      });
+                    })
+                    .catch(err => console.log(err));
+                });
+              });
+            }
           })
         }
-      })
-  })
+      });
+  });
 
 
   router.post('/login', (req, res) => {
