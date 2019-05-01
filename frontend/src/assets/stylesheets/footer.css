@@ -57,7 +57,7 @@
 /* Splash phone css */
 
 #root {
-  height: 950px;
+  height: 100vh;
   position: relative;
   background: #fafafa;
   /* display: flex; 
