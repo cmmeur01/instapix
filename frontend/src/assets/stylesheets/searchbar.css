@@ -1,0 +1,145 @@
+.searchbar::placeholder {
+  font-family: FontAwesome;
+  color: rgb(167, 167, 167);
+  font-size: 14px;
+  position: relative;
+  left: -10px;
+}
+
+.searchbar-div {
+  height: 28px;
+  flex: 0 1 auto;
+  min-width: 125px;
+  width: 215px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.searchbar {
+  background: #fafafa;
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  border: solid 1px #dbdbdb;
+  border-radius: 3px;
+  color: #262626;
+  outline: 0;
+  padding: 3px 10px 3px 26px;
+  z-index: 2;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif; */
+  line-height: 18px;
+  font-family: " -apple-system, Arial, FontAwesome";
+}
+
+.matches-div {
+  background: #fff;
+  border: solid 1px #e6e6e6;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.0975);
+  left: 50%;
+  margin-left: -121px;
+  position: absolute;
+  right: -12px;
+  top: 75px;
+  width: 243px;
+  z-index: 9;
+  display: none;
+}
+
+.matches-div:after,
+.matches-div:before {
+  bottom: 100%;
+  left: 57%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.matches-div:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #fff;
+  border-width: 12px;
+  margin-left: -30px;
+}
+
+.matches-div:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #e6e6e6;
+  border-width: 15px;
+  margin-left: -33px;
+}
+
+.matches {
+  list-style-type: none;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* overflow: hidden; */
+  max-height: 362px;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+}
+
+.user-div {
+  background: white;
+  align-items: center;
+  border-bottom: solid 1px #efefef;
+  height: 50px;
+  padding: 8px 14px;
+}
+
+.user-div > a {
+  color: black;
+  text-decoration: none;
+  display: flex;
+}
+
+.user-div > a > img {
+  height: 32px;
+  width: 32px;
+  margin: 0 10px 0 0;
+  display: block;
+  align-self: center;
+  flex: none;
+}
+
+.user-p {
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  text-align: left;
+}
+
+.first-p {
+  margin-bottom: 0;
+  font-weight: bold;
+  text-transform: lowercase;
+  position: relative;
+}
+
+.second-p {
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: -10px;
+  border-bottom: 10px solid #fff;
+  z-index: 1;
+  position: relative;
+  left: 117px;
+}

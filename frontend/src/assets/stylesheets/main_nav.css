@@ -1,0 +1,156 @@
+.main-header {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  transition: height 0.2s ease-in-out;
+  height: 77px;
+}
+
+.inner-main-div {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  height: 77px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  max-width: 1010px;
+  padding: 26px 20px;
+  transition: height 0.2s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+}
+
+div.main-logos {
+  width: 377.5px;
+  height: 36px;
+  display: flex;
+}
+
+.main-logos > a {
+  color: black;
+  text-decoration: none;
+  display: flex;
+  text-align: center;
+}
+
+.icons-left {
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  align-items: center;
+  align-content: stretch;
+  display: flex;
+}
+
+.icons-left > img {
+  height: 23px;
+  width: 23px;
+}
+
+.instapix-name {
+  display: flex;
+  position: relative;
+  left: -10px;
+}
+
+.instapix-name > span {
+  height: 29px;
+  width: 103px;
+  font-family: Cookie;
+  font-size: 34px;
+}
+
+.side-border {
+  background-color: #262626;
+  height: 28px;
+  margin: 0 16px;
+  width: 1px;
+  position: relative;
+  flex-shrink: 0;
+  flex-direction: column;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  align-items: stretch;
+}
+
+.nav-icons {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 0 0%;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+.inner-icons-div {
+  display: flex;
+  flex-direction: row;
+  padding-left: 24px;
+  white-space: nowrap;
+  align-content: center;
+  align-items: center;
+}
+
+.explore-icon {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.explore-icon > a {
+  font-family: Arial, FontAwesome;
+  width: 100%;
+  color: #003569;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.explore-icon > a > img {
+  height: 23px;
+  width: 23px;
+  align-items: center;
+  align-content: center;
+  transform: rotate(195deg);
+}
+
+.activity-icon {
+  margin-left: 30px;
+  display: flex;
+}
+.activity-icon > a {
+  font-family: Arial, FontAwesome;
+}
+
+.activity-heart {
+  height: 23px;
+  width: 25px;
+  position: relative;
+  top: 2px;
+}
+
+.profile-icon {
+  margin-left: 30px;
+}
+
+.profile-icon > a {
+}
+
+.profile-icon > a > img {
+  width: 24px;
+  height: 24px;
+}

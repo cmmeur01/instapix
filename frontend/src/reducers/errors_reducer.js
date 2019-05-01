@@ -3,9 +3,11 @@ import SessionErrorsReducer from './session_errors_reducer';
 // import errors from './errors_reducer';
 
 
-const RootReducer = combineReducers({
+
+const ErrorsReducer = combineReducers({
   // errors,
-  session: SessionErrorsReducer
+  session: SessionErrorsReducer,
+  
 });
 
-export default RootReducer;
+export default ErrorsReducer;
