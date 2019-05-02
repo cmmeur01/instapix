@@ -25,14 +25,13 @@ router.get('/', (req, res) => {
         });
         res.send({ users });
       });
-  }
-)});
+    }
+  );
+});
 
 router.post('/search', (req, res) => {
- 
   const searchTerm = req.body.searchTerm;
-  
-  User.find({ username: {$regex : '^' + searchTerm, $options : "i"}})
+  User.find({ username: { $regex: '^' + searchTerm, $options: "i" } }).sort([['username', 1]])
   .then(users => {
     users = users.map(user => {
       user.password = '';
@@ -41,8 +40,6 @@ router.post('/search', (req, res) => {
     res.send({ users });
   });
 });
-
-router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
@@ -59,24 +56,22 @@ router.post('/register', (req, res) => {
     return res.status(400).json(errors);
   }
 
-    // Check to make sure nobody has already registered with a duplicate email
     User.findOne({ email: req.body.email })
       .then(user => {
         if (user) {
-          // Throw a 400 error if the email address already exists
-          return res.status(400).json({email: `Another account is using ${req.body.email}.`})
+          return res.status(400).json({email: `Another account is using ${req.body.email}.`});
         } else {
           User.findOne({ username: req.body.username })
           .then(user => {
             if (user) {
-              return res.status(400).json({ username: `Username not available` })
+              return res.status(400).json({ username: `Username not available` });
             } else {
               const newUser = new User({
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
                 name: req.body.name
-              })
+              });
 
               bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -98,7 +93,7 @@ router.post('/register', (req, res) => {
                 });
               });
             }
-          })
+          });
         }
       });
   });
@@ -130,7 +125,7 @@ router.post('/register', (req, res) => {
             jwt.sign(
                 payload,
                 keys.secretOrKey,
-                // Tell the key to expire in one hour
+
                 {expiresIn: 3600},
                 (err, token) => {
                 res.json({
@@ -141,8 +136,8 @@ router.post('/register', (req, res) => {
             } else {
                 return res.status(400).json({password: 'Incorrect password'});
             }
-        })
-      })
-  })
+        });
+      });
+  });
 
 module.exports = router;

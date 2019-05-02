@@ -1,5 +1,5 @@
 import { RECEIVE_SEARCH_RESULTS } from './../actions/user_actions';
-import merge from 'lodash/merge';
+// import merge from 'lodash/merge';
 
 const UIReducer = (state = {}, action) => {
   Object.freeze(state);

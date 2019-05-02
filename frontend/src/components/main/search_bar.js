@@ -57,7 +57,7 @@ class SearchBar extends React.Component {
     const { users } = this.props;
     let results = '';
     if (!users || users.length < 1 || users === {} ) {
-      results = 'No results found';
+      results = <div className='no-results-found'>No results found.</div>;
     } else {
       results = users.map((user, i) => {
       return (

@@ -1,11 +1,12 @@
-import React from 'react';
-import PostItem from './post_item';
-import './../../assets/stylesheets/feed.css';
+import React from "react";
+import PostItem from "./post_item_container";
+// import SideBar from "./sidebar";
+import "./../../assets/stylesheets/feed.css";
 
 class Feed extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.props.fetchPosts();
@@ -13,23 +14,28 @@ class Feed extends React.Component {
 
   render() {
     const { posts, users } = this.props;
-    let feed = '';
+    let feed = "";
     if (posts) {
-      
-      feed = <ul className="feed-list">{posts.map((post, i) => {
-        // debugger;
-        let user = users.filter(user => user._id === post.user)[0];
-        return <li key={i}><PostItem post={post} user={user} /></li>
-      })}</ul>;
-
+      feed = (
+        <ul className="feed-list">
+          {posts.map((post, i) => {
+            let user = users.filter(user => user._id === post.user)[0];
+            return (
+              <li key={i}>
+                <PostItem post={post} user={user} />
+              </li>
+            );
+          })}
+        </ul>
+      );
     }
-     
 
     return (
-      <div className="feed-div">
-        {feed}
-      </div>
-    )
+      // <div className="outer-feed-container">
+      <div className="feed-div">{feed}</div>
+      /* <SideBar /> */
+      /* </div> */
+    );
   }
 }
 

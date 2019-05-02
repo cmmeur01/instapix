@@ -29,6 +29,7 @@ const UserSchema = new Schema({
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'posts' }],
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'posts' }],
     date: {
       type: Date,
       default: Date.now
