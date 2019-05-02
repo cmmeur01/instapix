@@ -1,0 +1,9 @@
+.feed-div {
+  height: 850px;
+  overflow: scroll;
+  margin-top: 50px;
+}
+
+.feed-list {
+  list-style-type: none;
+}

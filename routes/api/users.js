@@ -5,18 +5,42 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const jwt_decode = require('jwt-decode');
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
 router.get('/', (req, res) => {
-  User.find({})
-  .then(users => {
-    
-    console.log(users);
-    res.send({users})
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  User.findOne({ _id: user.id })
+    .then(user => {
+    let following = user.following;
+    following.push(user.id);
+    User.find({ _id: { $in: following } })
+      .then(users => {
+        users = users.map(user => {
+          user.password = '';
+          return user;
+        });
+        res.send({ users });
+      });
   }
 )});
+
+router.post('/search', (req, res) => {
+ 
+  const searchTerm = req.body.searchTerm;
+  
+  User.find({ username: {$regex : '^' + searchTerm, $options : "i"}})
+  .then(users => {
+    users = users.map(user => {
+      user.password = '';
+      return user;
+    });
+    res.send({ users });
+  });
+});
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
