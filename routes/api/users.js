@@ -5,6 +5,7 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const Post = require('./../../models/Post');
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
@@ -12,21 +13,85 @@ const validateLoginInput = require('../../validation/login');
 router.get('/', (req, res) => {
   User.find({})
   .then(users => {
-    
-    console.log(users);
-    res.send({users})
+    let hash = {};
+    users.forEach(user => {
+      hash[user.id] = user;
+    });
+    res.send(hash);
   }
 )});
 
+router.patch('/username', (req, res) => {
+  let user1;
+  // console.log(req);
+  User.findOne({_id: req.body.user._id})
+    .then(user => {
+
+      for (let i = 0; i < user.following.length; i++) {
+        if (user.following[i] == req.body.id) {
+          user.following.splice(i, 1);
+          console.log(user.following);
+        }
+      }
+      user.save();
+      user1 = user;
+      // res.send(user.following);
+    })
+    .then( () => {
+      User.findOne({_id: req.body.id}).then(user => {
+        for (let i = 0; i < user.followers.length; i++) {
+          if (user.followers[i] == req.body.user._id) {
+            user.followers.splice(i, 1);
+          }
+        }
+        user.save();
+        res.send({following: user1.following, followers: user.followers});
+      });
+    });
+  
+});
+
+
+router.post('/username', (req, res) => {
+  console.log(req.body.user._id);
+  let user1;
+  User.findOne({ _id: req.body.user._id })
+    .then(user => {
+      user.following.push(req.body.id);
+      user.save();
+      user1 = user;
+      // res.send(user.following);
+    })
+    .then( () => {
+      User.findOne({_id: req.body.id})
+      .then( user => {
+        user.followers.push(user1._id);
+        user.save();
+        res.send({ following: user1.following, followers: user.followers });
+      });
+    });
+});
+
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email
-    });
-  });
+router.get('/current', (req, res) => {
+  User.findOne({ _id: req.query.id })
+  .populate('posts')
+    .then(user => {
+      let currentUser = user;
+      User.findOne({ username: req.query.username })
+      .populate('posts')
+      .then( user => {
+        if (user) {
+            res.send({ [currentUser.id]: currentUser, [user.id]: user });
+        } else {
+          res.send({ [currentUser.id]: currentUser });
+        }
+      }
+      );
+    }
+  );
+});
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
