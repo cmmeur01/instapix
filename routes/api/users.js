@@ -35,7 +35,9 @@ const validateLoginInput = require('../../validation/login');
 router.get('/', (req, res) => {
   User.find({})
   .then(users => {
-    res.send({users});
+    let usersObject = {};
+    users.map(user => usersObject[user._id] = user);
+    res.send({users: usersObject});
   });
 });
 
