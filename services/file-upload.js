@@ -7,7 +7,7 @@ const keys = require('../config/keys');
 aws.config.update({
   secretAccessKey: keys.AWS.secretAccessKey,
   accessKeyId: keys.AWS.accessKeyId,
-  region: "us-west-2"
+  region: keys.AWS.region
 });
 
 const s3 = new aws.S3();
