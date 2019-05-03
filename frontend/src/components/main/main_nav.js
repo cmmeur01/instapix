@@ -30,7 +30,7 @@ class MainNav extends React.Component {
             </Link>
           </div>
           <div className="search-bar">
-            <SearchBar users={this.props.users} />
+            <SearchBar />
           </div>
 
           <div className="nav-icons">
@@ -60,9 +60,9 @@ class MainNav extends React.Component {
                   />
                 </Link>
               </div>
-              {/* <button className="logout-btn" onClick={this.props.logout}>
+              <button className="logout-btn" onClick={this.props.logout}>
                 Logout
-              </button> */}
+              </button>
             </div>
           </div>
         </div>

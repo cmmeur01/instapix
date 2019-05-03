@@ -2,46 +2,64 @@ import React from "react";
 import "./../../assets/stylesheets/searchbar.css";
 // import { fetchUsers } from "./../../actions/user_actions";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { searchUsers } from './../../actions/user_actions';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { inputVal: "", popupVisible: false };
+    this.state = { inputVal: "", popupVisible: true };
     this.update = this.update.bind(this);
   }
 
   update(e) {
+    // debugger;
     this.setState({ inputVal: e.target.value });
     let modal = document.getElementById("input-names");
-    modal.style.display = "block";
+    // if (this.state.inputVal.length < 0) {
+    //   modal.style.display = "none";
+    // } else {
+    //   modal.style.display = "block";
+    // }
+    if (e.target.value.length === 0) {
+      // this.setState({ inputVal: '' });
+      modal.style.display = "none";
+    } else {
+      // this.setState({ inputVal: e.target.value });
+      modal.style.display = "block";
+    }
+    this.props.searchUsers(e.target.value);
   }
 
-  matches() {
-    const matches = [];
-    const users = this.props.users;
+  // matches() {
+  //   const matches = [];
+  //   const users = this.props.users;
 
-    if (this.state.inputVal.length === 0) {
-      return users;
-    }
+  //   if (this.state.inputVal.length === 0) {
+  //     return users;
+  //   }
 
-    users.forEach(user => {
-      const sub = user.username.slice(0, this.state.inputVal.length);
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
-        matches.push(user);
-      }
-    });
+  //   users.forEach(user => {
+  //     const sub = user.username.slice(0, this.state.inputVal.length);
+  //     if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
+  //       matches.push(user);
+  //     }
+  //   });
 
-    if (matches.length === 0) {
-      matches.push("No matches");
-    }
+  //   if (matches.length === 0) {
+  //     matches.push("No matches");
+  //   }
 
-    return matches;
-  }
+  //   return matches;
+  // }
 
   render() {
-    let users = this.matches();
-    if (!users) return null;
-    const results = users.map((user, i) => {
+    const { users } = this.props;
+    let results = '';
+    if (!users || users.length < 1 || users === {} ) {
+      results = <div className='no-results-found'>No results found.</div>;
+    } else {
+      results = users.map((user, i) => {
       return (
         <li key={i}>
           <div className="user-div">
@@ -55,7 +73,7 @@ class SearchBar extends React.Component {
           </div>
         </li>
       );
-    });
+      })};
 
     return (
       <div className="searchbar-div">
@@ -74,5 +92,18 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+const msp = state => {
+  return({
+    users: state.ui.searchResults
+  });
+};
 
+const mdp = dispatch => {
+  return({
+    searchUsers: searchTerm => dispatch(searchUsers(searchTerm))
+  });
+};
+
+// export default SearchBar;
+
+export default connect(msp, mdp)(SearchBar);

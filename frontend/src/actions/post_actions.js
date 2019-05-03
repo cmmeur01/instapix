@@ -1,7 +1,9 @@
 import * as PostAPIUtil from './../util/post_api_util';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+
 export const RECEIVE_POST = 'RECEIVE_POST';
+
 
 const receivePosts = posts => {
   return({
@@ -9,6 +11,7 @@ const receivePosts = posts => {
     posts
   });
 };
+
 
 const receivePost = post => {
   return ({
@@ -18,9 +21,10 @@ const receivePost = post => {
 };
 
 
+
 export const fetchPosts = () => dispatch => {
   return PostAPIUtil.fetchPosts().then(res => {
-    return dispatch(receivePosts(res.data));
+    return dispatch(receivePosts(res.data.posts));
   });
 };
 
@@ -43,5 +47,4 @@ export const postComment = (post_id, user_id, text) => dispatch => {
     return dispatch(receivePost(res.data));
   });
 };
-
 

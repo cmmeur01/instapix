@@ -130,6 +130,7 @@
 .second-p {
   margin-top: 3px;
   text-transform: uppercase;
+  color: #999;
 }
 
 .arrow {
@@ -142,4 +143,10 @@
   z-index: 1;
   position: relative;
   left: 117px;
+}
+
+.no-results-found {
+  color: rgb(168,168,168);
+  padding: 15px;
+  font-size: 12px;
 }

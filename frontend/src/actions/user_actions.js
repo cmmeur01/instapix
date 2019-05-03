@@ -4,6 +4,7 @@ export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const RECEIVE_CURRENT_USERS = 'RECEIVE_CURRENT_USERS';
 export const UPDATE_FOLLOWING= "UPDATE_FOLLOWING";
+export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
 
 
 const receiveUsers = users => {
@@ -12,6 +13,7 @@ const receiveUsers = users => {
     users
   });
 };
+
 
 const receiveUser = user => {
   return ({
@@ -35,6 +37,15 @@ const receiveFollowing = (id, tgt_id, data) => {
     tgt_id,
     data
   };
+};
+
+
+
+const receiveSearchResults = users => {
+  return ({
+    type: RECEIVE_SEARCH_RESULTS,
+    users
+  });
 };
 
 
@@ -70,4 +81,10 @@ export const unfollowUser = (user, id) => dispatch => {
   });
 };
 
+
+export const searchUsers = searchTerm => dispatch => {
+  return UserAPIUtil.searchUsers(searchTerm).then(res => {
+    return dispatch(receiveSearchResults(res.data.users));
+  });
+};
 

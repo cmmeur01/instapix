@@ -15,3 +15,11 @@ export const fetchPostsByUserId = (id) => {
 export const postComment = (post_id, user_id, text) => {
   return axios.post(`/api/posts/id/comment`, {post_id: post_id, user_id: user_id, text: text});
 };
+  
+export const likePost = likeData => {
+  return axios.post('/api/posts/like', likeData);
+};
+
+export const unlikePost = likeData => {
+  return axios.patch('/api/posts/unlike', likeData);
+};

@@ -1,4 +1,7 @@
+
 import { RECEIVE_USERS, RECEIVE_USER, RECEIVE_CURRENT_USERS, UPDATE_FOLLOWING } from './../actions/user_actions';
+import { RECEIVE_USER_LOGOUT } from './../actions/session_actions';
+
 import merge from 'lodash/merge';
 import { RECEIVE_POST } from '../actions/post_actions';
 
@@ -20,6 +23,8 @@ const UsersReducer = (state = {}, action) => {
       let nextState = merge({}, state, action.post.user);
       let finalState = merge(nextState, state, action.post.users);
       return finalState;
+    case RECEIVE_USER_LOGOUT:
+      return {};
     default:
       return state;
   }

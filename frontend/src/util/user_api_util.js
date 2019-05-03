@@ -30,3 +30,10 @@ export const followUser = (user, id) => {
 };
 
 
+export const searchUsers = searchTerm => {
+  return axios.post('/api/users/search', {searchTerm});
+};
+
+export const fetchSuggestions = () => {
+  return axios.get('/api/users/suggestions');
+};
