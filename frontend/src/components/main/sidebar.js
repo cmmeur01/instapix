@@ -8,7 +8,6 @@ class SideBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {users: []};
-    this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
@@ -24,18 +23,6 @@ class SideBar extends React.Component {
       }
     }
     this.setState({users: stateUsers});
-  }
-
-  getCurrentUser() {
-    let currentUser;
-    if (this.props.users) {
-      this.props.users.forEach(user => {
-        if (this.props.currentUser.id === user._id) {
-          currentUser = user;
-        }
-      });
-    }
-    return currentUser;
   }
 
   getSuggestions() {

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import PostItem from './post_item';
 import { likePost, unlikePost } from './../../util/post_api_util';
+import { openModal } from './../../actions/modal_actions';
 
 const msp = state => {
   return({
@@ -11,7 +12,8 @@ const msp = state => {
 const mdp = dispatch => {
   return({
     likePost: postId => likePost(postId),
-    unlikePost: likeData => unlikePost(likeData)
+    unlikePost: likeData => unlikePost(likeData),
+    openModal: postId => dispatch(openModal(postId))
   });
 };
 
