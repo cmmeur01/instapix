@@ -5,7 +5,11 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+
+const Post = require('./../../models/Post');
+
 const jwt_decode = require('jwt-decode');
+
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
@@ -35,32 +39,42 @@ const validateLoginInput = require('../../validation/login');
 router.get('/', (req, res) => {
   User.find({})
   .then(users => {
-    let usersObject = {};
-    users.map(user => usersObject[user._id] = user);
-    res.send({users: usersObject});
-  });
-});
+    let hash = {};
+    users.forEach(user => {
+      hash[user.id] = user;
+    });
+    res.send(hash);
+  }
+)});
 
-// router.get('/suggestions', (req, res) => {
-//   const token = req.headers.authorization;
-//   const user = jwt_decode(token);
-//   User.findOne({ _id: user.id })
-//     .then(user => {
-//       let randomUsers = [];
-//       let following = user.following;
-//       let count = User.count();
-//       let random = Math.floor(Math.random() * count);
-//       while (randomUsers.length < 20) {
-//         User.findOne({}).skip(random)
-//         .then(randomUser => {
-//           if (!randomUsers.includes(randomUser) && !following.includes(randomUser.id)) {
-//             randomUsers.push(randomUser)
-//           }
-//         })
-//       }
-//       res.send({users: randomUsers});
-//     })
-// })
+router.patch('/username', (req, res) => {
+  let user1;
+  // console.log(req);
+  User.findOne({_id: req.body.user._id})
+    .then(user => {
+
+      for (let i = 0; i < user.following.length; i++) {
+        if (user.following[i] == req.body.id) {
+          user.following.splice(i, 1);
+          // console.log(user.following);
+        }
+      }
+      user.save();
+      user1 = user;
+      // res.send(user.following);
+    })
+    .then( () => {
+      User.findOne({_id: req.body.id}).then(user => {
+        for (let i = 0; i < user.followers.length; i++) {
+          if (user.followers[i] == req.body.user._id) {
+            user.followers.splice(i, 1);
+          }
+        }
+        user.save();
+        res.send({following: user1.following, followers: user.followers});
+      });
+   });
+});
 
 router.post('/search', (req, res) => {
   const searchTerm = req.body.searchTerm;
@@ -74,14 +88,48 @@ router.post('/search', (req, res) => {
   });
 });
 
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email,
-      image_url: req.user.image_url
+router.post('/username', (req, res) => {
+  // console.log(req.body.user._id);
+  let user1;
+  User.findOne({ _id: req.body.user._id })
+    .then(user => {
+      user.following.push(req.body.id);
+      user.save();
+      user1 = user;
+      // res.send(user.following);
+    })
+    .then( () => {
+      User.findOne({_id: req.body.id})
+      .then( user => {
+        user.followers.push(user1._id);
+        user.save();
+        res.send({ following: user1.following, followers: user.followers });
+      });
     });
-  });
+});
+
+
+router.get('/current', (req, res) => {
+  User.findOne({ _id: req.query.id })
+  // .populate({ path: 'posts', options: { sort: { "date": -1 } } })
+    .then(user => {
+      let currentUser = user;
+      User.findOne({ username: req.query.username })
+      // .populate({ path: 'posts', options: { sort: { "date": -1 } } })
+      // .populate('posts')
+      .then( user => {
+        if (user) {
+            let posts = user.posts;
+            res.send({ [currentUser.id]: currentUser, [user.id]: user });
+        } else {
+          res.send({ [currentUser.id]: currentUser });
+        }
+      }
+      );
+    }
+  );
+});
+
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
