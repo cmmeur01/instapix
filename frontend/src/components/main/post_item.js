@@ -19,6 +19,7 @@ class PostItem extends React.Component {
     this.getComment = this.getComment.bind(this);
     this.getName = this.getName.bind(this);
     this.likedClicked = this.likedClicked.bind(this);
+    this.modalOpen = this.modalOpen.bind(this);
   }
 
   update(e) {
@@ -83,6 +84,10 @@ class PostItem extends React.Component {
       this.setState({ liked: true, likeCount: this.state.likeCount + 1 });
     }
   }
+
+  modalOpen() {
+    this.props.openModal(this.props.post._id);
+  }
   
   render() {
     let { user, post } = this.props;
@@ -114,7 +119,7 @@ class PostItem extends React.Component {
     let likeCounter = '';
     if (this.state.likeCount === 1) {
       likeCounter = <h4>{this.state.likeCount} like</h4>;
-    } else {
+    } else if (this.state.likeCount > 1) {
       likeCounter = <h4>{this.state.likeCount} likes</h4>;
     }
 
@@ -155,7 +160,7 @@ class PostItem extends React.Component {
                 <img className="share" src={upload} alt="share" />
               </div>
             </section>
-            <section className="likes-section">
+            <section className="likes-section" onClick={this.modalOpen}>
               {likeCounter}
             </section>
             <div className="post-caption">

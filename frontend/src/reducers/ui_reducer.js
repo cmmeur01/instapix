@@ -1,14 +1,11 @@
-import { RECEIVE_SEARCH_RESULTS } from './../actions/user_actions';
+import search from './search_reducer';
+import modal from './modal_reducer';
+import { combineReducers } from 'redux';
 // import merge from 'lodash/merge';
 
-const UIReducer = (state = {}, action) => {
-  Object.freeze(state);
-  switch (action.type) {
-    case RECEIVE_SEARCH_RESULTS:
-      return { searchResults: action.users };
-    default:
-      return state;
-  }
-}
+const UIReducer = combineReducers({
+  search,
+  modal
+});
 
 export default UIReducer;

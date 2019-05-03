@@ -10,3 +10,16 @@ export const notFollowing = (state) => {
   }
   return randomUsers;
 };
+
+export const findPost = (state) => {
+  let postId = state.ui.modal.postId;
+  return state.entities.posts[postId];
+};
+
+export const findUsers = (state) => {
+  let postId = state.ui.modal.postId;
+  let post = state.entities.posts[postId];
+  let likers = post.likes;
+  return likers.map(liker => state.entities.users[liker]);
+  // return Object.values(state.entities.users);
+};

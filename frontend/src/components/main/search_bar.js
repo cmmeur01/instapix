@@ -94,7 +94,7 @@ class SearchBar extends React.Component {
 
 const msp = state => {
   return({
-    users: state.ui.searchResults
+    users: state.ui.search.searchResults
   });
 };
 
