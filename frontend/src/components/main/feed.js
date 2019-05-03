@@ -1,7 +1,8 @@
 import React from "react";
 import PostItem from "./post_item_container";
-// import SideBar from "./sidebar";
+import SideBar from "./sidebar";
 import "./../../assets/stylesheets/feed.css";
+import Suggestions from './suggestions';
 
 class Feed extends React.Component {
   // constructor(props) {
@@ -14,8 +15,9 @@ class Feed extends React.Component {
 
   render() {
     const { posts, users } = this.props;
+    if (users.length === 0) return null;
     let feed = "";
-    if (posts) {
+    if (posts.length > 0) {
       feed = (
         <ul className="feed-list">
           {posts.map((post, i) => {
@@ -28,13 +30,19 @@ class Feed extends React.Component {
           })}
         </ul>
       );
+    } else {
+      return (
+        <div className='outer-feed-container'>
+          <Suggestions />
+        </div>
+      )
     }
 
     return (
-      // <div className="outer-feed-container">
+      <div className="outer-feed-container">
       <div className="feed-div">{feed}</div>
-      /* <SideBar /> */
-      /* </div> */
+       <SideBar /> 
+      </div> 
     );
   }
 }

@@ -1,9 +1,76 @@
 .feed-div {
-  height: 850px;
+  height: 820px;
   overflow: scroll;
   margin-top: 50px;
+}
+
+.feed-div::-webkit-scrollbar {
+   display: none;
 }
 
 .feed-list {
   list-style-type: none;
 }
+
+.outer-feed-container {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.sug-container {
+  width: 598px;
+  position: relative;
+  top: 100px;
+}
+
+.sug-list-div {
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  width: 598px;
+  background: white;
+}
+
+.sug-container > div {
+  color: #262626;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sug-header {
+  margin-bottom: 10px;
+}
+
+.sug-users > .user-p > .second-p {
+  color: #999;
+}
+
+.li-users {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: none;
+}
+
+.li-users > .user-div {
+  border-bottom: none;
+}
+
+.follow-btn {
+  margin-right: 15px;
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+  width: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  padding: 5px 9px;
+  text-align: center;
+  font-size: 14px;
+  outline: none;
+}
+

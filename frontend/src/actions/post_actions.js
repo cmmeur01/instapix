@@ -19,7 +19,7 @@ const receivePosts = posts => {
 
 export const fetchPosts = () => dispatch => {
   return PostAPIUtil.fetchPosts().then(res => {
-    return dispatch(receivePosts(res.data));
+    return dispatch(receivePosts(res.data.posts));
   });
 };
 

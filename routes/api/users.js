@@ -10,24 +10,55 @@ const jwt_decode = require('jwt-decode');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
+
+// SENDS ONLY CURRENT USER AND FOLLOWINGS 
+// router.get('/', (req, res) => {
+//   const token = req.headers.authorization;
+//   const user = jwt_decode(token);
+//   User.findOne({ _id: user.id })
+//     .then(user => {
+//     let following = user.following;
+//     following.push(user.id);
+//     User.find({ _id: { $in: following } })
+//       .then(users => {
+//         users = users.map(user => {
+//           user.password = '';
+//           return user;
+//         });
+//         res.send({ users });
+//       });
+//     }
+//   );
+// });
+
+// SENDS ALL USERS
 router.get('/', (req, res) => {
-  const token = req.headers.authorization;
-  const user = jwt_decode(token);
-  User.findOne({ _id: user.id })
-    .then(user => {
-    let following = user.following;
-    following.push(user.id);
-    User.find({ _id: { $in: following } })
-      .then(users => {
-        users = users.map(user => {
-          user.password = '';
-          return user;
-        });
-        res.send({ users });
-      });
-    }
-  );
+  User.find({})
+  .then(users => {
+    res.send({users});
+  });
 });
+
+// router.get('/suggestions', (req, res) => {
+//   const token = req.headers.authorization;
+//   const user = jwt_decode(token);
+//   User.findOne({ _id: user.id })
+//     .then(user => {
+//       let randomUsers = [];
+//       let following = user.following;
+//       let count = User.count();
+//       let random = Math.floor(Math.random() * count);
+//       while (randomUsers.length < 20) {
+//         User.findOne({}).skip(random)
+//         .then(randomUser => {
+//           if (!randomUsers.includes(randomUser) && !following.includes(randomUser.id)) {
+//             randomUsers.push(randomUser)
+//           }
+//         })
+//       }
+//       res.send({users: randomUsers});
+//     })
+// })
 
 router.post('/search', (req, res) => {
   const searchTerm = req.body.searchTerm;
@@ -45,7 +76,8 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     res.json({
       id: req.user.id,
       username: req.user.username,
-      email: req.user.email
+      email: req.user.email,
+      image_url: req.user.image_url
     });
   });
 
@@ -80,8 +112,12 @@ router.post('/register', (req, res) => {
                   newUser
                     .save()
                     .then(user => {
-                      const payload = { id: user.id, username: user.username };
-
+                      const payload = { 
+                        id: user.id, 
+                        username: user.username, 
+                        image_url: user.image_url, 
+                        name: user.name
+                      };
                       jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                         res.json({
                           success: true,
@@ -120,7 +156,12 @@ router.post('/register', (req, res) => {
         bcrypt.compare(password, user.password)
         .then(isMatch => {
             if (isMatch) {
-            const payload = {id: user.id, name: user.name};
+            const payload = {
+              id: user.id,
+              username: user.username,
+              image_url: user.image_url,
+              name: user.name
+            };
 
             jwt.sign(
                 payload,

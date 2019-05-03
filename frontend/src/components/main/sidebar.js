@@ -1,19 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchPosts } from "./../../actions/post_actions";
-import { fetchUsers } from "./../../actions/user_actions";
+import { notFollowing } from './../../reducers/selectors';
+import "./../../assets/stylesheets/sidebar.css";
 
 class SideBar extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {users: []};
     this.getCurrentUser = this.getCurrentUser.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
+
   componentDidMount() {
-    this.props.fetchUsers();
+    let users = this.props.users;
+    let stateUsers = [];
+    while (stateUsers.length < 6) {
+      let random = Math.floor(Math.random() * users.length);
+      let user = users[random];
+      if (!stateUsers.includes(user)) {
+        stateUsers.push(user);
+      }
+    }
+    this.setState({users: stateUsers});
   }
 
   getCurrentUser() {
@@ -22,7 +32,6 @@ class SideBar extends React.Component {
       this.props.users.forEach(user => {
         if (this.props.currentUser.id === user._id) {
           currentUser = user;
-          debugger;
         }
       });
     }
@@ -30,17 +39,12 @@ class SideBar extends React.Component {
   }
 
   getSuggestions() {
-    let users = [];
-    while (users.length < 3) {
-      let user = this.props.users[
-        Math.floor(Math.random() * this.props.users.length)
-      ];
-      users.push(user);
-    }
-    debugger;
+    if (this.state.users === [] ) return null;
+    let users = this.state.users;
+
     const results = users.map((user, i) => {
       return (
-        <li key={i}>
+        <li className="side-lis" key={i}>
           <div className="user-div">
             <Link to={`/users/${user.name}`}>
               <img src={user.image_url} alt="avatar" />
@@ -50,6 +54,7 @@ class SideBar extends React.Component {
               </div>
             </Link>
           </div>
+          <div className="side-follow-btn"><button>Follow</button></div>
         </li>
       );
     });
@@ -60,21 +65,23 @@ class SideBar extends React.Component {
     return (
       <div className="side-feed-bar">
         <div className="profile-header">
-          {/* <div>
-            <img src={this.getCurrentUser().image_url} />
-          </div>
           <div>
-            <div>
-              <Link to="#">{this.getCurrentUser().username}</Link>
+            <img className="sidebar-profile" src={this.props.currentUser.image_url} alt="profile pic" />
+          </div>
+          <div className="user-info">
+            <div className="sidebar-username">
+              <Link to="#">{this.props.currentUser.username}</Link>
             </div>
-            <div>{this.getCurrentUser().name}</div>
-          </div> */}
+            <div className="sidebar-name">{this.props.currentUser.name}</div>
+          </div>
         </div>
 
         <div className="suggestions">
-          <div>Suggestions for you</div>
-          <div>
-            <ul>{this.getSuggestions()};</ul>
+          <div className="suggestions-div">
+            <div className="sug-text">
+              <div>Suggestions for you</div>
+            </div>
+            <ul className="suggestions-list">{this.getSuggestions()}</ul>
           </div>
         </div>
       </div>
@@ -82,23 +89,14 @@ class SideBar extends React.Component {
   }
 }
 
-// export default SideBar;
 const mstp = state => {
   return {
     posts: state.entities.posts.posts,
-    users: Object.values(state.entities.users),
+    users: notFollowing(state),
     currentUser: state.session.user
   };
 };
 
-const mdtp = dispatch => {
-  return {
-    fetchPosts: () => dispatch(fetchPosts()),
-    fetchUsers: () => dispatch(fetchUsers())
-  };
-};
-
 export default connect(
-  mstp,
-  mdtp
+  mstp
 )(SideBar);

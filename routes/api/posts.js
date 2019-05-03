@@ -14,7 +14,9 @@ router.get("/", (req, res) => {
      following.push(user.id);
      Post.find({ user: { $in: following }}).sort([['date', -1]])
      .then(posts => {
-       res.send({ posts });
+       let postsObject = {};
+       posts.forEach(post => postsObject[post._id] = post)
+       res.send({ posts: postsObject });
      });
      
   }) ;
@@ -47,12 +49,9 @@ router.patch('/unlike', (req, res) => {
       for (let i = 0; i < user.likes.length; i++) {
         if (user.likes[i] == postId) {
           user.likes.splice(i, 1);
-          // console.log(user.following);
         }
       }
       user.save();
-
-      // res.send(user.following);
     })
     .then(() => {
       Post.findOne({ _id: postId }).then(post => {
@@ -68,24 +67,4 @@ router.patch('/unlike', (req, res) => {
 
 });
 
-
-// router.post('/username', (req, res) => {
-//   // console.log(req.body.user._id);
-//   let user1;
-//   User.findOne({ _id: req.body.user._id })
-//     .then(user => {
-//       user.following.push(req.body.id);
-//       user.save();
-//       user1 = user;
-//       // res.send(user.following);
-//     })
-//     .then(() => {
-//       User.findOne({ _id: req.body.id })
-//         .then(user => {
-//           user.followers.push(user1._id);
-//           user.save();
-//           res.send({ following: user1.following, followers: user.followers });
-//         });
-//     });
-// }); `
 module.exports = router;

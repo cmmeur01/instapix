@@ -4,7 +4,7 @@ import Feed from './feed';
 
 const mstp = state => {
   return({
-    posts: state.entities.posts.posts,
+    posts: Object.values(state.entities.posts),
     users: Object.values(state.entities.users)
   });
 };
