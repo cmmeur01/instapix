@@ -18,7 +18,7 @@ class ShowPost extends React.Component {
       .then( ({post}) => {
         username = post.user.username;
       });
-    this.props.fetchComments(this.props.match.params.postId);
+    // this.props.fetchComments(this.props.match.params.postId);
     this.props.fetchCurrentUser(this.props.currentUser, username);
   }
 

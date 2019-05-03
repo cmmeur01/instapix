@@ -102,7 +102,26 @@ router.post("/id/comment", (req, res) => {
                   model: 'users'
                 }
               }).then( (post) => {
-                res.send(post);
+                // res.send({post: post, comments: post.comments});
+                let comments = post.comments;
+                let comment_ids = comments.map(ele => ele._id);
+                post.comments = comment_ids;
+                let users = comments.map(ele => ele.user);
+
+                let users_ids = users.map(ele => ele._id);
+
+                comments.forEach((comment, i) => {
+                  comment.user = users_ids[i];
+                });
+
+                let finalUsers = {};
+                users.forEach(user => {
+                  finalUsers[user._id] = user;
+                });
+                let user = post.user;
+                post.user = user._id;
+                let finalUser = { [user._id]: user };
+                res.send({ post: post, user: finalUser, users: finalUsers, comments: comments });
               });
             });
         }); 

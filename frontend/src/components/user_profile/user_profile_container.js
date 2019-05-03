@@ -5,7 +5,6 @@ import { fetchUser, fetchCurrentUser } from './../../actions/user_actions';
 import { fetchPostsByUserId } from './../../actions/post_actions';
 
 const msp = (state, ownProps) => {
-  // debugger;
   return (
     {
       currentUser: state.session.user.id,

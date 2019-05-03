@@ -2,7 +2,7 @@ import React from 'react';
 import { jsx, css } from "@emotion/core";
 import { BeatLoader } from "react-spinners";
 import FollowButton from './follow_button';
-import ProfilePostItem from './profile_post';
+import ProfilePostImageItem from './profile_post_image_item';
 
 const override = css`
   display: block;
@@ -46,7 +46,7 @@ class UserProfile extends React.Component {
     if (Array.isArray(this.props.posts.posts)) {
       console.log("inside");
       posts = this.props.posts.posts.map( (post, id) => {
-        return <ProfilePostItem key={id} currentUser={this.props.currentUser} post={post} />
+        return <ProfilePostImageItem key={id} currentUser={this.props.currentUser} post={post} />
       });
     }
     return (

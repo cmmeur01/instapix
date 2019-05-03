@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProfilePostItem = ({ currentUser, post }) => {
+const ProfilePostImageItem = ({ currentUser, post }) => {
   return (
     <Link to={`/posts/${post._id}`}>
       <li className="test-div">
@@ -10,4 +10,4 @@ const ProfilePostItem = ({ currentUser, post }) => {
     </Link>
   );
 };
-export default ProfilePostItem;
+export default ProfilePostImageItem;

@@ -47,7 +47,6 @@ export const fetchUsers = () => dispatch => {
 
 export const fetchCurrentUser = (id, username) => dispatch => {
   return UserAPIUtil.fetchCurrentUser(id, username).then(res => {
-    // debugger
     return dispatch(receiveCurrentUser(res.data));
   });
 };

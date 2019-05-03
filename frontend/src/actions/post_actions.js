@@ -30,12 +30,14 @@ export const fetchPostsByUserId = (id) => dispatch => {
   });
 };
 
+//has posts.posts when dispatch receivePost
 export const fetchPost = (id) => dispatch => {
   return PostAPIUtil.fetchPost(id).then(res => {
     return dispatch(receivePost(res.data));
   });
 };
 
+// does not have posts.posts when dispatch receivePost
 export const postComment = (post_id, user_id, text) => dispatch => {
   return PostAPIUtil.postComment(post_id, user_id, text).then(res => {
     return dispatch(receivePost(res.data));
