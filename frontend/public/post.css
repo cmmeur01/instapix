@@ -1,0 +1,27 @@
+.show-post-container {
+  max-height: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* align-content: center; */
+}
+
+.img-container > img {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.comment-container {
+  border-top: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  width: 350px;
+  height: 600px;
+  background-color: #FFFFFF;
+}
+
+.page-owner {
+  display: flex;
+  flex-direction: row;
+}

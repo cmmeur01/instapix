@@ -30,7 +30,7 @@ router.patch('/username', (req, res) => {
       for (let i = 0; i < user.following.length; i++) {
         if (user.following[i] == req.body.id) {
           user.following.splice(i, 1);
-          console.log(user.following);
+          // console.log(user.following);
         }
       }
       user.save();
@@ -53,7 +53,7 @@ router.patch('/username', (req, res) => {
 
 
 router.post('/username', (req, res) => {
-  console.log(req.body.user._id);
+  // console.log(req.body.user._id);
   let user1;
   User.findOne({ _id: req.body.user._id })
     .then(user => {
@@ -76,13 +76,15 @@ router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.get('/current', (req, res) => {
   User.findOne({ _id: req.query.id })
-  .populate('posts')
+  // .populate({ path: 'posts', options: { sort: { "date": -1 } } })
     .then(user => {
       let currentUser = user;
       User.findOne({ username: req.query.username })
-      .populate('posts')
+      // .populate({ path: 'posts', options: { sort: { "date": -1 } } })
+      // .populate('posts')
       .then( user => {
         if (user) {
+            let posts = user.posts;
             res.send({ [currentUser.id]: currentUser, [user.id]: user });
         } else {
           res.send({ [currentUser.id]: currentUser });
@@ -92,6 +94,9 @@ router.get('/current', (req, res) => {
     }
   );
 });
+
+
+// .populate({ path: 'posts', options: { sort: { "date": -1 } } });
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);

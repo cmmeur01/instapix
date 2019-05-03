@@ -16,10 +16,25 @@ class FollowButton extends React.Component {
 
   render() {
     let {owner, currentUser} = this.props;
-    let text = owner.followers.includes(currentUser._id) ? "Unfollow" : "Follow";
-    return (
-    <button onClick={this.handleClick.bind(this)} className="edit-profile-btn">{text}</button>
-    )
+    // let text = owner.followers.includes(currentUser._id) ? "Unfollow" : "Follow";
+    let button;
+    if (owner.followers.includes(currentUser._id)) {
+      button = <button onClick={this.handleClick.bind(this)} className="edit-profile-btn">Unfollow</button>
+    } else {
+      button = (
+        <button
+          onClick={this.handleClick.bind(this)}
+          className="edit-profile-btn inactive"
+        >
+          Follow
+        </button>
+      );
+    }
+      return (
+      <div>
+        {button}
+      </div>
+      );
   }
 
 }

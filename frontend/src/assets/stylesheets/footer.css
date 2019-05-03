@@ -75,14 +75,13 @@ article {
   margin: 0 auto;
 }
 
-.img-container {
+/* .img-container {
   height: 618px;
   width: 454px;
   background-image: url("https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png");
   position: relative;
   top: 110px;
   /* box-sizing: border-box; */
-}
 
 /* form css */
 

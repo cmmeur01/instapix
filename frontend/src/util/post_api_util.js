@@ -3,3 +3,15 @@ import axios from 'axios';
 export const fetchPosts = () => {
   return axios.get('/api/posts/');
 };
+
+export const fetchPost = (id) => {
+  return axios.get(`/api/posts/id?id=${id}`);
+};
+
+export const fetchPostsByUserId = (id) => {
+  return axios.get(`/api/posts/username?id=${id}`);
+};
+
+export const postComment = (post_id, user_id, text) => {
+  return axios.post(`/api/posts/id/comment`, {post_id: post_id, user_id: user_id, text: text});
+};

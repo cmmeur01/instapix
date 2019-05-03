@@ -1,5 +1,6 @@
 import { RECEIVE_USERS, RECEIVE_USER, RECEIVE_CURRENT_USERS, UPDATE_FOLLOWING } from './../actions/user_actions';
 import merge from 'lodash/merge';
+import { RECEIVE_POST } from '../actions/post_actions';
 
 const UsersReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -14,8 +15,11 @@ const UsersReducer = (state = {}, action) => {
       let newState = merge({}, state);
       newState[action.id].following = action.data.following;
       newState[action.tgt_id].followers = action.data.followers;
-      debugger
       return newState;
+    case RECEIVE_POST:
+      let nextState = merge({}, state, action.post.user);
+      let finalState = merge(nextState, state, action.post.users);
+      return finalState;
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { jsx, css } from "@emotion/core";
 import { BeatLoader } from "react-spinners";
 import FollowButton from './follow_button';
+import ProfilePostItem from './profile_post';
 
 const override = css`
   display: block;
@@ -13,15 +14,21 @@ const override = css`
 class UserProfile extends React.Component {
   
   componentDidMount() {
+    let owner;
     let username = this.props.match.params.username;
-    // this.props.fetchUser(username);
-    this.props.fetchCurrentUser(this.props.currentUser, username);
-    // debugger
+    this.props.fetchCurrentUser(this.props.currentUser, username).then(() => {
+      let users = Object.values(this.props.users);
+      users.forEach(user => {
+        if (user.username === this.props.match.params.username) {
+          owner = user;
+        }
+      });
+      this.props.fetchPostsByUserId(owner._id);
+    });
   }
 
   render() {
     let owner;
-    let url;
     if (this.props.match.params.username === this.props.currentUser.username) {
 
       owner = this.props.users[this.props.currentUser];
@@ -35,7 +42,13 @@ class UserProfile extends React.Component {
         }
       });
     }
-    debugger;
+    let posts;
+    if (Array.isArray(this.props.posts.posts)) {
+      console.log("inside");
+      posts = this.props.posts.posts.map( (post, id) => {
+        return <ProfilePostItem key={id} currentUser={this.props.currentUser} post={post} />
+      });
+    }
     return (
       <div>
       { 
@@ -77,8 +90,8 @@ class UserProfile extends React.Component {
                     </li>
                   </ul>
                   <div className="user-bio">
-                    <span className="user-profile-name">{owner.bio}</span>
-                    <span>userBio text blahblahblah</span>
+                    <span className="user-profile-name">{owner.name}</span>
+                    <span>{owner.bio}</span>
                   </div>
                 </div>
                 
@@ -89,20 +102,19 @@ class UserProfile extends React.Component {
                     <div className="posts-icon"></div>
                     <span> POSTS</span>
                   </li>
-                  <li>
-                    <div className="new-post-icon"></div>
-                    <span> NEW POST</span>
-                  </li>
+                    {owner._id === this.props.currentUser ? (
+                      <li>
+                        <div className="new-post-icon"></div>
+                        <span> NEW POST</span>
+                      </li>
+                    ) : (
+                      ''
+                    )}
                 </ul>
               </nav>
-              <div className="user-posts">
-                <div className="test-div" />
-                <div className="test-div" />
-                <div className="test-div" />
-                <div className="test-div" />
-                <div className="test-div" />
-                <div className="test-div" />
-              </div>
+              <ul className="user-posts">
+                {posts}
+              </ul>
             </div>
           </div>
         ) : (
