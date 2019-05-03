@@ -17,8 +17,9 @@ export const findPost = (state) => {
 };
 
 export const findUsers = (state) => {
-  // let postId = state.ui.modal;
-  // let likers = state.entities.posts.postId.likes;
-  // return likers.map(liker => state.entities.users[liker]);
-  return Object.values(state.entities.users);
-}
+  let postId = state.ui.modal.postId;
+  let post = state.entities.posts[postId];
+  let likers = post.likes;
+  return likers.map(liker => state.entities.users[liker]);
+  // return Object.values(state.entities.users);
+};
