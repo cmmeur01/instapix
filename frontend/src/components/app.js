@@ -19,9 +19,9 @@ import Main from './../components/main/main';
 const App = () => (
   <div className="app-div">    
     <Switch>
-      <Route exact path='/newpost' component={UploadComponent} />
-      <Route exact path='/users/:username' component={UserProfile} />
-      <Route exact path='/posts/:postId' component={ShowPost} />
+      <ProtectedRoute exact path='/newpost' component={Main} />
+      <ProtectedRoute exact path='/users/:username' component={Main} />
+      <ProtectedRoute exact path='/posts/:postId' component={Main} />
       <AuthRoute exact path='/' component={Splash} />
       <ProtectedRoute exact path='/home' component={Main} />
       <AuthRoute exact path='/signup' component={SignupForm} />

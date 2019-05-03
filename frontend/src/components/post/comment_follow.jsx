@@ -16,6 +16,7 @@ class CommentFollow extends React.Component {
 
   render() {
     let { owner, currentUser } = this.props;
+    if (!currentUser) return null;
     let button;
     if (owner.followers !== undefined ) {
       if (owner.followers.includes(currentUser._id)) {
@@ -39,6 +40,8 @@ class CommentFollow extends React.Component {
   }
 
 }
+
+
 
 const mdp = dispatch => ({
   unfollowUser: (currentUser, id) => dispatch(unfollowUser(currentUser, id)),
