@@ -11,7 +11,7 @@ const PostSchema = new Schema({
   description: {
     type: String
   },
-  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'likes' }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
   imgUrl: {
     type: String,
     required: true
