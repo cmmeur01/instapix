@@ -51,6 +51,9 @@ class UploadComponent extends React.Component {
     };
     if (file) {
       reader.readAsDataURL(file);
+      let submit = document.getElementById('post-caption');
+      submit.classList.add("new-post-caption");
+      submit.classList.remove("post-caption-hidden");
     }
   }
 
@@ -64,14 +67,16 @@ class UploadComponent extends React.Component {
 
     return (
       <div className="new-post-container">
-      <div className="">
-        Choose a file, add a description (optional), and submit!
-      </div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="file" onChange={this.handleFile} />
+        <div className="new-post-title">
+          Choose a picture, add a description, and share!
+        </div>
+        <form className="new-post-form" onSubmit={this.handleSubmit}>
+          <div><input type="file" onChange={this.handleFile} /></div>
+          <div className="post-caption-hidden" id="post-caption">
+            <div className="new-post-desc"><input type="text" placeholder="Write a caption" onChange={this.update("description")} /></div>
+            <div><button type="submit" className="shr-btn">Share</button></div>
+          </div>
           <img className="img-upload" id="img-upload" src="" alt="" />
-          <input type="text" onChange={this.update("description")} />
-          <button>Submit</button>
         </form>
       </div>
     );
