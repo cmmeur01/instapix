@@ -46,7 +46,11 @@ class UploadComponent extends React.Component {
         cropBoxResizable: false,
         dragMode: false,
         toggleDragModeOnDblclick: false,
-        data: { width: 600, height: 600 }
+        data: { width: 1, height: 1 },
+        minCropBoxHeight: 614,
+        minCropBoxWidth: 614,
+        viewMode: 2,
+        // scalable: false
       });
     };
     if (file) {
@@ -66,18 +70,20 @@ class UploadComponent extends React.Component {
   render() {
 
     return (
-      <div className="new-post-container">
-        <div className="new-post-title">
+      <div className="outter-post">
+        {/* <div className="new-post-title">
           Choose a picture, add a description, and share!
+        </div> */}
+        <div className="new-post-container">
+          <form className="new-post-form" onSubmit={this.handleSubmit}>
+            <div><input type="file" onChange={this.handleFile} /></div>
+            <div className="post-caption-hidden" id="post-caption">
+              <div className="new-post-desc"><input type="text" placeholder="Write a caption" onChange={this.update("description")} /></div>
+              <div><button type="submit" className="shr-btn">Share</button></div>
+            </div>
+            <img className="img-upload" id="img-upload" src="" alt="" />
+          </form>
         </div>
-        <form className="new-post-form" onSubmit={this.handleSubmit}>
-          <div><input type="file" onChange={this.handleFile} /></div>
-          <div className="post-caption-hidden" id="post-caption">
-            <div className="new-post-desc"><input type="text" placeholder="Write a caption" onChange={this.update("description")} /></div>
-            <div><button type="submit" className="shr-btn">Share</button></div>
-          </div>
-          <img className="img-upload" id="img-upload" src="" alt="" />
-        </form>
       </div>
     );
   }

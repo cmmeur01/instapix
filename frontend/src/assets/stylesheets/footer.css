@@ -2,8 +2,7 @@
 
 .footer {
   /* removed absolute position and added bottom margin */
-  /* position: absolute; */
-  margin-top: 50px;
+  position: absolute;
   bottom: 0;
   font-size: 12px;
   font-weight: 600;
@@ -19,6 +18,8 @@
   justify-content: center;
   padding: 38px 0;
   /* max-width: 935px; */
+  /* z-index: 999;
+  background-color: white; */
 }
 
 .footer-links {
@@ -59,8 +60,8 @@
 /* Splash phone css */
 
 #root {
-  height: 100vh;
-  position: relative;
+  /* height: 100vh; */
+  /* position: relative; */
   background: #fafafa;
   /* display: flex; 
   flex-direction: column; 

@@ -13,7 +13,6 @@
 
 .cropper-container img {
   display: block;
-  height: 100%;
   image-orientation: 0deg;
   max-height: none !important;
   max-width: none !important;

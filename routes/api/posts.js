@@ -209,9 +209,10 @@ router.post("/new", (req, res) => {
     const newPost = new Post({
       user: req.body.user,
       imgUrl: req.body.imgUrl,
-      description: req.body.text,
+      description: req.body.description,
       likes: []
     });
+    console.log(newPost);
     newPost.save().then((post) => {
       User.findOne({ _id: post.user })
       .then((user) => {
