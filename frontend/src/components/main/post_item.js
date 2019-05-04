@@ -12,14 +12,27 @@ class PostItem extends React.Component {
     super(props);
     this.state = {
       inputVal: "",
-      likeCount: props.post.likes.length,
-      liked: props.post.likes.includes(props.currentUserId)
+      likeCount: 0,
+      liked: false,
+      comments: []
     };
 
-    this.getComment = this.getComment.bind(this);
-    this.getName = this.getName.bind(this);
+    // this.getComment = this.getComment.bind(this);
+    // this.getName = this.getName.bind(this);
     this.likedClicked = this.likedClicked.bind(this);
     this.modalOpen = this.modalOpen.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.post) {
+      // debugger
+      this.setState({
+        likeCount: this.props.post.likes.length,
+        liked: this.props.post.likes.includes(this.props.currentUserId),
+        comments: this.props.comments.filter(comment => comment.post === this.props.post._id)
+      })
+      
+    }
   }
 
   update(e) {
@@ -39,41 +52,43 @@ class PostItem extends React.Component {
     }
   }
 
-  getComment() {
-    let quotes = [
-      "This is nice.",
-      "I like this.",
-      "Hmmm...",
-      "Tell me something.",
-      "What is that about?",
-      "Are you for real.",
-      "Well, I guess we have a winner.",
-      "Chicken is on me.",
-      "Who you think you are?",
-      "whatevs",
-      "and that's how the west was won."
-    ];
-    const comment = quotes[Math.floor(Math.random() * quotes.length)];
-    return comment;
-  }
+  
 
-  getName() {
-    let names = [
-      "sergeythegriden",
-      "christhemeurer",
-      "martinthemarkaj",
-      "koythesaeteurn",
-      "billythekid",
-      "rockstar",
-      "kittymeowmeow",
-      "datwhoppingirl",
-      "foodiepootie",
-      "areyoumymom",
-      "getmilk"
-    ];
-    const name = names[Math.floor(Math.random() * names.length)];
-    return name;
-  }
+  // getComment() {
+  //   let quotes = [
+  //     "This is nice.",
+  //     "I like this.",
+  //     "Hmmm...",
+  //     "Tell me something.",
+  //     "What is that about?",
+  //     "Are you for real.",
+  //     "Well, I guess we have a winner.",
+  //     "Chicken is on me.",
+  //     "Who you think you are?",
+  //     "whatevs",
+  //     "and that's how the west was won."
+  //   ];
+  //   const comment = quotes[Math.floor(Math.random() * quotes.length)];
+  //   return comment;
+  // }
+
+  // getName() {
+  //   let names = [
+  //     "sergeythegriden",
+  //     "christhemeurer",
+  //     "martinthemarkaj",
+  //     "koythesaeteurn",
+  //     "billythekid",
+  //     "rockstar",
+  //     "kittymeowmeow",
+  //     "datwhoppingirl",
+  //     "foodiepootie",
+  //     "areyoumymom",
+  //     "getmilk"
+  //   ];
+  //   const name = names[Math.floor(Math.random() * names.length)];
+  //   return name;
+  // }
 
   likedClicked() {
     if (this.state.liked === true) {
@@ -116,6 +131,45 @@ class PostItem extends React.Component {
       date = months[month - 1] + " " + day + ", " + year;
     }
 
+    let postComments = '';
+    if (this.state.comments.length >= 2) {
+      let commentOne = this.state.comments[0];
+      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
+      let commentTwo = this.state.comments[1];
+      let userTwo = this.props.users.filter(user => user._id === commentTwo.user)[0];
+      // debugger;
+      postComments = 
+        <div className="user-comments">
+          <p>
+            <Link to={`/posts/${post._id}`} className='view-all-comments'>View all comments</Link>
+          </p>
+          <p>
+            <Link to={`/users/${userOne.username}`}>
+              <span className="example">{userOne.username} </span>
+            </Link>
+            {commentOne.body}
+          </p>
+          <p>
+            <Link to={`/users/${userTwo.username}`}>
+              <span className="example">{userTwo.username} </span>
+            </Link>
+            {commentTwo.body}
+          </p>
+        </div>;
+    } else if (this.state.comments.length === 1) {
+      let commentOne = this.state.comments[0];
+      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
+      postComments = 
+        <div className="user-comments">
+          <p>
+            <Link to={`/users/${userOne.username}`}>
+              <span className="example">{userOne.username} </span>
+            </Link>
+            {commentOne.body}
+          </p>
+        </div>;
+    }
+
     let likeCounter = '';
     if (this.state.likeCount === 1) {
       likeCounter = <h4>{this.state.likeCount} like</h4>;
@@ -134,12 +188,14 @@ class PostItem extends React.Component {
       <div className="post-item-container">
         <article className="post-item">
           <header className="post-header">
-            <div className="post-user-image">
-              <img src={user.image_url} alt={user.username} />
-            </div>
-            <div className="post-user-username">
-              <h4>{user.username}</h4>
-            </div>
+            <Link to={`/users/${user.username}`}>
+              <div className="post-user-image">
+                <img src={user.image_url} alt={user.username} />
+              </div>
+              <div className="post-user-username">
+                <h4>{user.username}</h4>
+              </div>
+            </Link>
           </header>
           <div className="post-image">
             <img src={post.imgUrl} alt={user.username} />
@@ -164,28 +220,18 @@ class PostItem extends React.Component {
               {likeCounter}
             </section>
             <div className="post-caption">
-              <span className="post-user-username">{user.username}</span>
+              <Link to={`/users/${user.username}`}>
+                <span className="post-user-username">{user.username}</span>
+              </Link>
               <span>{post.description}</span>
             </div>
-            <div className="user-comments">
-              <p>
-                <Link to="/comments">View all comments</Link>
-              </p>
-              <p>
-                <span className="example">{this.getName()} </span>
-                {this.getComment()}
-              </p>
-              <p>
-                <span className="example">{this.getName()} </span>
-                {this.getComment()}
-              </p>
-            </div>
+            {postComments}
             <div className="post-item-date">
               <h4>{date}</h4>
             </div>
           </footer>
           <section className="comment-box">
-            <form className="comment-form">
+            <form className="comment-form2">
               <textarea
                 onChange={this.update()}
                 onKeyDown={this.disableBtn}

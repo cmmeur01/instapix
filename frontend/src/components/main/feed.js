@@ -5,17 +5,18 @@ import "./../../assets/stylesheets/feed.css";
 import Suggestions from './suggestions';
 
 class Feed extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     this.props.fetchPosts();
   }
 
   render() {
-    const { posts, users } = this.props;
-    if (users.length === 0) return null;
+    if (!this.props.posts) return null;
+    const { posts, users, comments } = this.props;
+    if (users.length === 0 || !posts) return null;
     let feed = "";
     if (posts.length > 0) {
       feed = (
@@ -24,7 +25,7 @@ class Feed extends React.Component {
             let user = users.filter(user => user._id === post.user)[0];
             return (
               <li key={i}>
-                <PostItem post={post} user={user} />
+                <PostItem post={post} user={user} users={users} comments={comments} />
               </li>
             );
           })}

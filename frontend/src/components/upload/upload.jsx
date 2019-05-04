@@ -10,7 +10,7 @@ class UploadComponent extends React.Component {
       imageUrl: '',
       description: ''
     };
-    let cropper;
+    // let cropper;
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

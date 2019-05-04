@@ -23,9 +23,11 @@
   height: 34px;
 }
 
-.post-header {
+.post-header > a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .post-user-image {
@@ -46,6 +48,11 @@
   align-items: center;
   position: relative;
   top: -10px;
+}
+
+.post-caption > a {
+  text-decoration: none;
+  color: black;
 }
 
 .post-caption > span {
@@ -126,7 +133,11 @@
 
 .user-comments > p > a {
   text-decoration: none;
-  color: #999;
+  color: black;
+}
+
+.view-all-comments {
+  color: gray;
 }
 
 .comment-box {
@@ -142,7 +153,7 @@
   margin-top: 4px;
 }
 
-.comment-form {
+.comment-form2 {
   flex-direction: row;
   flex-shrink: 1;
   position: relative;

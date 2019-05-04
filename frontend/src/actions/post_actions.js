@@ -1,7 +1,7 @@
 import * as PostAPIUtil from './../util/post_api_util';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-
+export const RECEIVE_FEED_POSTS = 'RECEIVE_FEED_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
 
 
@@ -20,11 +20,19 @@ const receivePost = post => {
   });
 };
 
+const receiveFeedPosts = data => {
+  return ({
+    type: RECEIVE_FEED_POSTS,
+    data
+  })
+}
+
 
 
 export const fetchPosts = () => dispatch => {
   return PostAPIUtil.fetchPosts().then(res => {
-    return dispatch(receivePosts(res.data.posts));
+    debugger;
+    return dispatch(receiveFeedPosts(res.data));
   });
 };
 

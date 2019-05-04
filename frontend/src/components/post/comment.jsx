@@ -50,7 +50,7 @@ class Comment extends React.Component {
     // });
     let owner = users[this.props.post.user];
     let currentUser = users[this.props.currentUserId];
-    debugger;
+    // debugger;
     return (
       <div className="comment-component">
         <div className="page-owner">
