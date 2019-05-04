@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const upload = require('../../services/file-upload');
-
 const singleUpload = upload.single('image');
 
+
+//aws route to upload picture / get image link
 router.post('/upload', function (req, res) {
   singleUpload(req, res, function (err) {
     if (err) {
@@ -16,9 +17,6 @@ router.post('/upload', function (req, res) {
     return res.json({ 'imageUrl': req.file.location });
   });
 });
-
-
-
 
 
 module.exports = router;

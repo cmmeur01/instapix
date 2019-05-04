@@ -57,7 +57,11 @@ router.get("/id", (req, res) => {
         let user = post.user;
         post.user = user._id;
         let finalUser = { [user._id]: user };
-        res.send( {post: post, user: finalUser, users: finalUsers, comments: comments});
+        let hashComments = {};
+        comments.forEach((comment) => {
+          hashComments[comment._id] = comment;
+        })
+        res.send( {post: post, user: finalUser, users: finalUsers, comments: hashComments});
       });
   }
 
@@ -69,7 +73,14 @@ router.get("/username", (req, res) => {
   if (user) {
     Post.find({ user: req.query.id }).sort({ "date": -1 })
       .then(posts => {
-        res.send({posts});
+        //new
+        let postsHash = {}
+        posts.forEach((post) => {
+          postsHash[post._id] = post;
+        })
+        res.send(postsHash);
+        //end
+        // res.send(posts);
       });
   }
 });
@@ -119,7 +130,11 @@ router.post("/id/comment", (req, res) => {
                 let user = post.user;
                 post.user = user._id;
                 let finalUser = { [user._id]: user };
-                res.send({ post: post, user: finalUser, users: finalUsers, comments: comments });
+                let hashComments = {};
+                comments.forEach((comment) => {
+                  hashComments[comment._id] = comment;
+                })
+                res.send({ post: post, user: finalUser, users: finalUsers, comments: hashComments });
               });
             });
         }); 
@@ -185,5 +200,28 @@ router.patch('/unlike', (req, res) => {
     });
 
 });
+
+router.post("/new", (req, res) => {
+  
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  if (user) {
+    const newPost = new Post({
+      user: req.body.user,
+      imgUrl: req.body.imgUrl,
+      description: req.body.text,
+      likes: []
+    });
+    newPost.save().then((post) => {
+      User.findOne({ _id: post.user })
+      .then((user) => {
+        user.posts.push(post._id);
+        user.save()
+        .then(res.send({ post }));
+      });
+    });
+  }
+});
+
 
 module.exports = router;

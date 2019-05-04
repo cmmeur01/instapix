@@ -40,8 +40,7 @@ class Comment extends React.Component {
   render() {
     
     let {comments, users} = this.props;
-    // if (!users) return null;
-    let postComments = comments.map((comment, id) => {
+    let postComments = Object.values(comments).map((comment, id) => {
       let user = users[comment.user];
       return <CommentItem key={id} user={user} comment={comment} />
     });
@@ -50,7 +49,6 @@ class Comment extends React.Component {
     // });
     let owner = users[this.props.post.user];
     let currentUser = users[this.props.currentUserId];
-    debugger;
     return (
       <div className="comment-component">
         <div className="page-owner">
@@ -65,8 +63,16 @@ class Comment extends React.Component {
             <CommentFollow owner={owner} currentUser={currentUser} />
           </div>
         </div>
-        <ul className="comment-index-component">{postComments}</ul>
-        <div className="comment-form">
+        <ul className="comment-index-component">
+          <li className="comment-item">
+            <img className="comment-user-pic" src={owner.image_url} alt="img" />
+            <span className="comment-body">
+              <strong>{owner.name}</strong> {this.props.post.description}
+            </span>
+          </li>
+          {postComments}
+        </ul>
+        <div className="post-comment-form">
           <form onSubmit={this.handleSubmit}>
             <textarea
               id="myTextarea"

@@ -1,6 +1,9 @@
 import React from 'react';
 import Cropper from 'cropperjs';
 import axios from "axios";
+import { connect } from 'react-redux';
+import { sendPost } from './../../actions/post_actions';
+
 
 class UploadComponent extends React.Component {
 
@@ -8,11 +11,13 @@ class UploadComponent extends React.Component {
     super(props);
     this.state = {
       imageUrl: '',
-      description: ''
+      description: '',
+      likes: []
     };
-    let cropper;
+    // let cropper;
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state.user = this.props.currentUserId();
   }
 
   handleSubmit(e) {
@@ -25,8 +30,8 @@ class UploadComponent extends React.Component {
       formData.append('image', blob);
 
       axios.post("/api/users/images/upload", formData)
-        .then((url) => that.setState({ imageUrl: url.data.imageUrl }))
-        .then(() => console.log(that.state));
+        .then((url) => that.props.sendPost({ imgUrl: url.data.imageUrl, likes: [], user: that.state.user, description: that.state.description }))
+        .then((id) => that.props.history.push(`/posts/${id}`));
     });
   }
 
@@ -47,26 +52,41 @@ class UploadComponent extends React.Component {
     if (file) {
       reader.readAsDataURL(file);
     }
+  }
 
-
+  update(field) {
+    return (e) => {
+      this.setState({ [field]: e.target.value });
+    };
   }
 
   render() {
 
     return (
-      <div>
+      <div className="new-post-container">
+      <div className="">
+        Choose a file, add a description (optional), and submit!
+      </div>
         <form onSubmit={this.handleSubmit}>
           <input type="file" onChange={this.handleFile} />
+          <img className="img-upload" id="img-upload" src="" alt="" />
+          <input type="text" onChange={this.update("description")} />
           <button>Submit</button>
         </form>
-
-        <img id="img-upload" src="" alt="" />
       </div>
     );
   }
 
-
 }
 
-export default UploadComponent;
+
+const msp = (state, ownProps) => ({
+  currentUserId: () => state.session.user.id
+});
+
+const mdp = dispatch => ({
+  sendPost: (post) => dispatch(sendPost(post))
+});
+
+export default connect(msp, mdp)(UploadComponent);
 

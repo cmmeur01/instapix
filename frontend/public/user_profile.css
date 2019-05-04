@@ -3,6 +3,7 @@
   flex-direction: column;
   background-color: #fafafa;
   justify-content: center;
+  padding-top: 60px;
 }
 
 .inner-profile {

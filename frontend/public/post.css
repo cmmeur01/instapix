@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* align-content: center; */
+  padding-top: 115px;
 }
 
-.img-container > img {
+.img-cont > img {
   width: 600px;
   height: 600px;
   object-fit: cover;
@@ -23,7 +23,7 @@
   box-sizing: content-box;
   /* flex-grow: 1;
   height: calc(100% - 32px); */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* left: 0; */
   /* padding: 16px 12px; */
   /* position: absolute; */
@@ -87,8 +87,11 @@
   padding: 6px 12px 6px 0
 }
 
+
+
 .comment-item {
   list-style: none;
+  padding-bottom: 15px;
 }
 
 .comment-component{
@@ -100,8 +103,10 @@
 .comment-index-component{
   display: flex;
   flex-direction: column;
-  padding: 16px 12px;
+  padding: 0 12px;
   height: 100%;
+  overflow-y: scroll;
+  margin: 5px 0;
   /* justify-content: space-between; */
 }
 
@@ -121,7 +126,7 @@
   /* font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; */
 }
 
-.comment-form {
+.post-comment-form {
   display: flex;
   border-top: 1px solid #efefef;
   color: #999;
@@ -129,15 +134,15 @@
   min-height: 56px;
   align-items: center;
   justify-content: center;
-
 }
-.comment-form > form {
+
+.post-comment-form > form {
   display: flex;
   justify-content: space-between;
   width: calc(100% - 24px);
 }
 
-.comment-form > form > textarea {
+.post-comment-form > form > textarea {
   font-size: 14px;
 
   background: 0 0;
@@ -151,7 +156,7 @@
   resize: none;
 }
 
-.comment-form > form > button {
+.post-comment-form > form > button {
   border: 0;
   color: #3897f0;
   display: inline;
@@ -163,3 +168,33 @@
 .disabled {
   opacity: 0.3;
 }
+
+.new-post-container {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+
+.post-comment-link {
+  color: black;
+  text-decoration: none;
+}
+
+/* .img-upload {
+  max-height: 850px;
+  max-width: 850px;
+} */
+
+/* .cropper-container {
+  max-height: 850px;
+  max-width: 850px;
+}
+
+
+.cropper-bg {
+  max-height: 850px;
+  max-width: 850px; */
+/* } */
+
+

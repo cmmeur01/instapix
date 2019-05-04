@@ -1,16 +1,16 @@
-import axios from "axios";
+// import axios from "axios";
 
-export const setAuthToken = token => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = token;
-  } else {
-    delete axios.defaults.headers.common["Authorization"];
-  }
-};
+// export const setAuthToken = token => {
+//   if (token) {
+//     axios.defaults.headers.common["Authorization"] = token;
+//   } else {
+//     delete axios.defaults.headers.common["Authorization"];
+//   }
+// };
 
-export const sumbitPost = postData => {
-  return axios.post("/api/users/images/upload", postData);
-};
+// export const sumbitPost = postData => {
+//   return axios.post("/api/users/images/upload", postData);
+// };
 
 
 
