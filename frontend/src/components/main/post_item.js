@@ -19,29 +19,37 @@ class PostItem extends React.Component {
 
     // this.getComment = this.getComment.bind(this);
     // this.getName = this.getName.bind(this);
-    this.likedClicked = this.likedClicked.bind(this);
+    this.handleLike = this.handleLike.bind(this);
     this.modalOpen = this.modalOpen.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpdate =this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
     if (this.props.post) {
       // debugger
-      this.setState({
-        likeCount: this.props.post.likes.length,
-        liked: this.props.post.likes.includes(this.props.currentUserId),
-        comments: this.props.comments.filter(comment => comment.post === this.props.post._id)
-      })
-      
+      this.setLocalState();
     }
   }
 
-  update(e) {
-    return e => {
-      let button = document.getElementById("comment-btn");
-      button.disabled = false;
-      button.classList.add("show-btn");
-      this.setState({ inputVal: e.target.value });
-    };
+  // componentDidUpdate() {
+  //   this.setLocalState();
+  // }
+
+  setLocalState() {
+    this.setState({
+      likeCount: this.props.post.likes.length,
+      liked: this.props.post.likes.includes(this.props.currentUserId),
+      comments: this.props.comments.filter(comment => comment.post === this.props.post._id),
+    });
+  }
+
+  handleUpdate(e) {
+    debugger;
+    this.setState({ inputVal: e.target.value });
+    let button = document.getElementById("comment-btn");
+    button.disabled = false;
+    button.classList.add("show-btn");
   }
 
   disableBtn(e) {
@@ -52,51 +60,21 @@ class PostItem extends React.Component {
     }
   }
 
-  
+  handleSubmit(e) {
+    // debugger;
+    this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
+    .then(() => {
+      this.setState({inputVal: ''})
+    });
+  }
 
-  // getComment() {
-  //   let quotes = [
-  //     "This is nice.",
-  //     "I like this.",
-  //     "Hmmm...",
-  //     "Tell me something.",
-  //     "What is that about?",
-  //     "Are you for real.",
-  //     "Well, I guess we have a winner.",
-  //     "Chicken is on me.",
-  //     "Who you think you are?",
-  //     "whatevs",
-  //     "and that's how the west was won."
-  //   ];
-  //   const comment = quotes[Math.floor(Math.random() * quotes.length)];
-  //   return comment;
-  // }
-
-  // getName() {
-  //   let names = [
-  //     "sergeythegriden",
-  //     "christhemeurer",
-  //     "martinthemarkaj",
-  //     "koythesaeteurn",
-  //     "billythekid",
-  //     "rockstar",
-  //     "kittymeowmeow",
-  //     "datwhoppingirl",
-  //     "foodiepootie",
-  //     "areyoumymom",
-  //     "getmilk"
-  //   ];
-  //   const name = names[Math.floor(Math.random() * names.length)];
-  //   return name;
-  // }
-
-  likedClicked() {
+  handleLike() {
     if (this.state.liked === true) {
-      this.props.unlikePost({ postId: this.props.post._id, userId: this.props.currentUserId });
-      this.setState({ liked: false, likeCount: this.state.likeCount - 1 });
+      this.props.unlikePost({ postId: this.props.post._id, userId: this.props.currentUserId })
+      .then(() => this.setState({ liked: false, likeCount: this.state.likeCount - 1 }));
     } else {
-      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId });
-      this.setState({ liked: true, likeCount: this.state.likeCount + 1 });
+      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId })
+      .then(() => this.setState({ liked: true, likeCount: this.state.likeCount + 1 }));
     }
   }
 
@@ -109,40 +87,50 @@ class PostItem extends React.Component {
     // debugger;
     if (!user) return null;
 
-    let date = "";
-    if (post) {
-      let months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ];
-      let month = parseInt(post.date.slice(5, 7));
-      let day = post.date.slice(8, 10);
-      let year = post.date.slice(0, 4);
-      date = months[month - 1] + " " + day + ", " + year;
+    let heartButton = '';
+    if (this.state.liked === true) {
+      heartButton = <img
+        id="like-icon"
+        onClick={this.handleLike}
+        className="img-heart-icon"
+        src={redheart}
+        alt=""
+      />
+    } else {
+      heartButton = <img
+        id="like-icon"
+        onClick={this.handleLike}
+        className="img-heart-icon"
+        src={heart}
+        alt=""
+      />;
+    }
+
+    let likeCounter = '';
+    if (this.state.likeCount === 1) {
+      likeCounter = <h4>{this.state.likeCount} like</h4>;
+    } else if (this.state.likeCount > 1) {
+      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+    }
+
+    let viewAll = '';
+    if (this.state.comments.length > 2) {
+      viewAll = <p>
+        <Link to={`/posts/${post._id}`} className='view-all-comments'>View all comments</Link>
+      </p>;
     }
 
     let postComments = '';
     if (this.state.comments.length >= 2) {
-      let commentOne = this.state.comments[0];
+      let lastComment = this.state.comments.length - 1;
+      let commentOne = this.state.comments[lastComment - 1];
       let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
-      let commentTwo = this.state.comments[1];
+      let commentTwo = this.state.comments[lastComment];
       let userTwo = this.props.users.filter(user => user._id === commentTwo.user)[0];
       // debugger;
       postComments = 
         <div className="user-comments">
-          <p>
-            <Link to={`/posts/${post._id}`} className='view-all-comments'>View all comments</Link>
-          </p>
+          {viewAll}
           <p>
             <Link to={`/users/${userOne.username}`}>
               <span className="example">{userOne.username} </span>
@@ -170,20 +158,28 @@ class PostItem extends React.Component {
         </div>;
     }
 
-    let likeCounter = '';
-    if (this.state.likeCount === 1) {
-      likeCounter = <h4>{this.state.likeCount} like</h4>;
-    } else if (this.state.likeCount > 1) {
-      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+    let date = "";
+    if (post) {
+      let months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      let month = parseInt(post.date.slice(5, 7));
+      let day = post.date.slice(8, 10);
+      let year = post.date.slice(0, 4);
+      date = months[month - 1] + " " + day + ", " + year;
     }
 
-    let heartButton = '';
-    if (this.state.liked === true ) {
-      heartButton = <img id="like-icon" onClick={this.likedClicked} className="img-heart-icon" src={redheart} alt="" />
-    } else {
-      heartButton = <img id="like-icon" onClick={this.likedClicked} className="img-heart-icon" src={heart} alt="" />;
-    }
-    // debugger;
     return (
       <div className="post-item-container">
         <article className="post-item">
@@ -231,9 +227,9 @@ class PostItem extends React.Component {
             </div>
           </footer>
           <section className="comment-box">
-            <form className="comment-form2">
+            <form className="comment-form2" onSubmit={this.handleSubmit}>
               <textarea
-                onChange={this.update()}
+                onChange={this.handleUpdate}
                 onKeyDown={this.disableBtn}
                 aria-label="Add a comment…"
                 placeholder="Add a comment…"
@@ -244,7 +240,7 @@ class PostItem extends React.Component {
               <button
                 id="comment-btn"
                 className="comment-btn "
-                disabled
+                // disabled
                 type="submit"
               >
                 Post

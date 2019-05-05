@@ -7,16 +7,27 @@ import Suggestions from './suggestions';
 class Feed extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      posts: [],
+      users: [],
+      comments: []
+    }
   }
 
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchPosts()
+    .then(() => {
+      this.setState({
+        posts: this.props.posts,
+        users: this.props.users,
+        comments: this.props.comments
+      });
+    });
   }
 
   render() {
-    if (!this.props.posts) return null;
-    const { posts, users, comments } = this.props;
-    if (users.length === 0 || !posts) return null;
+    const { posts, users, comments } = this.state;
+    if (users.length === 0) return null;
     let feed = "";
     if (posts.length > 0) {
       feed = (

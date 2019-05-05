@@ -136,8 +136,8 @@
   color: black;
 }
 
-.view-all-comments {
-  color: gray;
+.view-all-comments > a {
+  color: lightgray;
 }
 
 .comment-box {

@@ -31,7 +31,7 @@ const receiveFeedPosts = data => {
 
 export const fetchPosts = () => dispatch => {
   return PostAPIUtil.fetchPosts().then(res => {
-    debugger;
+    // debugger;
     return dispatch(receiveFeedPosts(res.data));
   });
 };

@@ -1,6 +1,6 @@
 
 import { RECEIVE_POSTS, RECEIVE_POST, RECEIVE_FEED_POSTS } from './../actions/post_actions';
-import { RECEIVE_CURRENT_USERS } from './../actions/user_actions';
+// import { RECEIVE_CURRENT_USERS } from './../actions/user_actions';
 import { RECEIVE_USER_LOGOUT } from './../actions/session_actions';
 import merge from 'lodash/merge';
 
