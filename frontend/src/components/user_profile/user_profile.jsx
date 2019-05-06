@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
 import { jsx, css } from "@emotion/core";
+
 import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
@@ -9,7 +10,6 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
-
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class UserProfile extends React.Component {
           owner = user;
         }
       });
+
       this.props.fetchPostsByUserId(owner._id).then(() => {
         this.setState({ posts: this.props.posts });
       });
@@ -67,6 +68,7 @@ class UserProfile extends React.Component {
       });
     }
     let posts;
+    
     if (this.state.posts) {
       posts = Object.values(this.state.posts).map((post, id) => {
         return (
@@ -78,9 +80,18 @@ class UserProfile extends React.Component {
         );
       });
     }
+
+    // let imageUrl;
+    // if (owner.posts.length > 0) {
+    //   imageUrl = `/posts/${owner.posts[0]}`;
+    // } else {
+    //   imageUrl = owner.image_url;
+    // }
+
     return (
       <div>
         {owner && posts ? (
+
           <div className="user-profile-container">
             <div className="inner-profile">
               <div className="profile-top">
@@ -153,11 +164,13 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
+
             <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}
               color={"#312F2D"}
+
               loading={true}
             />
           </div>
