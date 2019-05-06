@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from './comment_container';
 import { jsx, css } from "@emotion/core";
-import { BeatLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 
 
 const override = css`
@@ -22,6 +22,17 @@ class ShowPost extends React.Component {
     this.props.fetchCurrentUser(this.props.currentUser, username);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.postId !== prevProps.match.params.postId) {
+      let username;
+      this.props.fetchPost(this.props.match.params.postId)
+        .then(({ post }) => {
+          username = post.user.username;
+        });
+      this.props.fetchCurrentUser(this.props.currentUser, username);
+    }
+  }
+
 
   render() {
     let post;
@@ -31,29 +42,26 @@ class ShowPost extends React.Component {
 
     return (
       <div>
-        {
-          post ? (
-            <div className="show-post-container">
-              <div className="img-container">
-                <img src={post.imgUrl} alt="" />
-              </div>
-              <div className="comment-container">
-                <Comment post={post}/>
-              </div>
+        {post ? (
+          <div className="show-post-container">
+            <div className="img-cont">
+              <img src={post.imgUrl} alt="" />
             </div>
-          ) : (
-              <div className='stock-loading'>
-                <BeatLoader
-                  className={override}
-                  sizeUnit={"px"}
-                  size={25}
-                  color={'#21ce99'}
-                  loading={true}
-                />
-              </div>
-            )
-
-        }
+            <div className="comment-container">
+              <Comment post={post} />
+            </div>
+          </div>
+        ) : (
+          <div className="stock-loading">
+            <MoonLoader
+              className={override}
+              sizeUnit={"px"}
+              size={25}
+              color={"#312F2D"}
+              loading={true}
+            />
+          </div>
+        )}
       </div>
     );
   }

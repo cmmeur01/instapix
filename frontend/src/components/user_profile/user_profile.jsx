@@ -1,8 +1,9 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
-import { BeatLoader } from "react-spinners";
-import FollowButton from "./follow_button";
-import ProfilePostImageItem from "./profile_post_image_item";
+
+import { MoonLoader } from "react-spinners";
+import FollowButton from './follow_button';
+import ProfilePostImageItem from './profile_post_image_item';
 
 const override = css`
   display: block;
@@ -11,6 +12,11 @@ const override = css`
 `;
 
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     let owner;
     let username = this.props.match.params.username;
@@ -22,8 +28,30 @@ class UserProfile extends React.Component {
         }
       });
 
-      this.props.fetchPostsByUserId(owner._id);
+      this.props.fetchPostsByUserId(owner._id).then(() => {
+        this.setState({ posts: this.props.posts });
+      });
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.username !== prevProps.match.params.username) {
+      let owner;
+      let username = this.props.match.params.username;
+      this.props
+        .fetchCurrentUser(this.props.currentUser, username)
+        .then(() => {
+          let users = Object.values(this.props.users);
+          users.forEach(user => {
+            if (user.username === this.props.match.params.username) {
+              owner = user;
+            }
+          });
+          this.props.fetchPostsByUserId(owner._id).then(() => {
+            this.setState({ posts: this.props.posts });
+          });
+        });
+    }
   }
 
   render() {
@@ -40,9 +68,9 @@ class UserProfile extends React.Component {
       });
     }
     let posts;
-    if (Array.isArray(this.props.posts.posts)) {
-      console.log("inside");
-      posts = this.props.posts.posts.map((post, id) => {
+    
+    if (this.state.posts) {
+      posts = Object.values(this.state.posts).map((post, id) => {
         return (
           <ProfilePostImageItem
             key={id}
@@ -62,7 +90,8 @@ class UserProfile extends React.Component {
 
     return (
       <div>
-        {owner ? (
+        {owner && posts ? (
+
           <div className="user-profile-container">
             <div className="inner-profile">
               <div className="profile-top">
@@ -135,11 +164,13 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
-            <BeatLoader
+
+            <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}
-              color={"#21ce99"}
+              color={"#312F2D"}
+
               loading={true}
             />
           </div>

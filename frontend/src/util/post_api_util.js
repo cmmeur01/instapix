@@ -23,3 +23,7 @@ export const likePost = likeData => {
 export const unlikePost = likeData => {
   return axios.patch('/api/posts/unlike', likeData);
 };
+
+export const sendPost = (post) => {
+  return axios.post(`/api/posts/new`, post);
+};
