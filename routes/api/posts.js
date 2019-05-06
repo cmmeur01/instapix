@@ -16,8 +16,15 @@ router.get("/", (req, res) => {
      Post.find({ user: { $in: following }}).sort([['date', -1]])
      .then(posts => {
        let postsObject = {};
-       posts.forEach(post => postsObject[post._id] = post)
-       res.send({ posts: postsObject });
+       posts.forEach(post => postsObject[post._id] = post);
+       let postIds = Object.keys(postsObject);
+      //  User.find({ _id: { $in: following } })
+       Comment.find({ post: { $in: postIds }})
+       .then(comments => {
+         let commentsObject = {};
+         comments.forEach(comment => commentsObject[comment._id] = comment);
+         res.send({posts: postsObject, comments: commentsObject});
+       })
      });
      
   }) ;

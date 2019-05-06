@@ -6,88 +6,110 @@ import * as redheart from "./../../assets/images/redheart.png";
 import * as bubble from "./../../assets/images/bubble.png";
 import * as upload from "./../../assets/images/igupload.png";
 
-// Need post create method
 class PostItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       inputVal: "",
-      likeCount: props.post.likes.length,
-      liked: props.post.likes.includes(props.currentUserId)
+      likeCount: 0,
+      liked: false,
+      comments: []
     };
 
-    this.getComment = this.getComment.bind(this);
-    this.getName = this.getName.bind(this);
-    this.likedClicked = this.likedClicked.bind(this);
+    this.handleLike = this.handleLike.bind(this);
     this.modalOpen = this.modalOpen.bind(this);
+    this.commentSubmit = this.commentSubmit.bind(this);
+    this.handleUpdate =this.handleUpdate.bind(this);
   }
 
-  update(e) {
-    return e => {
-      let button = document.getElementById("comment-btn");
-      button.disabled = false;
-      button.classList.add("show-btn");
-      this.setState({ inputVal: e.target.value });
-    };
-  }
-
-  disableBtn(e) {
-    let button = document.getElementById("comment-btn");
-    if (e.keyCode === 8 && e.target.value.length === 0) {
-      button.classList.remove("show-btn");
-      button.disabled = true;
+  componentDidMount() {
+    if (this.props.post) {
+      // debugger
+      this.setLocalState();
     }
   }
 
-  getComment() {
-    let quotes = [
-      "This is nice.",
-      "I like this.",
-      "Hmmm...",
-      "Tell me something.",
-      "What is that about?",
-      "Are you for real.",
-      "Well, I guess we have a winner.",
-      "Chicken is on me.",
-      "Who you think you are?",
-      "whatevs",
-      "and that's how the west was won."
-    ];
-    const comment = quotes[Math.floor(Math.random() * quotes.length)];
-    return comment;
+  componentDidUpdate(prevProps) {
+    if (this.props.comments !== prevProps.comments) {
+      this.setLocalState({comments: this.props.comments});
+    }
   }
 
-  getName() {
-    let names = [
-      "sergeythegriden",
-      "christhemeurer",
-      "martinthemarkaj",
-      "koythesaeteurn",
-      "billythekid",
-      "rockstar",
-      "kittymeowmeow",
-      "datwhoppingirl",
-      "foodiepootie",
-      "areyoumymom",
-      "getmilk"
-    ];
-    const name = names[Math.floor(Math.random() * names.length)];
-    return name;
+  setLocalState() {
+    this.setState({
+      likeCount: this.props.post.likes.length,
+      liked: this.props.post.likes.includes(this.props.currentUserId),
+      comments: this.props.comments.filter(comment => comment.post === this.props.post._id),
+    });
   }
 
-  likedClicked() {
+  // handleUpdate(e) {
+  //   // debugger;
+  //   this.setState({ inputVal: e.target.value });
+  //   let button = document.getElementById("comment-btn");
+  //   button.disabled = false;
+  //   button.classList.add("show-btn");
+  // }
+
+  handleUpdate(e) {
+    // debugger;
+    this.setState({ inputVal: e.target.value });
+    // this.state.inputVal = e.target.value;
+    debugger;
+    // let textarea = document.getElementById("myTextarea");
+    // let l = this.state.inputVal.length;
+    // if (l > 90) {
+    //   document.getElementById("myTextarea").style.height = "72px";
+    // } else if (l > 60 && l <= 90) {
+    //   document.getElementById("myTextarea").style.height = "54px";
+    // } else if (l > 30 && l <= 60) {
+    //   document.getElementById("myTextarea").style.height = "36px";
+    // } else if (l <= 30) {
+    //   document.getElementById("myTextarea").style.height = "18px";
+    // }
+    // debugger;
+
+    // let button = document.getElementById("comment-btn");
+    // if (l < 1) {
+    //   button.classList.remove("show-btn");
+    //   button.disabled = true;
+    // } else {
+    //   button.classList.add("show-btn");
+    //   button.disabled = false;
+    // }
+    // textarea.scrollTop = textarea.scrollHeight;
+  }
+
+  // disableBtn(e) {
+  //   let button = document.getElementById("comment-btn");
+  //   if (e.keyCode === 8 && e.target.value === "") {
+  //     button.classList.remove("show-btn");
+  //     button.disabled = true;
+  //   }
+  // }
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.text)
+  //     .then(this.setState({ text: '' }))
+  //     .then(() => document.getElementById("myTextarea").value = '');
+  // }
+
+  commentSubmit(e) {
+    debugger;
+    e.preventDefault();
+    this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
+    .then(() => this.setState({inputVal: ''}));
+  }
+
+  handleLike() {
+    // debugger;
     if (this.state.liked === true) {
-      this.props.unlikePost({
-        postId: this.props.post._id,
-        userId: this.props.currentUserId
-      });
-      this.setState({ liked: false, likeCount: this.state.likeCount - 1 });
+      this.props.unlikePost({ postId: this.props.post._id, userId: this.props.currentUserId })
+      .then(() => this.setState({ liked: false, likeCount: this.state.likeCount - 1 }));
     } else {
-      this.props.likePost({
-        postId: this.props.post._id,
-        userId: this.props.currentUserId
-      });
-      this.setState({ liked: true, likeCount: this.state.likeCount + 1 });
+      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId })
+      .then(() => this.setState({ liked: true, likeCount: this.state.likeCount + 1 }));
     }
   }
 
@@ -99,6 +121,65 @@ class PostItem extends React.Component {
     let { user, post } = this.props;
     // debugger;
     if (!user) return null;
+
+    let heartButton = '';
+    if (this.state.liked === true) {
+      heartButton = <img id="like-icon" onClick={this.handleLike} className="img-heart-icon" src={redheart} alt="like" />;
+    } else {
+      heartButton = <img id="like-icon" onClick={this.handleLike} className="img-heart-icon" src={heart} alt="like" />;
+    }
+
+    let likeCounter = '';
+    if (this.state.likeCount === 1) {
+      likeCounter = <h4>{this.state.likeCount} like</h4>;
+    } else if (this.state.likeCount > 1) {
+      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+    }
+
+    let viewAll = '';
+    if (this.state.comments.length > 2) {
+      viewAll = <p>
+        <Link to={`/posts/${post._id}`} className='view-all-comments'>View all comments</Link>
+      </p>;
+    }
+
+    let postComments = '';
+    if (this.state.comments.length >= 2) {
+      let lastComment = this.state.comments.length - 1;
+      let commentOne = this.state.comments[lastComment - 1];
+      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
+      let commentTwo = this.state.comments[lastComment];
+      let userTwo = this.props.users.filter(user => user._id === commentTwo.user)[0];
+      // debugger;
+      postComments = 
+        <div className="user-comments">
+          {viewAll}
+          <p>
+            <Link to={`/users/${userOne.username}`}>
+              <span className="example">{userOne.username} </span>
+            </Link>
+            {commentOne.body}
+          </p>
+          <p>
+            <Link to={`/users/${userTwo.username}`}>
+              <span className="example">{userTwo.username} </span>
+            </Link>
+            {commentTwo.body}
+          </p>
+        </div>;
+    } else if (this.state.comments.length === 1) {
+      let commentOne = this.state.comments[0];
+      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
+      postComments = 
+        <div className="user-comments">
+          <p>
+            <Link to={`/users/${userOne.username}`}>
+              <span className="example">{userOne.username} </span>
+            </Link>
+            {commentOne.body}
+          </p>
+        </div>;
+    }
 
     let date = "";
     if (post) {
@@ -121,6 +202,7 @@ class PostItem extends React.Component {
       let year = post.date.slice(0, 4);
       date = months[month - 1] + " " + day + ", " + year;
     }
+
 
     let likeCounter = "";
     if (this.state.likeCount === 1) {
@@ -153,16 +235,19 @@ class PostItem extends React.Component {
     }
     // debugger;
 
+
     return (
       <div className="post-item-container">
         <article className="post-item">
           <header className="post-header">
-            <div className="post-user-image">
-              <img src={user.image_url} alt={user.username} />
-            </div>
-            <div className="post-user-username">
-              <h4>{user.username}</h4>
-            </div>
+            <Link to={`/users/${user.username}`}>
+              <div className="post-user-image">
+                <img src={user.image_url} alt={user.username} />
+              </div>
+              <div className="post-user-username">
+                <h4>{user.username}</h4>
+              </div>
+            </Link>
           </header>
           <div className="post-image">
             <img src={post.imgUrl} alt={user.username} />
@@ -185,42 +270,33 @@ class PostItem extends React.Component {
               {likeCounter}
             </section>
             <div className="post-caption">
-              <span className="post-user-username">{user.username}</span>
+              <Link to={`/users/${user.username}`}>
+                <span className="post-user-username">{user.username}</span>
+              </Link>
               <span>{post.description}</span>
             </div>
-            <div className="user-comments">
-              <p>
-                <Link to="/comments">View all comments</Link>
-              </p>
-              <p>
-                <span className="example">{this.getName()} </span>
-                {this.getComment()}
-              </p>
-              <p>
-                <span className="example">{this.getName()} </span>
-                {this.getComment()}
-              </p>
-            </div>
+            {postComments}
             <div className="post-item-date">
               <h4>{date}</h4>
             </div>
           </footer>
           <section className="comment-box">
-            <form className="comment-form">
+            <form className="comment-form2" onSubmit={this.commentSubmit}>
               <textarea
-                onChange={this.update()}
-                onKeyDown={this.disableBtn}
+                onChange={this.handleUpdate}
+                // onKeyDown={this.disableBtn}
                 aria-label="Add a comment…"
                 placeholder="Add a comment…"
                 className="add-comment"
                 autoComplete="off"
                 autoCorrect="off"
+                id='myTextarea'
+                value={this.state.inputVal}
               />
-              <button
-                id="comment-btn"
-                className="comment-btn "
-                disabled
-                type="submit"
+              <button 
+                id="comment-btn" 
+                disabled={!this.state.inputVal} 
+                className={!this.state.inputVal ? 'comment-btn' : 'comment-btn show-btn'}
               >
                 Post
               </button>

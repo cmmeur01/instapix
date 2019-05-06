@@ -17,7 +17,7 @@ class Suggestions extends React.Component {
       return (
         <li className="li-users" key={i}>
           <div className="user-div sug-users">
-            <Link to={`/users/${user.name}`}>
+            <Link to={`/users/${user.username}`}>
               <img src={user.image_url} alt="avatar" />
               <div className="user-p">
                 <p className="first-p">{user.username}</p>

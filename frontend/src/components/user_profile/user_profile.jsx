@@ -22,12 +22,13 @@ class UserProfile extends React.Component {
     let username = this.props.match.params.username;
     this.props.fetchCurrentUser(this.props.currentUser, username).then(() => {
       let users = Object.values(this.props.users);
+      // debugger;
       users.forEach(user => {
+        // debugger;
         if (user.username === this.props.match.params.username) {
           owner = user;
         }
       });
-
       this.props.fetchPostsByUserId(owner._id).then(() => {
         this.setState({ posts: this.props.posts });
       });

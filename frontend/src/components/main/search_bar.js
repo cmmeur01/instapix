@@ -63,7 +63,7 @@ class SearchBar extends React.Component {
       return (
         <li key={i}>
           <div className="user-div">
-            <Link to={`/users/${user.name}`}>
+            <Link to={`/users/${user.username}`}>
               <img src={user.image_url} alt="avatar" />
               <div className="user-p">
                 <p className="first-p">{user.username}</p>

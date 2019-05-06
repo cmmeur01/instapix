@@ -41,6 +41,7 @@ router.get('/', (req, res) => {
   .then(users => {
     let hash = {};
     users.forEach(user => {
+      user.password = '';
       hash[user.id] = user;
     });
     res.send(hash);

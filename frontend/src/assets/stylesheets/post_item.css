@@ -23,9 +23,11 @@
   height: 34px;
 }
 
-.post-header {
+.post-header > a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .post-user-image {
@@ -51,6 +53,11 @@
   align-items: center;
   position: relative;
   top: -10px;
+}
+
+.post-caption > a {
+  text-decoration: none;
+  color: black;
 }
 
 .post-caption > span {
@@ -132,7 +139,11 @@
 
 .user-comments > p > a {
   text-decoration: none;
-  color: #999;
+  color: black;
+}
+
+.view-all-comments > a {
+  color: lightgray;
 }
 
 .comment-box {
@@ -148,7 +159,7 @@
   margin-top: 4px;
 }
 
-.comment-form {
+.comment-form2 {
   flex-direction: row;
   flex-shrink: 1;
   position: relative;
@@ -172,8 +183,9 @@
 }
 
 .comment-btn {
+  z-index: 3;
   opacity: 0.3;
-  pointer-events: none;
+  /* pointer-events: none; */
   border: 0;
   background: 0 0;
   color: #3897f0;
@@ -197,6 +209,10 @@
 
 .show-btn {
   opacity: 1;
+}
+
+.comment-btn > button:hover {
+  cursor: pointer;
 }
 
 .example {

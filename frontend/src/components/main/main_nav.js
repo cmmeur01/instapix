@@ -53,7 +53,7 @@ class MainNav extends React.Component {
                 </Link>
               </div>
               <div className="profile-icon">
-                <Link to="#">
+                <Link to={`/users/${this.props.currentUser.username}`}>
                   <img
                     src="https://cdn3.iconfinder.com/data/icons/basic-user-interface-application/32/INSTAGRAM_ICON_SETS-12-512.png"
                     alt="profile-icon"
@@ -73,7 +73,8 @@ class MainNav extends React.Component {
 
 const mstp = state => {
   return {
-    users: Object.values(state.entities.users)
+    users: Object.values(state.entities.users),
+    currentUser: state.session.user
   };
 };
 
