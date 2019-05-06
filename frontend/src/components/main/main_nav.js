@@ -36,7 +36,7 @@ class MainNav extends React.Component {
           <div className="nav-icons">
             <div className="inner-icons-div">
               <div className="explore-icon">
-                <Link to="#">
+                <Link to="/explore">
                   <img
                     src="http://cdn.onlinewebfonts.com/svg/img_119257.png"
                     alt="compass"

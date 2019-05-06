@@ -116,7 +116,7 @@ class PostItem extends React.Component {
   modalOpen() {
     this.props.openModal(this.props.post._id);
   }
-  
+
   render() {
     let { user, post } = this.props;
     // debugger;
@@ -203,6 +203,39 @@ class PostItem extends React.Component {
       date = months[month - 1] + " " + day + ", " + year;
     }
 
+
+    let likeCounter = "";
+    if (this.state.likeCount === 1) {
+      likeCounter = <h4>{this.state.likeCount} like</h4>;
+    } else if (this.state.likeCount > 1) {
+      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+    }
+
+    let heartButton = "";
+    if (this.state.liked === true) {
+      heartButton = (
+        <img
+          id="like-icon"
+          onClick={this.likedClicked}
+          className="img-heart-icon"
+          src={redheart}
+          alt=""
+        />
+      );
+    } else {
+      heartButton = (
+        <img
+          id="like-icon"
+          onClick={this.likedClicked}
+          className="img-heart-icon"
+          src={heart}
+          alt=""
+        />
+      );
+    }
+    // debugger;
+
+
     return (
       <div className="post-item-container">
         <article className="post-item">
@@ -222,9 +255,7 @@ class PostItem extends React.Component {
           <footer className="post-footer">
             <section className="icons-div">
               <div className="like-icon">
-                <button className="icon-btn">
-                  {heartButton}
-                </button>
+                <button className="icon-btn">{heartButton}</button>
               </div>
               <div className="comment-icon">
                 <button className="icon-btn">

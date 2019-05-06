@@ -56,3 +56,9 @@ export const postComment = (post_id, user_id, text) => dispatch => {
   });
 };
 
+export const sendPost = (post) => dispatch => { 
+  return PostAPIUtil.sendPost(post).then( res => {
+    return res.data.post._id;
+  });
+};
+

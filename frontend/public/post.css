@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* align-content: center; */
+  padding-top: 115px;
 }
 
-.img-container > img {
+.img-cont > img {
   width: 600px;
   height: 600px;
   object-fit: cover;
@@ -23,7 +23,7 @@
   box-sizing: content-box;
   /* flex-grow: 1;
   height: calc(100% - 32px); */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* left: 0; */
   /* padding: 16px 12px; */
   /* position: absolute; */
@@ -87,8 +87,11 @@
   padding: 6px 12px 6px 0
 }
 
+
+
 .comment-item {
   list-style: none;
+  padding-bottom: 15px;
 }
 
 .comment-component{
@@ -100,8 +103,10 @@
 .comment-index-component{
   display: flex;
   flex-direction: column;
-  padding: 16px 12px;
+  padding: 0 12px;
   height: 100%;
+  overflow-y: scroll;
+  margin: 5px 0;
   /* justify-content: space-between; */
 }
 
@@ -121,7 +126,7 @@
   /* font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; */
 }
 
-.comment-form {
+.post-comment-form {
   display: flex;
   border-top: 1px solid #efefef;
   color: #999;
@@ -129,15 +134,15 @@
   min-height: 56px;
   align-items: center;
   justify-content: center;
-
 }
-.comment-form > form {
+
+.post-comment-form > form {
   display: flex;
   justify-content: space-between;
   width: calc(100% - 24px);
 }
 
-.comment-form > form > textarea {
+.post-comment-form > form > textarea {
   font-size: 14px;
 
   background: 0 0;
@@ -151,7 +156,7 @@
   resize: none;
 }
 
-.comment-form > form > button {
+.post-comment-form > form > button {
   border: 0;
   color: #3897f0;
   display: inline;
@@ -162,4 +167,122 @@
 
 .disabled {
   opacity: 0.3;
+}
+
+.new-post-container {
+  padding-top: 100px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* width: 800px; */
+  background: #fafafa;
+  margin-bottom: 50px;
+  max-width: 800px;
+  /* max-height: 1000px; */
+}
+
+.post-comment-link {
+  color: black;
+  text-decoration: none;
+}
+
+.new-post-title {
+  text-align: center;
+}
+
+.new-post-form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* max-width: 100%;
+  max-height: 1000px; */
+  width: 614px;
+}
+
+/* .new-post-form > img {
+  max-width: 1000px;
+  max-height: 1000px;
+} */
+
+.cropper-modal {
+  /* width: 1000px;
+  height: 1000px; */
+}
+
+.new-post-caption {
+  display: flex;
+  flex-direction: row;
+  margin-top: 25px;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-top: 1px solid #efefef;
+  border-left: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+}
+
+.post-caption-hidden {
+  display: none;
+}
+
+.shr-btn {
+  font-size: 14px;
+  font-weight: 700;
+  color: #3897f0;
+  background: #FFFFFF;
+  border: none;
+  cursor: pointer;
+} 
+
+.new-post-desc > input {
+  border: none;
+  /* width: 942px; */
+}
+
+.new-post-desc > input:focus {
+  outline: none;
+}
+
+.img-upload {
+  /* max-height: 1000px; */
+  max-width: 570px;
+}
+
+.outter-post {
+  display: flex;
+  justify-content: center;
+}
+
+.dropzone {
+  display: flex;
+  border: 1px solid black;
+  background-color: white;
+  /* padding-top: 500px; */
+  font-family: Cookie;
+  font-size: 30px;
+  cursor: pointer;
+  /* text-align: center; */
+  justify-content: center;
+  vertical-align: middle;
+  height: 60vh;
+}
+/* 
+.upload-button {
+  margin: 0 auto;
+  cursor: pointer;
+} */
+
+.dropzone > h1 {
+  margin: auto;
+}
+
+.dropzone:hover {
+  background-color: #3897f0;
+}
+/* 
+.dropzone > h1 {
+  align-content: center;
+} */
+
+.dropzone-section-hidden {
+  display: none;
 }
