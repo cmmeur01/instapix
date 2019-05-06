@@ -1,5 +1,6 @@
 .searchbar::placeholder {
-  font-family: FontAwesome;
+  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   color: rgb(167, 167, 167);
   font-size: 14px;
   position: relative;
@@ -146,7 +147,7 @@
 }
 
 .no-results-found {
-  color: rgb(168,168,168);
+  color: rgb(168, 168, 168);
   padding: 15px;
   font-size: 12px;
 }

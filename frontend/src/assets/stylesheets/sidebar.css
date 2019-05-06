@@ -12,10 +12,9 @@ ul.suggestions-list > li > div {
 
 .profile-header {
   display: flex;
-  align-items:center;
+  align-items: center;
   height: 50px;
   width: 293px;
-  
 }
 
 .sidebar-profile {
@@ -42,7 +41,7 @@ ul.suggestions-list > li > div {
 .sidebar-username > a {
   color: black;
   text-decoration: none;
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .sidebar-name {
@@ -63,7 +62,7 @@ ul.suggestions-list > li > div {
   flex-direction: row;
   align-content: center;
   box-sizing: border-box;
-   display: flex;
+  display: flex;
 }
 
 .sug-text > div {
@@ -72,15 +71,23 @@ ul.suggestions-list > li > div {
   color: #999;
   font-size: 14px;
   line-height: 18px;
-  font-weight: 500!important;
+  font-weight: 500 !important;
 }
 
 .suggestions {
-    background-color: #fff;
-    border-radius: 4px;
-    border: 1px solid #e6e6e6;
-    width: 275px;
-    margin-top: 15px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #e6e6e6;
+  width: 275px;
+  margin-top: 15px;
+}
+
+.user-p {
+  font-size: 12px;
+  position: relative;
+  top: 8px;
+  text-align: left;
+  line-height: normal;
 }
 
 .side-lis {
@@ -104,4 +111,3 @@ ul.suggestions-list > li > div {
   font-size: 12px;
   outline: none;
 }
-
