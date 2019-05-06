@@ -39,6 +39,11 @@
   margin-right: 5px;
 }
 
+.post-user-username > h4 {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
 .post-caption {
   /* display: flex; */
   /* padding-left: 5px; */
@@ -68,6 +73,7 @@
   height: 23px;
   width: 26px;
   margin: 5px 15px 5px 5px;
+  outline: none;
 }
 
 .icons-div {
@@ -87,7 +93,7 @@
   font: inherit;
   /*border is optional*/
   cursor: pointer;
-  outline: none;
+  outline: none !important;
 }
 
 .icon-comment {
@@ -148,7 +154,6 @@
   position: relative;
   display: flex;
   flex-grow: 1;
-  top: 20px;
 }
 
 .add-comment {
