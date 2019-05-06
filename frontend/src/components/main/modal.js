@@ -15,7 +15,15 @@ class Modal extends React.Component {
     if (!this.props.users) return null;
     let users = this.props.users;
 
+    
+
     const results = users.map((user, i) => {
+      let followButton = '';
+      if (user._id !== this.props.currentUser.id) {
+        followButton = <div>
+          <button className="follow-btn">Follow</button>
+        </div>
+      }
       return (
         <li className="li-users" key={i}>
           <div className="user-div likes-li">
@@ -27,9 +35,7 @@ class Modal extends React.Component {
               </div>
             </Link>
           </div>
-          <div>
-            <button className="follow-btn">Follow</button>
-          </div>
+          {followButton}
         </li>
       );
     });
@@ -72,7 +78,8 @@ const msp = state => {
   return ({
     postId,
     post,
-    users
+    users,
+    currentUser: state.session.user
   })
 }
 

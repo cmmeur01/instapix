@@ -25,7 +25,7 @@ class UserProfile extends React.Component {
           owner = user;
         }
       });
-      debugger;
+      // debugger;
       this.props.fetchPostsByUserId(owner._id);
     });
   }

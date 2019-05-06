@@ -178,8 +178,9 @@
 }
 
 .comment-btn {
+  z-index: 3;
   opacity: 0.3;
-  pointer-events: none;
+  /* pointer-events: none; */
   border: 0;
   background: 0 0;
   color: #3897f0;
@@ -203,6 +204,10 @@
 
 .show-btn {
   opacity: 1;
+}
+
+.comment-btn > button:hover {
+  cursor: pointer;
 }
 
 .example {
