@@ -3,6 +3,7 @@ import Cropper from 'cropperjs';
 import axios from "axios";
 import { connect } from 'react-redux';
 import { sendPost } from './../../actions/post_actions';
+import Dropzone from "react-dropzone";
 
 
 class UploadComponent extends React.Component {
@@ -37,7 +38,9 @@ class UploadComponent extends React.Component {
 
   handleFile(e) {
     let preview = document.getElementById('img-upload');
-    const file = e.currentTarget.files[0];
+    // debugger
+    // const file = e.currentTarget.files[0];
+    const file = e[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       preview.src = reader.result;
@@ -58,6 +61,9 @@ class UploadComponent extends React.Component {
       let submit = document.getElementById('post-caption');
       submit.classList.add("new-post-caption");
       submit.classList.remove("post-caption-hidden");
+      let upload = document.getElementById("dropzone-section");
+      upload.classList.remove("dropzone-section");
+      upload.classList.add("dropzone-section-hidden");
     }
   }
 
@@ -74,12 +80,60 @@ class UploadComponent extends React.Component {
         {/* <div className="new-post-title">
           Choose a picture, add a description, and share!
         </div> */}
+        {/* <div>
+          <h1>HELLO</h1>
+          <Dropzone
+            onDrop={this.handleFile}
+            // multiple
+            // maxSize={8000000}
+            className="dropzone"
+          >
+            {({ getRootProps, getInputProps }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+              </div>
+            )}
+
+          </Dropzone>
+        </div> */}
+        {/* <Dropzone onDrop={this.handleFile}>
+          {({ getRootProps, getInputProps }) => (
+            <section className="dropzone">
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              </div>
+            </section>
+          )}
+        </Dropzone> */}
         <div className="new-post-container">
           <form className="new-post-form" onSubmit={this.handleSubmit}>
-            <div><input type="file" onChange={this.handleFile} /></div>
+            <div>
+              {/* <input type="file" onChange={this.handleFile} /> */}
+              <Dropzone onDrop={this.handleFile}>
+                {({ getRootProps, getInputProps }) => (
+                  <section className="dropzone-section" id="dropzone-section">
+                    <div {...getRootProps()} className="dropzone">
+                      <input {...getInputProps()} />
+                        <h1>Drag 'n' drop some files here, or click to select files</h1>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
             <div className="post-caption-hidden" id="post-caption">
-              <div className="new-post-desc"><input type="text" placeholder="Write a caption" onChange={this.update("description")} /></div>
-              <div><button type="submit" className="shr-btn">Share</button></div>
+              <div className="new-post-desc">
+                <input
+                  type="text"
+                  placeholder="Write a caption"
+                  onChange={this.update("description")}
+                />
+              </div>
+              <div>
+                <button type="submit" className="shr-btn">
+                  Share
+                </button>
+              </div>
             </div>
             <img className="img-upload" id="img-upload" src="" alt="" />
           </form>
