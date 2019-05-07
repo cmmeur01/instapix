@@ -1,9 +1,10 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
-
+import { Link } from 'react-router-dom';
 import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
+import ProfileModal from './../user_profile/modal';
 
 const override = css`
   display: block;
@@ -15,6 +16,11 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    this.props.openProfileModal(this.props.currentUser);
   }
 
   componentDidMount() {
@@ -22,9 +28,7 @@ class UserProfile extends React.Component {
     let username = this.props.match.params.username;
     this.props.fetchCurrentUser(this.props.currentUser, username).then(() => {
       let users = Object.values(this.props.users);
-      // debugger;
       users.forEach(user => {
-        // debugger;
         if (user.username === this.props.match.params.username) {
           owner = user;
         }
@@ -69,7 +73,6 @@ class UserProfile extends React.Component {
       });
     }
     let posts;
-    
     if (this.state.posts) {
       posts = Object.values(this.state.posts).map((post, id) => {
         return (
@@ -88,15 +91,14 @@ class UserProfile extends React.Component {
     // } else {
     //   imageUrl = owner.image_url;
     // }
-
     return (
       <div>
         {owner && posts ? (
-
           <div className="user-profile-container">
+            {this.props.modal ? <ProfileModal /> : ""}
             <div className="inner-profile">
               <div className="profile-top">
-                <div className="profile-picture">
+                <div onClick={this.handleClick} className="profile-picture">
                   <img src={owner.image_url} />
                 </div>
                 <div className="outer-user-info">
@@ -104,11 +106,18 @@ class UserProfile extends React.Component {
                     <h3>{owner.username}</h3>
                     {/* conditional */}
                     {owner._id === this.props.currentUser ? (
-                      <button className="edit-profile-btn">Edit Profile</button>
+                      <button
+                        onClick={this.handleClick}
+                        className="edit-profile-btn"
+                      >
+                        Edit Profile
+                      </button>
                     ) : (
                       <FollowButton
                         owner={owner}
-                        currentUser={this.props.users[this.props.currentUser]}
+                        currentUser={
+                          this.props.users[this.props.currentUser]
+                        }
                       />
                     )}
                   </div>
@@ -153,7 +162,9 @@ class UserProfile extends React.Component {
                   {owner._id === this.props.currentUser ? (
                     <li>
                       <div className="new-post-icon" />
-                      <span> NEW POST</span>
+                      <Link to="/newpost">
+                        <span className="new-post-span"> NEW POST</span>
+                      </Link>
                     </li>
                   ) : (
                     ""
@@ -165,13 +176,11 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
-
             <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}
               color={"#312F2D"}
-
               loading={true}
             />
           </div>

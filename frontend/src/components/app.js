@@ -8,6 +8,7 @@ import LoginForm from "./../components/session/login_form_container";
 import UserProfile from "./../components/user_profile/user_profile_container";
 import UploadComponent from "./../components/upload/upload";
 import ShowPost from "./../components/post/post_show_container";
+
 // import Explore from "../components/main/explore";
 // import MainPage from './main/main_page';
 // import LoginFormContainer from './session/login_form_container';
