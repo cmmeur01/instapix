@@ -10,6 +10,7 @@ const CommentsReducer = (state = [], action) => {
       return merge([], state, action.comments);
     case RECEIVE_POST:
       return action.post.comments;
+      // return merge({}, state, action.comments);
     case RECEIVE_FEED_POSTS:
       return action.data.comments;
     default:

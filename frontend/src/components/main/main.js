@@ -8,9 +8,8 @@ import ShowPost from "./../post/post_show_container";
 import UploadComponent from "./../upload/upload";
 import Explore from "./explore";
 
-
 const Main = () => (
-  <div>
+  <div className="app-main-page">
     <Modal />
     <MainNav />
     <Switch>
