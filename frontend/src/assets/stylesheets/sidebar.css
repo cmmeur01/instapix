@@ -27,6 +27,7 @@ ul.suggestions-list > li > div {
   position: relative;
   top: 110px;
   margin-left: 30px;
+  height: 500px;
 }
 
 .sidebar-username {

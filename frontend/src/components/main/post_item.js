@@ -19,7 +19,7 @@ class PostItem extends React.Component {
     this.handleLike = this.handleLike.bind(this);
     this.modalOpen = this.modalOpen.bind(this);
     this.commentSubmit = this.commentSubmit.bind(this);
-    this.handleUpdate =this.handleUpdate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class PostItem extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.comments !== prevProps.comments) {
-      this.setLocalState({comments: this.props.comments});
+      this.setLocalState({ comments: this.props.comments });
     }
   }
 
@@ -39,7 +39,9 @@ class PostItem extends React.Component {
     this.setState({
       likeCount: this.props.post.likes.length,
       liked: this.props.post.likes.includes(this.props.currentUserId),
-      comments: this.props.comments.filter(comment => comment.post === this.props.post._id),
+      comments: this.props.comments.filter(
+        comment => comment.post === this.props.post._id
+      )
     });
   }
 
@@ -55,7 +57,7 @@ class PostItem extends React.Component {
     // debugger;
     this.setState({ inputVal: e.target.value });
     // this.state.inputVal = e.target.value;
-    debugger;
+    // debugger;
     // let textarea = document.getElementById("myTextarea");
     // let l = this.state.inputVal.length;
     // if (l > 90) {
@@ -96,20 +98,36 @@ class PostItem extends React.Component {
   // }
 
   commentSubmit(e) {
-    debugger;
     e.preventDefault();
-    this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
-    .then(() => this.setState({inputVal: ''}));
+    this.props
+      .postComment(
+        this.props.post._id,
+        this.props.currentUserId,
+        this.state.inputVal
+      )
+      .then(() => this.setState({ inputVal: "" }));
   }
 
   handleLike() {
     // debugger;
     if (this.state.liked === true) {
-      this.props.unlikePost({ postId: this.props.post._id, userId: this.props.currentUserId })
-      .then(() => this.setState({ liked: false, likeCount: this.state.likeCount - 1 }));
+      this.props
+        .unlikePost({
+          postId: this.props.post._id,
+          userId: this.props.currentUserId
+        })
+        .then(() =>
+          this.setState({ liked: false, likeCount: this.state.likeCount - 1 })
+        );
     } else {
-      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId })
-      .then(() => this.setState({ liked: true, likeCount: this.state.likeCount + 1 }));
+      this.props
+        .likePost({
+          postId: this.props.post._id,
+          userId: this.props.currentUserId
+        })
+        .then(() =>
+          this.setState({ liked: true, likeCount: this.state.likeCount + 1 })
+        );
     }
   }
 
@@ -122,36 +140,60 @@ class PostItem extends React.Component {
     // debugger;
     if (!user) return null;
 
-    let heartButton = '';
+    let heartButton = "";
     if (this.state.liked === true) {
-      heartButton = <img id="like-icon" onClick={this.handleLike} className="img-heart-icon" src={redheart} alt="like" />;
+      heartButton = (
+        <img
+          id="like-icon"
+          onClick={this.handleLike}
+          className="img-heart-icon"
+          src={redheart}
+          alt="like"
+        />
+      );
     } else {
-      heartButton = <img id="like-icon" onClick={this.handleLike} className="img-heart-icon" src={heart} alt="like" />;
+      heartButton = (
+        <img
+          id="like-icon"
+          onClick={this.handleLike}
+          className="img-heart-icon"
+          src={heart}
+          alt="like"
+        />
+      );
     }
 
-    let likeCounter = '';
+    let likeCounter = "";
     if (this.state.likeCount === 1) {
       likeCounter = <h4>{this.state.likeCount} like</h4>;
     } else if (this.state.likeCount > 1) {
       likeCounter = <h4>{this.state.likeCount} likes</h4>;
     }
 
-    let viewAll = '';
+    let viewAll = "";
     if (this.state.comments.length > 2) {
-      viewAll = <p>
-        <Link to={`/posts/${post._id}`} className='view-all-comments'>View all comments</Link>
-      </p>;
+      viewAll = (
+        <p>
+          <Link to={`/posts/${post._id}`} className="view-all-comments">
+            View all comments
+          </Link>
+        </p>
+      );
     }
 
-    let postComments = '';
+    let postComments = "";
     if (this.state.comments.length >= 2) {
       let lastComment = this.state.comments.length - 1;
       let commentOne = this.state.comments[lastComment - 1];
-      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
+      let userOne = this.props.users.filter(
+        user => user._id === commentOne.user
+      )[0];
       let commentTwo = this.state.comments[lastComment];
-      let userTwo = this.props.users.filter(user => user._id === commentTwo.user)[0];
+      let userTwo = this.props.users.filter(
+        user => user._id === commentTwo.user
+      )[0];
       // debugger;
-      postComments = 
+      postComments = (
         <div className="user-comments">
           {viewAll}
           <p>
@@ -166,11 +208,14 @@ class PostItem extends React.Component {
             </Link>
             {commentTwo.body}
           </p>
-        </div>;
+        </div>
+      );
     } else if (this.state.comments.length === 1) {
       let commentOne = this.state.comments[0];
-      let userOne = this.props.users.filter(user => user._id === commentOne.user)[0];
-      postComments = 
+      let userOne = this.props.users.filter(
+        user => user._id === commentOne.user
+      )[0];
+      postComments = (
         <div className="user-comments">
           <p>
             <Link to={`/users/${userOne.username}`}>
@@ -178,7 +223,8 @@ class PostItem extends React.Component {
             </Link>
             {commentOne.body}
           </p>
-        </div>;
+        </div>
+      );
     }
 
     let date = "";
@@ -203,39 +249,6 @@ class PostItem extends React.Component {
       date = months[month - 1] + " " + day + ", " + year;
     }
 
-
-    let likeCounter = "";
-    if (this.state.likeCount === 1) {
-      likeCounter = <h4>{this.state.likeCount} like</h4>;
-    } else if (this.state.likeCount > 1) {
-      likeCounter = <h4>{this.state.likeCount} likes</h4>;
-    }
-
-    let heartButton = "";
-    if (this.state.liked === true) {
-      heartButton = (
-        <img
-          id="like-icon"
-          onClick={this.likedClicked}
-          className="img-heart-icon"
-          src={redheart}
-          alt=""
-        />
-      );
-    } else {
-      heartButton = (
-        <img
-          id="like-icon"
-          onClick={this.likedClicked}
-          className="img-heart-icon"
-          src={heart}
-          alt=""
-        />
-      );
-    }
-    // debugger;
-
-
     return (
       <div className="post-item-container">
         <article className="post-item">
@@ -258,9 +271,9 @@ class PostItem extends React.Component {
                 <button className="icon-btn">{heartButton}</button>
               </div>
               <div className="comment-icon">
-                <button className="icon-btn">
+                <Link to={`posts/${post._id}`} className="icon-btn">
                   <img className="icon-comment img-icon" src={bubble} alt="" />
-                </button>
+                </Link>
               </div>
               <div className="share-icon">
                 <img className="share" src={upload} alt="share" />
@@ -290,13 +303,15 @@ class PostItem extends React.Component {
                 className="add-comment"
                 autoComplete="off"
                 autoCorrect="off"
-                id='myTextarea'
+                id="myTextarea"
                 value={this.state.inputVal}
               />
-              <button 
-                id="comment-btn" 
-                disabled={!this.state.inputVal} 
-                className={!this.state.inputVal ? 'comment-btn' : 'comment-btn show-btn'}
+              <button
+                id="comment-btn"
+                disabled={!this.state.inputVal}
+                className={
+                  !this.state.inputVal ? "comment-btn" : "comment-btn show-btn"
+                }
               >
                 Post
               </button>
