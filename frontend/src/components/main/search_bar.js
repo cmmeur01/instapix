@@ -1,7 +1,7 @@
 import React from "react";
 import "./../../assets/stylesheets/searchbar.css";
 // import { fetchUsers } from "./../../actions/user_actions";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { searchUsers } from './../../actions/user_actions';
 
@@ -10,6 +10,7 @@ class SearchBar extends React.Component {
     super(props);
     this.state = { inputVal: "", popupVisible: true };
     this.update = this.update.bind(this);
+    this.visitSearchResult = this.visitSearchResult.bind(this);
   }
 
   update(e) {
@@ -29,6 +30,15 @@ class SearchBar extends React.Component {
       modal.style.display = "block";
     }
     this.props.searchUsers(e.target.value);
+  }
+
+  visitSearchResult(username) {
+    return (e) => {
+      this.setState({ inputVal: '' });
+      let modal = document.getElementById("input-names");
+      modal.style.display = "none";
+      this.props.history.push(`users/${username}`);
+    }
   }
 
   // matches() {
@@ -62,15 +72,15 @@ class SearchBar extends React.Component {
       results = users.map((user, i) => {
       return (
         <li key={i}>
-          <div className="user-div">
-            <Link to={`/users/${user.username}`}>
-              <img src={user.image_url} alt="avatar" />
-              <div className="user-p">
-                <p className="first-p">{user.username}</p>
-                <p className="second-p">{user.name}</p>
-              </div>
-            </Link>
-          </div>
+          <button onClick={this.visitSearchResult(user.username)}>
+            <div className="user-div">
+                <img src={user.image_url} alt="avatar" />
+                <div className="user-p">
+                  <p className="first-p">{user.username}</p>
+                  <p className="second-p">{user.name}</p>
+                </div>
+            </div>
+          </button>
         </li>
       );
       })};
@@ -81,6 +91,7 @@ class SearchBar extends React.Component {
           className="searchbar"
           type="text"
           onChange={this.update}
+          value={this.state.inputVal}
           placeholder="&#xF002; Search"
         />
 
@@ -106,4 +117,4 @@ const mdp = dispatch => {
 
 // export default SearchBar;
 
-export default connect(msp, mdp)(SearchBar);
+export default withRouter(connect(msp, mdp)(SearchBar));
