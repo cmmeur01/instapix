@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUsers } from "./../../actions/user_actions";
-import { logout } from "./../../actions/session_actions";
 import SearchBar from "./search_bar";
 import "./../../assets/stylesheets/main_nav.css";
 import * as ip from "./../../assets/images/ip.png";
@@ -60,9 +59,6 @@ class MainNav extends React.Component {
                   />
                 </Link>
               </div>
-              <button className="logout-btn" onClick={this.props.logout}>
-                Logout
-              </button>
             </div>
           </div>
         </div>
@@ -80,8 +76,7 @@ const mstp = state => {
 
 const mdtp = dispatch => {
   return {
-    fetchUsers: () => dispatch(fetchUsers()),
-    logout: () => dispatch(logout())
+    fetchUsers: () => dispatch(fetchUsers())
   };
 };
 

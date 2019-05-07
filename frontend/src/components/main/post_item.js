@@ -55,7 +55,7 @@ class PostItem extends React.Component {
     // debugger;
     this.setState({ inputVal: e.target.value });
     // this.state.inputVal = e.target.value;
-    debugger;
+    // debugger;
     // let textarea = document.getElementById("myTextarea");
     // let l = this.state.inputVal.length;
     // if (l > 90) {
@@ -96,10 +96,14 @@ class PostItem extends React.Component {
   // }
 
   commentSubmit(e) {
-    debugger;
+    // debugger;
     e.preventDefault();
     this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
-    .then(() => this.setState({inputVal: ''}));
+    .then(() => this.setState({ 
+      comments: this.state.comments.concat({
+        body: this.state.inputVal, 
+        user:this.props.currentUserId}), 
+      inputVal: '' }));
   }
 
   handleLike() {
@@ -114,7 +118,7 @@ class PostItem extends React.Component {
   }
 
   modalOpen() {
-    this.props.openModal(this.props.post._id);
+    this.props.openLikesModal(this.props.post._id);
   }
   
   render() {
