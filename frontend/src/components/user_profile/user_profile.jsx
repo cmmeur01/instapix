@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from "@emotion/core";
-import { BeatLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
 import * as gearButton from './../../assets/images/gear.png';

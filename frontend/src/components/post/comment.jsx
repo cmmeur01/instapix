@@ -50,7 +50,20 @@ class Comment extends React.Component {
     // });
     let owner = users[this.props.post.user];
     let currentUser = users[this.props.currentUserId];
+<<<<<<< Updated upstream
     // debugger;
+=======
+
+    let followButton = '';
+    let dot = '';
+    if (owner._id !== this.props.currentUserId) {
+      followButton = <div className="is-following">
+        <CommentFollow owner={owner} currentUser={currentUser} />
+      </div>;
+      dot = ' •'
+    }
+
+>>>>>>> Stashed changes
     return (
       <div className="comment-component">
         <div className="page-owner">
@@ -58,12 +71,17 @@ class Comment extends React.Component {
             <img src={owner.image_url} alt="" />
           </div>
           <div className="owner-names">
+<<<<<<< Updated upstream
             <div className="owner-username"><Link to={`/users/${owner.username}`}>{owner.username}</Link> •</div>
+=======
+            <div className="owner-username">
+              <Link to={`/users/${owner.username}`}>{owner.username}</Link>
+              {dot}
+            </div>
+>>>>>>> Stashed changes
             <div className="full-name">{owner.name}</div>
           </div>
-          <div className="is-following">
-            <CommentFollow owner={owner} currentUser={currentUser} />
-          </div>
+          {followButton}
         </div>
         <ul className="comment-index-component">{postComments}</ul>
         <div className="comment-form">

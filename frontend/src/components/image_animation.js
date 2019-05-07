@@ -20,7 +20,7 @@ class ImageAnimation extends React.Component {
   componentDidMount() {
     this.timeout = setTimeout(() => {
       this.setState({ fadeIn: false });
-    }, 1500);
+    }, 4500);
     this.animateImages();
   }
 
@@ -37,7 +37,7 @@ class ImageAnimation extends React.Component {
 
       this.timeout = setTimeout(() => {
         this.setState({ fadeIn: false });
-      }, 1500);
+      }, 4500);
     }, 2000);
   }
 

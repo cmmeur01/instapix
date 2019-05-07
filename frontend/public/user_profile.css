@@ -191,6 +191,7 @@
 }
 
 .inactive {
+<<<<<<< Updated upstream
     background-color: #3897f0;
     border: 1px solid #3897f0;
     border-radius: 4px;
@@ -199,3 +200,14 @@
 
 
 
+=======
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.comment-container {
+  margin-block-end: 104px;
+}
+>>>>>>> Stashed changes

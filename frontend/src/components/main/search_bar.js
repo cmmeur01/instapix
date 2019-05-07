@@ -8,25 +8,17 @@ import { searchUsers } from './../../actions/user_actions';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { inputVal: "", popupVisible: true };
+    this.state = { inputVal: "" };
     this.update = this.update.bind(this);
     this.visitSearchResult = this.visitSearchResult.bind(this);
   }
 
   update(e) {
-    // debugger;
     this.setState({ inputVal: e.target.value });
     let modal = document.getElementById("input-names");
-    // if (this.state.inputVal.length < 0) {
-    //   modal.style.display = "none";
-    // } else {
-    //   modal.style.display = "block";
-    // }
     if (e.target.value.length === 0) {
-      // this.setState({ inputVal: '' });
       modal.style.display = "none";
     } else {
-      // this.setState({ inputVal: e.target.value });
       modal.style.display = "block";
     }
     this.props.searchUsers(e.target.value);
@@ -34,6 +26,7 @@ class SearchBar extends React.Component {
 
   visitSearchResult(username) {
     return (e) => {
+<<<<<<< Updated upstream
       this.setState({ inputVal: '' });
       let modal = document.getElementById("input-names");
       modal.style.display = "none";
@@ -62,6 +55,14 @@ class SearchBar extends React.Component {
 
   //   return matches;
   // }
+=======
+      this.setState({ inputVal: ''});
+      let modal = document.getElementById("input-names");
+      modal.style.display = "none";
+      this.props.history.push(`/users/${username}`);
+    };
+  }
+>>>>>>> Stashed changes
 
   render() {
     const { users } = this.props;
@@ -71,6 +72,7 @@ class SearchBar extends React.Component {
     } else {
       results = users.map((user, i) => {
       return (
+<<<<<<< Updated upstream
         <li key={i}>
           <button onClick={this.visitSearchResult(user.username)}>
             <div className="user-div">
@@ -81,6 +83,18 @@ class SearchBar extends React.Component {
                 </div>
             </div>
           </button>
+=======
+        <li key={i} onClick={this.visitSearchResult(user.username)}>
+          <div className="user-div">
+            
+              <img src={user.image_url} alt="avatar" />
+              <div className="user-p">
+                <p className="first-p">{user.username}</p>
+                <p className="second-p">{user.name}</p>
+              </div>
+            
+          </div>
+>>>>>>> Stashed changes
         </li>
       );
       })};
@@ -93,6 +107,7 @@ class SearchBar extends React.Component {
           onChange={this.update}
           value={this.state.inputVal}
           placeholder="&#xF002; Search"
+          value={this.state.inputVal}
         />
 
         <div id="input-names" className="matches-div">
@@ -115,6 +130,9 @@ const mdp = dispatch => {
   });
 };
 
+<<<<<<< Updated upstream
 // export default SearchBar;
 
+=======
+>>>>>>> Stashed changes
 export default withRouter(connect(msp, mdp)(SearchBar));
