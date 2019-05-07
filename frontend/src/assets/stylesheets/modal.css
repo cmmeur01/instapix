@@ -5,7 +5,7 @@
   right: 0;
   left: 0;
   z-index: 3;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.modal-inner{
+.modal-inner {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -35,7 +35,7 @@
 .playlist-form-input {
   font-size: 60px;
   width: 100%;
-  background: rbg(39,39,39);
+  background: rbg(39, 39, 39);
 }
 
 .playlist-form-input > label {
@@ -48,6 +48,7 @@
   border-bottom: solid 1px #efefef;
   height: 50px;
   padding: 8px 14px;
+  display: flex;
 }
 
 .user-div > a {
@@ -68,7 +69,6 @@
 .user-p {
   font-size: 12px;
   position: relative;
-  top: -5px;
   text-align: left;
 }
 
@@ -163,3 +163,4 @@
 .logout-modal-buttons > button:hover {
   cursor: pointer;
 }
+

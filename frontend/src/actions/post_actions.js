@@ -52,7 +52,14 @@ export const fetchPost = (id) => dispatch => {
 // does not have posts.posts when dispatch receivePost
 export const postComment = (post_id, user_id, text) => dispatch => {
   return PostAPIUtil.postComment(post_id, user_id, text).then(res => {
+    debugger
     return dispatch(receivePost(res.data));
+  });
+};
+
+export const sendPost = (post) => dispatch => { 
+  return PostAPIUtil.sendPost(post).then( res => {
+    return res.data.post._id;
   });
 };
 

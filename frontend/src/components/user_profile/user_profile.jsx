@@ -11,9 +11,12 @@ const override = css`
   border-color: red;
 `;
 
-
 class UserProfile extends React.Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     let owner;
     let username = this.props.match.params.username;
@@ -26,37 +29,70 @@ class UserProfile extends React.Component {
           owner = user;
         }
       });
-      // debugger;
-      this.props.fetchPostsByUserId(owner._id);
+      this.props.fetchPostsByUserId(owner._id).then(() => {
+        this.setState({ posts: this.props.posts });
+      });
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.username !== prevProps.match.params.username) {
+      let owner;
+      let username = this.props.match.params.username;
+      this.props
+        .fetchCurrentUser(this.props.currentUser, username)
+        .then(() => {
+          let users = Object.values(this.props.users);
+          users.forEach(user => {
+            if (user.username === this.props.match.params.username) {
+              owner = user;
+            }
+          });
+          this.props.fetchPostsByUserId(owner._id).then(() => {
+            this.setState({ posts: this.props.posts });
+          });
+        });
+    }
   }
 
   render() {
     let owner;
     if (this.props.match.params.username === this.props.currentUser.username) {
-
       owner = this.props.users[this.props.currentUser];
     } else {
       let users = Object.values(this.props.users);
-      
-      users.forEach( user => {
+
+      users.forEach(user => {
         if (user.username === this.props.match.params.username) {
           owner = user;
-  
         }
       });
     }
     let posts;
-    if (Array.isArray(this.props.posts.posts)) {
-      console.log("inside");
-      posts = this.props.posts.posts.map( (post, id) => {
-        return <ProfilePostImageItem key={id} currentUser={this.props.currentUser} post={post} />
+    
+    if (this.state.posts) {
+      posts = Object.values(this.state.posts).map((post, id) => {
+        return (
+          <ProfilePostImageItem
+            key={id}
+            currentUser={this.props.currentUser}
+            post={post}
+          />
+        );
       });
     }
+
+    // let imageUrl;
+    // if (owner.posts.length > 0) {
+    //   imageUrl = `/posts/${owner.posts[0]}`;
+    // } else {
+    //   imageUrl = owner.image_url;
+    // }
+
     return (
       <div>
-      { 
-        owner ? (
+        {owner && posts ? (
+
           <div className="user-profile-container">
             <div className="inner-profile">
               <div className="profile-top">
@@ -75,25 +111,34 @@ class UserProfile extends React.Component {
                         </button>
                       </div>
                     ) : (
-                      <FollowButton owner={owner} currentUser={this.props.users[this.props.currentUser]} />
+                      <FollowButton
+                        owner={owner}
+                        currentUser={this.props.users[this.props.currentUser]}
+                      />
                     )}
                   </div>
                   <ul className="inner-user-info">
                     <li className="post-count">
                       <span>
-                        <span className="profile-num-count">{owner.posts.length} </span>
-                          posts
+                        <span className="profile-num-count">
+                          {owner.posts.length}{" "}
+                        </span>
+                        posts
                       </span>
                     </li>
                     <li className="follower-count">
                       <span>
-                        <span className="profile-num-count">{owner.followers.length} </span>
+                        <span className="profile-num-count">
+                          {owner.followers.length}{" "}
+                        </span>
                         followers
                       </span>
                     </li>
                     <li className="following-count">
                       <span>
-                        <span className="profile-num-count">{owner.following.length} </span>
+                        <span className="profile-num-count">
+                          {owner.following.length}{" "}
+                        </span>
                         following
                       </span>
                     </li>
@@ -103,46 +148,42 @@ class UserProfile extends React.Component {
                     <span>{owner.bio}</span>
                   </div>
                 </div>
-                
               </div>
               <nav className="user-nav">
                 <ul className="user-nav-links">
                   <li>
-                    <div className="posts-icon"></div>
+                    <div className="posts-icon" />
                     <span> POSTS</span>
                   </li>
-                    {owner._id === this.props.currentUser ? (
-                      <li>
-                        <div className="new-post-icon"></div>
-                        <span> NEW POST</span>
-                      </li>
-                    ) : (
-                      ''
-                    )}
+                  {owner._id === this.props.currentUser ? (
+                    <li>
+                      <div className="new-post-icon" />
+                      <span> NEW POST</span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </nav>
-              <ul className="user-posts">
-                {posts}
-              </ul>
+              <ul className="user-posts">{posts}</ul>
             </div>
           </div>
         ) : (
-          <div className='stock-loading'>
-            <BeatLoader
+          <div className="stock-loading">
+
+            <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}
-              color={'#21ce99'}
+              color={"#312F2D"}
+
               loading={true}
             />
           </div>
-        )
-
-      }
+        )}
       </div>
     );
   }
-
 }
 
 export default UserProfile;
