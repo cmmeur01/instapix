@@ -144,3 +144,23 @@
 .likes-li {
   padding-bottom: 0px;
 }
+
+.logout-modal-buttons {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.logout-modal-buttons > button {
+  width: 400px;
+  height: 50px;
+  border: none;
+  border-top: 0.5px solid lightgray;
+  font-size: 14px;
+}
+
+.logout-modal-buttons > button:hover {
+  cursor: pointer;
+}
+

@@ -1,9 +1,9 @@
-import React from "react";
-import { jsx, css } from "@emotion/core";
-
-import { MoonLoader } from "react-spinners";
+import React from 'react';
+import { css } from "@emotion/core";
+import { BeatLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
+import * as gearButton from './../../assets/images/gear.png';
 
 const override = css`
   display: block;
@@ -97,14 +97,19 @@ class UserProfile extends React.Component {
             <div className="inner-profile">
               <div className="profile-top">
                 <div className="profile-picture">
-                  <img src={owner.image_url} />
+                  <img src={owner.image_url} alt={owner.username} />
                 </div>
                 <div className="outer-user-info">
                   <div className="user-profile-row">
                     <h3>{owner.username}</h3>
                     {/* conditional */}
                     {owner._id === this.props.currentUser ? (
-                      <button className="edit-profile-btn">Edit Profile</button>
+                      <div className='edit-logout-buttons'>
+                        <button className="edit-profile-btn">Edit Profile</button>
+                        <button className='logout-gear-btn' onClick={this.props.openLogoutModal}>
+                          <img src={gearButton} alt='gear'/>
+                        </button>
+                      </div>
                     ) : (
                       <FollowButton
                         owner={owner}

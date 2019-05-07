@@ -190,7 +190,6 @@
 }
 
 .comment-btn {
-  z-index: 3;
   opacity: 0.3;
   /* pointer-events: none; */
   border: 0;

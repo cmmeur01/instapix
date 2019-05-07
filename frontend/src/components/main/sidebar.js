@@ -53,11 +53,15 @@ class SideBar extends React.Component {
       <div className="side-feed-bar">
         <div className="profile-header">
           <div>
-            <img className="sidebar-profile" src={this.props.currentUser.image_url} alt="profile pic" />
+            <Link to={`/users/${this.props.currentUser.username}`}>
+              <img className="sidebar-profile" src={this.props.currentUser.image_url} alt="profile pic" />
+            </Link>
           </div>
           <div className="user-info">
             <div className="sidebar-username">
-              <Link to="#">{this.props.currentUser.username}</Link>
+              <Link to={`/users/${this.props.currentUser.username}`}>
+                {this.props.currentUser.username}
+              </Link>
             </div>
             <div className="sidebar-name">{this.props.currentUser.name}</div>
           </div>

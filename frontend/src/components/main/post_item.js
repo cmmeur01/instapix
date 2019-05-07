@@ -98,14 +98,15 @@ class PostItem extends React.Component {
   // }
 
   commentSubmit(e) {
+
+    // debugger;
     e.preventDefault();
-    this.props
-      .postComment(
-        this.props.post._id,
-        this.props.currentUserId,
-        this.state.inputVal
-      )
-      .then(() => this.setState({ inputVal: "" }));
+    this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
+    .then(() => this.setState({ 
+      comments: this.state.comments.concat({
+        body: this.state.inputVal, 
+        user:this.props.currentUserId}), 
+      inputVal: '' }));
   }
 
   handleLike() {
@@ -132,7 +133,7 @@ class PostItem extends React.Component {
   }
 
   modalOpen() {
-    this.props.openModal(this.props.post._id);
+    this.props.openLikesModal(this.props.post._id);
   }
 
   render() {
