@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { closeModal } from './../../actions/modal_actions';
 import { Link } from 'react-router-dom';
+import { logout } from './../../actions/session_actions';
 import React from 'react';
 import { findPost, findUsers } from './../../reducers/selectors';
 import './../../assets/stylesheets/modal.css';
@@ -43,10 +44,8 @@ class Modal extends React.Component {
   }
 
   render() {
-    if (!this.props.postId) {
-      return null;
-    } else {
-      return (
+    if (this.props.postId) {
+        return (
         <div className="modal-bg" onClick={this.props.closeModal}>
           <div className="modal-inner" onClick={e => e.stopPropagation()}>
             <div className="likes-div">
@@ -59,7 +58,21 @@ class Modal extends React.Component {
           </div>
         </div>
       )
+    } else if (this.props.logoutModal) {
+      return(
+        <div className="modal-bg" onClick={this.props.closeModal}>
+          <div className="modal-inner" onClick={e => e.stopPropagation()}>
+            <div className='logout-modal-buttons'>
+              <button onClick={this.props.logout}>Log Out</button>
+              <button onClick={this.props.closeModal}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )
+    } else {
+      return null;
     }
+
   }
 }
 
@@ -69,23 +82,29 @@ const msp = state => {
   let postId;
   let post;
   let users;
+  let logoutModal = false;
   if (state.ui.modal.postId) {
     postId = state.ui.modal.postId;
     post = findPost(state);
     users = findUsers(state);
+  } else if (state.ui.modal.logoutModal) {
+    logoutModal = true;
   }
+
 
   return ({
     postId,
     post,
     users,
+    logoutModal,
     currentUser: state.session.user
   })
 }
 
 const mdp = dispatch => {
   return ({
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
+    logout: () => dispatch(logout())
   })
 }
 

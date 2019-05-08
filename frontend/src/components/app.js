@@ -30,7 +30,7 @@ const App = () => (
       <ProtectedRoute exact path="/suggestions" component={Main} />
       <ProtectedRoute exact path="/explore" component={Main} />
     </Switch>
-    {/* <Footer /> */}
+    <Footer />
   </div>
 );
 

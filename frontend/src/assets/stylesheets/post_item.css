@@ -117,6 +117,11 @@
 
 .likes-section > h4 {
   margin-top: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  text-decoration: none;
+  margin-bottom: 15px;
 }
 
 .post-footer {
@@ -125,8 +130,8 @@
 
 .user-comments {
   position: relative;
-  top: -10px;
-  line-height: 12px;
+  /* top: -10px; */
+  line-height: 10px;
 }
 .user-comments:first-child {
   /* margin-top: 5px; */
@@ -157,6 +162,8 @@
   min-height: 56px;
   justify-content: center;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .comment-form2 {
@@ -183,7 +190,6 @@
 }
 
 .comment-btn {
-  z-index: 3;
   opacity: 0.3;
   /* pointer-events: none; */
   border: 0;
@@ -222,5 +228,5 @@
 
 .post-item-date {
   position: relative;
-  top: -15px;
+  top: -5px;
 }
