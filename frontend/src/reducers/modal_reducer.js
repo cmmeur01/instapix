@@ -1,5 +1,12 @@
-import { OPEN_LIKES_MODAL, CLOSE_MODAL, OPEN_LOGOUT_MODAL } from './../actions/modal_actions';
+import {
+  OPEN_LIKES_MODAL,
+  CLOSE_MODAL,
+  OPEN_PROFILE_MODAL,
+  CLOSE_PROFILE_MODAL,
+  OPEN_LOGOUT_MODAL
+} from "./../actions/modal_actions";
 import { RECEIVE_USER_LOGOUT } from './../actions/session_actions';
+
 
 const modalReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -9,6 +16,10 @@ const modalReducer = (state = {}, action) => {
     case OPEN_LOGOUT_MODAL:
       return {logoutModal: true};
     case CLOSE_MODAL:
+      return {};
+    case OPEN_PROFILE_MODAL:
+      return { userId: action.userId };
+    case CLOSE_PROFILE_MODAL:
       return {};
     case RECEIVE_USER_LOGOUT:
       return {};

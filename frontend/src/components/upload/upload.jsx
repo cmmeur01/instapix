@@ -15,7 +15,6 @@ class UploadComponent extends React.Component {
       description: '',
       likes: []
     };
-    // let cropper;
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state.user = this.props.currentUserId();
@@ -38,14 +37,11 @@ class UploadComponent extends React.Component {
 
   handleFile(e) {
     let preview = document.getElementById('img-upload');
-    // debugger
-    // const file = e.currentTarget.files[0];
     const file = e[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       preview.src = reader.result;
       this.cropper = new Cropper(preview, {
-        // aspectRatio: 16/9,
         cropBoxResizable: false,
         dragMode: false,
         toggleDragModeOnDblclick: false,
@@ -53,7 +49,6 @@ class UploadComponent extends React.Component {
         minCropBoxHeight: 614,
         minCropBoxWidth: 614,
         viewMode: 2,
-        // scalable: false
       });
     };
     if (file) {
@@ -77,35 +72,6 @@ class UploadComponent extends React.Component {
 
     return (
       <div className="outter-post">
-        {/* <div className="new-post-title">
-          Choose a picture, add a description, and share!
-        </div> */}
-        {/* <div>
-          <h1>HELLO</h1>
-          <Dropzone
-            onDrop={this.handleFile}
-            // multiple
-            // maxSize={8000000}
-            className="dropzone"
-          >
-            {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-              </div>
-            )}
-
-          </Dropzone>
-        </div> */}
-        {/* <Dropzone onDrop={this.handleFile}>
-          {({ getRootProps, getInputProps }) => (
-            <section className="dropzone">
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
-          )}
-        </Dropzone> */}
         <div className="new-post-container">
           <form className="new-post-form" onSubmit={this.handleSubmit}>
             <div>

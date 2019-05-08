@@ -78,3 +78,9 @@ export const searchUsers = searchTerm => dispatch => {
     return dispatch(receiveSearchResults(res.data.users));
   });
 };
+
+export const editProfile = (url, id) => dispatch => {
+  return UserAPIUtil.editProfile(url, id).then(res => {
+    return dispatch(receiveCurrentUser(res.data));
+  });
+};

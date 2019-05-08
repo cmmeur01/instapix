@@ -3,7 +3,6 @@ import { RECEIVE_POST, RECEIVE_FEED_POSTS } from './../actions/post_actions';
 import merge from 'lodash/merge';
 
 const CommentsReducer = (state = [], action) => {
-  // debugger;
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_COMMENTS:

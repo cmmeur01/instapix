@@ -101,6 +101,7 @@ class PostItem extends React.Component {
 
     // debugger;
     e.preventDefault();
+
     this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
     .then(() => this.setState({ 
       comments: this.state.comments.concat({

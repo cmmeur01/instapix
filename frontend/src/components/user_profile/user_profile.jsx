@@ -1,8 +1,10 @@
-import React from 'react';
-import { css } from "@emotion/core";
-import { BeatLoader } from "react-spinners";
+import React from "react";
+import { jsx, css } from "@emotion/core";
+import { Link } from 'react-router-dom';
+import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
+import ProfileModal from './../user_profile/modal';
 import * as gearButton from './../../assets/images/gear.png';
 
 const override = css`
@@ -15,6 +17,11 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    this.props.openProfileModal(this.props.currentUser);
   }
 
   componentDidMount() {
@@ -22,9 +29,7 @@ class UserProfile extends React.Component {
     let username = this.props.match.params.username;
     this.props.fetchCurrentUser(this.props.currentUser, username).then(() => {
       let users = Object.values(this.props.users);
-      // debugger;
       users.forEach(user => {
-        // debugger;
         if (user.username === this.props.match.params.username) {
           owner = user;
         }
@@ -69,7 +74,6 @@ class UserProfile extends React.Component {
       });
     }
     let posts;
-    
     if (this.state.posts) {
       posts = Object.values(this.state.posts).map((post, id) => {
         return (
@@ -88,32 +92,36 @@ class UserProfile extends React.Component {
     // } else {
     //   imageUrl = owner.image_url;
     // }
-
     return (
       <div>
         {owner && posts ? (
-
           <div className="user-profile-container">
+            {this.props.modal ? <ProfileModal /> : ""}
             <div className="inner-profile">
               <div className="profile-top">
-                <div className="profile-picture">
-                  <img src={owner.image_url} alt={owner.username} />
+
+                <div onClick={this.handleClick} className="profile-picture">
+                  <img src={owner.image_url} alt={owner.username}/>
                 </div>
                 <div className="outer-user-info">
                   <div className="user-profile-row">
                     <h3>{owner.username}</h3>
                     {/* conditional */}
                     {owner._id === this.props.currentUser ? (
+
                       <div className='edit-logout-buttons'>
-                        <button className="edit-profile-btn">Edit Profile</button>
+                        <button className="edit-profile-btn" onClick={this.handleClick}>Edit Profile</button>
                         <button className='logout-gear-btn' onClick={this.props.openLogoutModal}>
                           <img src={gearButton} alt='gear'/>
                         </button>
                       </div>
+
                     ) : (
                       <FollowButton
                         owner={owner}
-                        currentUser={this.props.users[this.props.currentUser]}
+                        currentUser={
+                          this.props.users[this.props.currentUser]
+                        }
                       />
                     )}
                   </div>
@@ -158,7 +166,9 @@ class UserProfile extends React.Component {
                   {owner._id === this.props.currentUser ? (
                     <li>
                       <div className="new-post-icon" />
-                      <span> NEW POST</span>
+                      <Link to="/newpost">
+                        <span className="new-post-span"> NEW POST</span>
+                      </Link>
                     </li>
                   ) : (
                     ""
@@ -170,13 +180,11 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
-
             <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}
               color={"#312F2D"}
-
               loading={true}
             />
           </div>

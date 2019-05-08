@@ -37,3 +37,7 @@ export const searchUsers = searchTerm => {
 export const fetchSuggestions = () => {
   return axios.get('/api/users/suggestions');
 };
+
+export const editProfile = (image_url, id) => {
+  return axios.patch('/api/users/edit', { image_url: image_url, id: id });
+};
