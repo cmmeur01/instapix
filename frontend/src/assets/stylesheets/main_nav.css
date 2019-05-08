@@ -39,6 +39,7 @@ div.main-logos {
   text-decoration: none;
   display: flex;
   text-align: center;
+  align-items: center;
 }
 
 .icons-left {
@@ -57,7 +58,6 @@ div.main-logos {
 .instapix-name {
   display: flex;
   position: relative;
-  left: -10px;
 }
 
 .instapix-name > span {
@@ -65,6 +65,9 @@ div.main-logos {
   width: 103px;
   font-family: Cookie;
   font-size: 34px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .side-border {

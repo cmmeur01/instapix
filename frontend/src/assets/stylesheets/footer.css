@@ -1,6 +1,7 @@
 /* footer css */
 
 .footer {
+  /* removed absolute position and added bottom margin */
   position: absolute;
   bottom: 0;
   font-size: 12px;
@@ -12,11 +13,13 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  background: #fafafa;
   /* align-items: center; */
   /* text-align: center; */
   justify-content: center;
   padding: 38px 0;
   /* max-width: 935px; */
+  /* z-index: 999; */
 }
 
 .footer-links {
@@ -48,16 +51,18 @@
   font-weight: 600;
   margin: 0 70px;
   text-transform: uppercase;
-  top: 12px;
   /* width: 100%; */
   position: relative;
   color: #999;
 }
 
 /* Splash phone css */
+.app-main-page {
+  background: #fafafa;
+}
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   background: #fafafa;
   /* display: flex; 
@@ -75,13 +80,14 @@ article {
   margin: 0 auto;
 }
 
-/* .img-container {
+.img-container {
   height: 618px;
   width: 454px;
   background-image: url("https://www.instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png");
   position: relative;
   top: 110px;
   /* box-sizing: border-box; */
+}
 
 /* form css */
 
@@ -339,7 +345,6 @@ article {
   justify-content: center;
   margin: 10px 0;
   position: relative;
-  
 }
 
 .z1VUo {
@@ -357,7 +362,7 @@ article {
   width: 242px;
   position: relative;
   top: 100px;
-  left: 150px;
+  left: 136px;
 }
 
 .image-fade-out {
@@ -419,7 +424,6 @@ article {
   align-items: center;
   width: 100%;
   margin: auto;
- 
 }
 /* inside splash.js */
 .splash-main {
@@ -439,4 +443,3 @@ article {
   text-align: center;
   list-style-type: none;
 }
-

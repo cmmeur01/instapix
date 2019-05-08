@@ -48,6 +48,18 @@ router.get('/', (req, res) => {
   }
 )});
 
+//send whole user back to redirect
+router.patch('/edit', (req, res) => {
+  // console.log(req.body);
+  User.findOne({ _id: req.body.id })
+    .then( user => {
+      user.image_url = req.body.image_url;
+      // console.log(user);
+      user.save()
+        .then(res.send({ [user.id]: user }));
+    });
+});
+
 router.patch('/username', (req, res) => {
   let user1;
   // console.log(req);

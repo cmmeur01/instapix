@@ -1,6 +1,10 @@
 import React from 'react';
 import Cropper from 'cropperjs';
 import axios from "axios";
+import { connect } from 'react-redux';
+import { sendPost } from './../../actions/post_actions';
+import Dropzone from "react-dropzone";
+
 
 class UploadComponent extends React.Component {
 
@@ -8,11 +12,12 @@ class UploadComponent extends React.Component {
     super(props);
     this.state = {
       imageUrl: '',
-      description: ''
+      description: '',
+      likes: []
     };
-    // let cropper;
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state.user = this.props.currentUserId();
   }
 
   handleSubmit(e) {
@@ -25,48 +30,94 @@ class UploadComponent extends React.Component {
       formData.append('image', blob);
 
       axios.post("/api/users/images/upload", formData)
-        .then((url) => that.setState({ imageUrl: url.data.imageUrl }))
-        .then(() => console.log(that.state));
+        .then((url) => that.props.sendPost({ imgUrl: url.data.imageUrl, likes: [], user: that.state.user, description: that.state.description }))
+        .then((id) => that.props.history.push(`/posts/${id}`));
     });
   }
 
   handleFile(e) {
     let preview = document.getElementById('img-upload');
-    const file = e.currentTarget.files[0];
+    const file = e[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       preview.src = reader.result;
       this.cropper = new Cropper(preview, {
-        // aspectRatio: 16/9,
         cropBoxResizable: false,
         dragMode: false,
         toggleDragModeOnDblclick: false,
-        data: { width: 600, height: 600 }
+        data: { width: 1, height: 1 },
+        minCropBoxHeight: 614,
+        minCropBoxWidth: 614,
+        viewMode: 2,
       });
     };
     if (file) {
       reader.readAsDataURL(file);
+      let submit = document.getElementById('post-caption');
+      submit.classList.add("new-post-caption");
+      submit.classList.remove("post-caption-hidden");
+      let upload = document.getElementById("dropzone-section");
+      upload.classList.remove("dropzone-section");
+      upload.classList.add("dropzone-section-hidden");
     }
+  }
 
-
+  update(field) {
+    return (e) => {
+      this.setState({ [field]: e.target.value });
+    };
   }
 
   render() {
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="file" onChange={this.handleFile} />
-          <button>Submit</button>
-        </form>
-
-        <img id="img-upload" src="" alt="" />
+      <div className="outter-post">
+        <div className="new-post-container">
+          <form className="new-post-form" onSubmit={this.handleSubmit}>
+            <div>
+              {/* <input type="file" onChange={this.handleFile} /> */}
+              <Dropzone onDrop={this.handleFile}>
+                {({ getRootProps, getInputProps }) => (
+                  <section className="dropzone-section" id="dropzone-section">
+                    <div {...getRootProps()} className="dropzone">
+                      <input {...getInputProps()} />
+                        <h1>Drag 'n' drop some files here, or click to select files</h1>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
+            <div className="post-caption-hidden" id="post-caption">
+              <div className="new-post-desc">
+                <input
+                  type="text"
+                  placeholder="Write a caption"
+                  onChange={this.update("description")}
+                />
+              </div>
+              <div>
+                <button type="submit" className="shr-btn">
+                  Share
+                </button>
+              </div>
+            </div>
+            <img className="img-upload" id="img-upload" src="" alt="" />
+          </form>
+        </div>
       </div>
     );
   }
 
-
 }
 
-export default UploadComponent;
+
+const msp = (state, ownProps) => ({
+  currentUserId: () => state.session.user.id
+});
+
+const mdp = dispatch => ({
+  sendPost: (post) => dispatch(sendPost(post))
+});
+
+export default connect(msp, mdp)(UploadComponent);
 

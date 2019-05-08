@@ -3,6 +3,7 @@
   flex-direction: column;
   background-color: #fafafa;
   justify-content: center;
+  padding-top: 60px;
 }
 
 .inner-profile {
@@ -40,7 +41,7 @@
   width: 293px;
   height: 293px;
   /* border: 1px solid red; */
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   list-style: none;
   overflow: hidden;
 }
@@ -63,6 +64,8 @@
   box-sizing: border-box;
   position: relative;
   height: 150px;
+  object-fit: cover;
+  width: 150px;
 }
 
 .outer-user-info {
@@ -102,7 +105,7 @@
   font-weight: 600;
   margin-left: 20px;
   font-size: 14px;
-  outline: 0!important;
+  outline: 0 !important;
 }
 
 .logout-gear-btn {
@@ -161,7 +164,7 @@
   width: 13px;
   height: 11px;
   background-size: cover;
-  background-image: url("https://s3.amazonaws.com/instapic-images/Screenshot+2019-05-01+at+20.21.44.png")
+  background-image: url("https://s3.amazonaws.com/instapic-images/Screenshot+2019-05-01+at+20.21.44.png");
 }
 
 .new-post-icon {
@@ -169,11 +172,22 @@
   width: 17px;
   height: 17px;
   background-size: cover;
-  background-image: url("https://s3.amazonaws.com/instapic-images/Screen+Shot+2019-05-01+at+1.51.32+PM.png")
+  background-image: url("https://s3.amazonaws.com/instapic-images/Screen+Shot+2019-05-01+at+1.51.32+PM.png");
+}
+
+.user-nav-links > li > a {
+  margin-bottom: 2px;
+}
+
+.new-post-span {
+  font-size: 12px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .user-nav-links {
   display: flex;
+  margin-top: 16px;
 }
 
 .user-nav > ul > li {
@@ -197,7 +211,77 @@
   color: #fff;
 }
 
+
 .comment-container {
   margin-block-end: 104px;
 }
 
+.modal-inner-profile-edit{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 20px;
+  width: 400px;
+  border-radius: 15px;
+}
+
+.modal-inner-profile-edit > h3{
+  display: block;
+  color: #262626;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 40px 20px;
+  margin-bottom: -0.5rem;
+}
+
+.edit-profile-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+}
+
+
+
+.edit-profile-button > [type="file"] {
+  position:absolute;
+  display: none;
+}
+
+.edit-profile-button > label {
+  color: #3897f0;
+}
+
+.custom-file-upload {
+  /* display: inline-block; */
+  /* padding: 6px 12px; */
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+  width: 95%;
+  height: 100%
+}
+.cancel-btn {
+  height: 0
+}
+
+.edit-profile-button > button{
+  width: 95%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  outline: 0!important;
+  cursor: pointer;
+}
+
+.edit-profile-button {
+  border-top: 1px solid #efefef;
+  min-height: 48px;
+}
+
+.remove-cur-btn {
+  color: red;
+}

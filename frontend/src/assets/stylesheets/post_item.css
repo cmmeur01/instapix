@@ -41,6 +41,11 @@
   margin-right: 5px;
 }
 
+.post-user-username > h4 {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
 .post-caption {
   /* display: flex; */
   /* padding-left: 5px; */
@@ -75,6 +80,7 @@
   height: 23px;
   width: 26px;
   margin: 5px 15px 5px 5px;
+  outline: none;
 }
 
 .icons-div {
@@ -94,7 +100,7 @@
   font: inherit;
   /*border is optional*/
   cursor: pointer;
-  outline: none;
+  outline: none !important;
 }
 
 .icon-comment {
@@ -111,6 +117,11 @@
 
 .likes-section > h4 {
   margin-top: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  text-decoration: none;
+  margin-bottom: 15px;
 }
 
 .post-footer {
@@ -119,8 +130,8 @@
 
 .user-comments {
   position: relative;
-  top: -10px;
-  line-height: 12px;
+  /* top: -10px; */
+  line-height: 10px;
 }
 .user-comments:first-child {
   /* margin-top: 5px; */
@@ -151,6 +162,8 @@
   min-height: 56px;
   justify-content: center;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .comment-form2 {
@@ -159,7 +172,6 @@
   position: relative;
   display: flex;
   flex-grow: 1;
-  top: 20px;
 }
 
 .add-comment {
@@ -216,5 +228,5 @@
 
 .post-item-date {
   position: relative;
-  top: -15px;
+  top: -5px;
 }

@@ -1,11 +1,11 @@
 .feed-div {
-  height: 820px;
+  height: 1600px;
   overflow: scroll;
   margin-top: 50px;
 }
 
 .feed-div::-webkit-scrollbar {
-   display: none;
+  display: none;
 }
 
 .feed-list {
@@ -73,4 +73,3 @@
   font-size: 14px;
   outline: none;
 }
-
