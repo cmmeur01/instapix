@@ -26,11 +26,10 @@ class SearchBar extends React.Component {
 
   visitSearchResult(username) {
     return (e) => {
-<<<<<<< Updated upstream
       this.setState({ inputVal: '' });
       let modal = document.getElementById("input-names");
       modal.style.display = "none";
-      this.props.history.push(`users/${username}`);
+      this.props.history.push(`/users/${username}`);
     }
   }
 
@@ -55,14 +54,6 @@ class SearchBar extends React.Component {
 
   //   return matches;
   // }
-=======
-      this.setState({ inputVal: ''});
-      let modal = document.getElementById("input-names");
-      modal.style.display = "none";
-      this.props.history.push(`/users/${username}`);
-    };
-  }
->>>>>>> Stashed changes
 
   render() {
     const { users } = this.props;
@@ -72,18 +63,6 @@ class SearchBar extends React.Component {
     } else {
       results = users.map((user, i) => {
       return (
-<<<<<<< Updated upstream
-        <li key={i}>
-          <button onClick={this.visitSearchResult(user.username)}>
-            <div className="user-div">
-                <img src={user.image_url} alt="avatar" />
-                <div className="user-p">
-                  <p className="first-p">{user.username}</p>
-                  <p className="second-p">{user.name}</p>
-                </div>
-            </div>
-          </button>
-=======
         <li key={i} onClick={this.visitSearchResult(user.username)}>
           <div className="user-div">
             
@@ -94,7 +73,6 @@ class SearchBar extends React.Component {
               </div>
             
           </div>
->>>>>>> Stashed changes
         </li>
       );
       })};
@@ -130,9 +108,4 @@ const mdp = dispatch => {
   });
 };
 
-<<<<<<< Updated upstream
-// export default SearchBar;
-
-=======
->>>>>>> Stashed changes
 export default withRouter(connect(msp, mdp)(SearchBar));

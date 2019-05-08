@@ -19,17 +19,37 @@ class UserProfile extends React.Component {
     let username = this.props.match.params.username;
     this.props.fetchCurrentUser(this.props.currentUser, username).then(() => {
       let users = Object.values(this.props.users);
-      // debugger;
       users.forEach(user => {
-        // debugger;
         if (user.username === this.props.match.params.username) {
           owner = user;
         }
       });
-      // debugger;
-      this.props.fetchPostsByUserId(owner._id);
+      this.props.fetchPostsByUserId(owner._id).then(() => {
+        this.setState({ posts: this.props.posts });
+      });
     });
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.username !== prevProps.match.params.username) {
+      let owner;
+      let username = this.props.match.params.username;
+      this.props
+        .fetchCurrentUser(this.props.currentUser, username)
+        .then(() => {
+          let users = Object.values(this.props.users);
+          users.forEach(user => {
+            if (user.username === this.props.match.params.username) {
+              owner = user;
+            }
+          });
+          this.props.fetchPostsByUserId(owner._id).then(() => {
+            this.setState({ posts: this.props.posts });
+          });
+        });
+    }
+  } 
+
 
   render() {
     let owner;
@@ -128,7 +148,7 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className='stock-loading'>
-            <BeatLoader
+            <MoonLoader
               className={override}
               sizeUnit={"px"}
               size={25}

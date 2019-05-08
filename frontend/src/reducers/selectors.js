@@ -22,9 +22,6 @@ export const findUsers = (state) => {
   let likers = post.likes;
   return likers.map(liker => state.entities.users[liker]);
   // return Object.values(state.entities.users);
-<<<<<<< Updated upstream
-};
-=======
 };
 
 export const findCurrentUser = state => {
@@ -41,4 +38,3 @@ export const findCurrentUser = state => {
 //   );
 //   return notFollowed;
 // };
->>>>>>> Stashed changes
