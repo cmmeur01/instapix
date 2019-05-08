@@ -254,16 +254,14 @@
 
 .dropzone {
   display: flex;
+  flex-direction: column;
   border: 1px solid black;
   background-color: white;
-  /* padding-top: 500px; */
   font-family: Cookie;
   font-size: 30px;
   cursor: pointer;
-  /* text-align: center; */
+  height: 50vh;
   justify-content: center;
-  vertical-align: middle;
-  height: 60vh;
 }
 /* 
 .upload-button {
@@ -271,18 +269,20 @@
   cursor: pointer;
 } */
 
-.dropzone > h1 {
+/* .dropzone > h1 {
   margin: auto;
-}
+} */
 
 .dropzone:hover {
   background-color: #3897f0;
 }
-/* 
-.dropzone > h1 {
-  align-content: center;
-} */
+
+.dropzone > img {
+  height: 50px;
+  width: 50px;
+}
 
 .dropzone-section-hidden {
   display: none;
 }
+

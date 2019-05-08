@@ -1,5 +1,5 @@
 import React from "react";
-import { jsx, css } from "@emotion/core";
+import { css } from "@emotion/core";
 import { Link } from 'react-router-dom';
 import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
@@ -101,7 +101,7 @@ class UserProfile extends React.Component {
               <div className="profile-top">
                 <div onClick={this.handleClick} className="profile-picture">
                   {this.props.modal.picLoading ? (
-                    <img src="https://media.giphy.com/media/l3nWhI38IWDofyDrW/giphy.gif" />
+                    <img src="https://media.giphy.com/media/l3nWhI38IWDofyDrW/giphy.gif" alt=""/>
                   ) : (
                     <img src={owner.image_url} alt={owner.username} />
                   )}
