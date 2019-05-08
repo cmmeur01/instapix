@@ -19,7 +19,7 @@ class FollowButton extends React.Component {
     // let text = owner.followers.includes(currentUser._id) ? "Unfollow" : "Follow";
     let button;
     if (owner.followers.includes(currentUser._id)) {
-      button = <button onClick={this.handleClick.bind(this)} className="edit-profile-btn">Following</button>
+      button = <button onClick={this.handleClick.bind(this)} className="edit-profile-btn">Unfollow</button>
     } else {
       button = (
         <button
