@@ -58,7 +58,7 @@ class UserProfile extends React.Component {
           });
         });
     }
-  }
+  } 
 
   render() {
     let owner;
@@ -191,6 +191,7 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
+
             <MoonLoader
               className={override}
               sizeUnit={"px"}

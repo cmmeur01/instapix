@@ -105,7 +105,7 @@
   display: flex;
 }
 
-.user-div > a > img {
+.user-div > img {
   height: 32px;
   width: 32px;
   margin: 0 10px 0 0;

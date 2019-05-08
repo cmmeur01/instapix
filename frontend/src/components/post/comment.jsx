@@ -55,6 +55,15 @@ class Comment extends React.Component {
     // });
     let owner = users[this.props.post.user];
     let currentUser = users[this.props.currentUserId];
+    let followButton = '';
+    let dot = '';
+    if (owner._id !== this.props.currentUserId) {
+      followButton = <div className="is-following">
+        <CommentFollow owner={owner} currentUser={currentUser} />
+      </div>;
+      dot = ' •'
+    }
+
     return (
       <div className="comment-component">
         <div className="page-owner">
@@ -63,13 +72,12 @@ class Comment extends React.Component {
           </div>
           <div className="owner-names">
             <div className="owner-username">
-              <Link to={`/users/${owner.username}`}>{owner.username}</Link> •
+              <Link to={`/users/${owner.username}`}>{owner.username}</Link>
+              {dot}
             </div>
             <div className="full-name">{owner.name}</div>
           </div>
-          <div className="is-following">
-            <CommentFollow owner={owner} currentUser={currentUser} />
-          </div>
+          {followButton}
         </div>
         <ul className="comment-index-component">
           <li className="comment-item">
