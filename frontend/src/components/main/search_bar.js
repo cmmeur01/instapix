@@ -85,7 +85,6 @@ class SearchBar extends React.Component {
           onChange={this.update}
           value={this.state.inputVal}
           placeholder="&#xF002; Search"
-          value={this.state.inputVal}
         />
 
         <div id="input-names" className="matches-div">
