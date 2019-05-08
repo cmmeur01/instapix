@@ -53,7 +53,6 @@ router.patch('/edit', (req, res) => {
   // console.log(req.body);
   User.findOne({ _id: req.body.id })
     .then( user => {
-      console.log(req.body.image_url);
       user.image_url = req.body.image_url;
       // console.log(user);
       user.save()

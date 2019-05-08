@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { closeProfileModal } from './../../actions/modal_actions';
+import { closeProfileModal, picLoaded, picLoading } from './../../actions/modal_actions';
 import React from 'react';
 import axios from "axios";
 import {editProfile} from './../../actions/user_actions';
@@ -28,13 +28,16 @@ class ProfileModal extends React.Component {
     reader.onloadend = res => {
       const formData = new FormData();
       formData.append("image", file);
+      that.props.closeProfileModal();
+      this.props.picLoading();
       axios
         .post("/api/users/images/upload", formData)
         .then(url => {
           that.props.editProfile(url.data.imageUrl, that.props.currentUser.id);
         })
         .then(() => {
-          that.props.closeProfileModal();
+          // that.props.closeProfileModal();
+          this.props.picLoaded();
         });
     };
     if (file) {
@@ -44,6 +47,7 @@ class ProfileModal extends React.Component {
 
   render() {
     return (
+
       <div className="modal-bg" onClick={this.props.closeModal}>
         <div
           className="modal-inner-profile-edit"
@@ -52,7 +56,7 @@ class ProfileModal extends React.Component {
           <h3>Change Profile Photo</h3>
           <div className="edit-profile-buttons">
             <div className="edit-profile-button">
-              <label for="file-upload" class="custom-file-upload">
+              <label htmlFor="file-upload" className="custom-file-upload">
                 Upload Photo
               </label>
               <input id="file-upload" type="file" onChange={this.handleFile} />
@@ -89,7 +93,9 @@ const msp = (state, ownProps) => {
 const mdp = dispatch => {
   return {
     closeProfileModal: () => dispatch(closeProfileModal()),
-    editProfile: (url, id) => dispatch(editProfile(url, id))
+    editProfile: (url, id) => dispatch(editProfile(url, id)),
+    picLoading: () => dispatch(picLoading()),
+    picLoaded: () => dispatch(picLoaded())
   };
 }
 

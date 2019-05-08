@@ -96,26 +96,37 @@ class UserProfile extends React.Component {
       <div>
         {owner && posts ? (
           <div className="user-profile-container">
-            {this.props.modal ? <ProfileModal /> : ""}
+            {this.props.modal.userId ? <ProfileModal /> : ""}
             <div className="inner-profile">
               <div className="profile-top">
-
                 <div onClick={this.handleClick} className="profile-picture">
-                  <img src={owner.image_url} alt={owner.username}/>
+                  {this.props.modal.picLoading ? (
+                    <img src="https://media.giphy.com/media/l3nWhI38IWDofyDrW/giphy.gif" />
+                  ) : (
+                    <img src={owner.image_url} alt={owner.username} />
+                  )}
+
+                  {/* <img src={owner.image_url} alt={owner.username} /> */}
                 </div>
                 <div className="outer-user-info">
                   <div className="user-profile-row">
                     <h3>{owner.username}</h3>
                     {/* conditional */}
                     {owner._id === this.props.currentUser ? (
-
-                      <div className='edit-logout-buttons'>
-                        <button className="edit-profile-btn" onClick={this.handleClick}>Edit Profile</button>
-                        <button className='logout-gear-btn' onClick={this.props.openLogoutModal}>
-                          <img src={gearButton} alt='gear'/>
+                      <div className="edit-logout-buttons">
+                        <button
+                          className="edit-profile-btn"
+                          onClick={this.handleClick}
+                        >
+                          Edit Profile
+                        </button>
+                        <button
+                          className="logout-gear-btn"
+                          onClick={this.props.openLogoutModal}
+                        >
+                          <img src={gearButton} alt="gear" />
                         </button>
                       </div>
-
                     ) : (
                       <FollowButton
                         owner={owner}
