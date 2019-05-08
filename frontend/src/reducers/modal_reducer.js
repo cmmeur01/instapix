@@ -3,7 +3,9 @@ import {
   CLOSE_MODAL,
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
-  OPEN_LOGOUT_MODAL
+  OPEN_LOGOUT_MODAL,
+  PIC_LOADED,
+  PIC_LOADING
 } from "./../actions/modal_actions";
 import { RECEIVE_USER_LOGOUT } from './../actions/session_actions';
 
@@ -23,6 +25,10 @@ const modalReducer = (state = {}, action) => {
       return {};
     case RECEIVE_USER_LOGOUT:
       return {};
+    case PIC_LOADED:
+      return {};
+    case PIC_LOADING:
+      return { picLoading: true };
     default:
       return state;
   }

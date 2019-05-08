@@ -12,7 +12,7 @@ const msp = (state, ownProps) => {
     modalUser: state.entities.users[state.session.user.id],
     users: state.entities.users,
     posts: state.entities.posts,
-    modal: state.ui.modal.userId
+    modal: state.ui.modal
   };
 };
 
