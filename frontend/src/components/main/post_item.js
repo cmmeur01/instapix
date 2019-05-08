@@ -13,6 +13,7 @@ class PostItem extends React.Component {
       inputVal: "",
       likeCount: 0,
       liked: false,
+      likers: [],
       comments: []
     };
 
@@ -39,9 +40,8 @@ class PostItem extends React.Component {
     this.setState({
       likeCount: this.props.post.likes.length,
       liked: this.props.post.likes.includes(this.props.currentUserId),
-      comments: this.props.comments.filter(
-        comment => comment.post === this.props.post._id
-      )
+      comments: this.props.comments.filter(comment => comment.post === this.props.post._id),
+      likers: this.props.post.likes
     });
   }
 
@@ -122,14 +122,12 @@ class PostItem extends React.Component {
           this.setState({ liked: false, likeCount: this.state.likeCount - 1 })
         );
     } else {
-      this.props
-        .likePost({
-          postId: this.props.post._id,
-          userId: this.props.currentUserId
-        })
-        .then(() =>
-          this.setState({ liked: true, likeCount: this.state.likeCount + 1 })
-        );
+      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId })
+      .then(() => this.setState({ 
+        liked: true, 
+        likeCount: this.state.likeCount + 1,
+        likers: this.state.likers.concat(this.props.currentUserId)
+      }));
     }
   }
 

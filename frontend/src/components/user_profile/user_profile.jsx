@@ -1,5 +1,5 @@
-import React from "react";
-import { jsx, css } from "@emotion/core";
+import React from 'react';
+import { css } from "@emotion/core";
 import { Link } from 'react-router-dom';
 import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
@@ -58,7 +58,7 @@ class UserProfile extends React.Component {
           });
         });
     }
-  }
+  } 
 
   render() {
     let owner;
@@ -191,6 +191,7 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div className="stock-loading">
+
             <MoonLoader
               className={override}
               sizeUnit={"px"}
