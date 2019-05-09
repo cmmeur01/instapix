@@ -70,14 +70,22 @@
 .owner-names {
   display: flex;
   flex-direction: column;
-  padding: 6px 6px 6px 0;
+  padding: 6px 0 6px 6px;
+}
+
+.comment-user-pic > img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
 }
 
 .comment-user-pic {
   width: 34px;
   height: 34px;
-  /* padding-right: 12px; */
-  padding: 6px 12px 6px 0
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 
@@ -114,6 +122,7 @@
   display: inline-block;
   word-wrap: break-word;
   width: 260px;
+  margin-left: 12px;
 }
 
 .post-comment-form {
@@ -132,7 +141,7 @@
   width: calc(100% - 24px);
 }
 
-.post-comment-form > form > textarea {
+.textarea-auto {
   font-size: 14px;
   background: 0 0;
   border: 0;
