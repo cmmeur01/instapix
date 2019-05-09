@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { followUser, unfollowUser } from './../../actions/user_actions';
 
 
-class SidebarItem extends React.Component {
+class SuggestionItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = { followed: false };
@@ -15,13 +15,13 @@ class SidebarItem extends React.Component {
   handleFollow(e) {
     e.preventDefault();
     this.props.followUser(this.props.currentUser, this.props.user._id)
-    .then(() => this.setState({ followed: true }));
+      .then(() => this.setState({ followed: true }));
   }
 
   handleUnfollow(e) {
     e.preventDefault();
     this.props.unfollowUser(this.props.currentUser, this.props.user._id)
-    .then(() => this.setState({ followed: false }));
+      .then(() => this.setState({ followed: false }));
   }
 
   render() {
@@ -29,22 +29,18 @@ class SidebarItem extends React.Component {
 
     let followButton;
     if (!this.state.followed) {
-      followButton = <div className='side-follow-btn'>
-        <button onClick={this.handleFollow}>
+      followButton = <button onClick={this.handleFollow} className='edit-profile-btn inactive'>
           Follow
         </button>
-      </div>;
     } else {
-      followButton = <div className='side-unfollow-btn'>
-        <button onClick={this.handleUnfollow}>
+      followButton = <button onClick={this.handleUnfollow} className='edit-profile-btn'>
           Following
         </button>
-      </div>;
     }
 
     return (
-      <li className="side-lis">
-        <div className="user-div">
+      <li className="li-users">
+        <div className="user-div sug-users">
           <Link to={`/users/${user.username}`}>
             <img src={user.image_url} alt="avatar" />
             <div className="user-p">
@@ -53,23 +49,25 @@ class SidebarItem extends React.Component {
             </div>
           </Link>
         </div>
-        {followButton}
+        <div className='sug-btn-container'>
+          {followButton}
+        </div>
       </li>
     )
   }
 }
 
 const msp = state => {
-  return({
+  return ({
     currentUser: state.entities.users[state.session.user.id]
   });
 };
 
 const mdp = dispatch => {
-  return({
+  return ({
     followUser: (currentUser, userId) => dispatch(followUser(currentUser, userId)),
     unfollowUser: (currentUser, userId) => dispatch(unfollowUser(currentUser, userId))
   });
 };
 
-export default connect(msp, mdp)(SidebarItem);
+export default connect(msp, mdp)(SuggestionItem);

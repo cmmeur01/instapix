@@ -24,6 +24,7 @@
   width: 598px;
   position: relative;
   top: 100px;
+  /* margin-block-end: 104px; */
 }
 
 .sug-list-div {
@@ -31,6 +32,7 @@
   border-radius: 4px;
   width: 598px;
   background: white;
+  /* margin-block-end: 104px; */
 }
 
 .sug-container > div {
@@ -45,6 +47,11 @@
 
 .sug-users > .user-p > .second-p {
   color: #999;
+}
+
+.sug-btn-container {
+  margin-right: 20px;
+  /* margin-bottom: 7px; */
 }
 
 .li-users {

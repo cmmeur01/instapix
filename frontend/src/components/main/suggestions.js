@@ -2,35 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { notFollowing } from './../../reducers/selectors';
 import { Link } from 'react-router-dom';
+import SuggestionItem from './suggestion_item';
 
 class Suggestions extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { users: [] }
     this.getSuggestions = this.getSuggestions.bind(this);
   }
 
-  getSuggestions() {
-    if (!this.props.users) return null;
-    let users = this.props.users;
+  componentDidMount() {
+    this.setState({ users: this.props.users })
+  }
 
-    const results = users.map((user, i) => {
-      return (
-        <li className="li-users" key={i}>
-          <div className="user-div sug-users">
-            <Link to={`/users/${user.username}`}>
-              <img src={user.image_url} alt="avatar" />
-              <div className="user-p">
-                <p className="first-p">{user.username}</p>
-                <p className="second-p">{user.name}</p>
-              </div>
-            </Link>
-          </div>
-          <div>
-            <button className="follow-btn">Follow</button>
-          </div>
-        </li>
-      );
-    });
+  getSuggestions() {
+    if (this.state.users.length === 0) return null;
+    let users = this.state.users;
+
+    const results = users.map((user, i) => <SuggestionItem user={user} key={i} />);
     return results;
   }
 
