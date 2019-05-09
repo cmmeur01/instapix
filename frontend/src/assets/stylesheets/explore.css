@@ -73,7 +73,7 @@
 
 /* carousel */
 
-.carousel-item {
+/* .carousel-item {
   align-content: center;
   margin-left: 30px;
 }
@@ -89,7 +89,7 @@
 
 .carousel-inner {
   display: flex;
-}
+} */
 
 .card-info {
   list-style-type: none;
@@ -141,6 +141,34 @@
 }
 
 .carousel-btn {
+  width: 0;
+  position: relative;
+  left: 35px;
+}
+
+.edit-profile-btn {
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+  color: #262626;
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  padding: 5px 9px;
+  font-weight: 600;
+  margin-left: 20px;
+  font-size: 14px;
+  outline: 0 !important;
+}
+
+.inactive {
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  border-radius: 4px;
+  color: #fff;
+}
+
+/* .carousel-btn {
   background-color: #3897f0;
   border: 1px solid #3897f0;
   border-radius: 4px;
@@ -158,9 +186,9 @@
   font-size: 14px;
   line-height: 18px;
   margin: 20px auto 25px;
-}
+} */
 
-.carousel-control-prev {
+/* .carousel-control-prev {
   height: 40px;
   width: 40px;
   height: 198px;
@@ -196,4 +224,4 @@
   width: 35px;
   transform: rotate(90deg);
   border-radius: 50%;
-}
+} */
