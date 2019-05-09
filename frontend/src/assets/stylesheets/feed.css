@@ -11,6 +11,7 @@
 .feed-list {
   list-style-type: none;
   margin-block-end: 104px;
+/*   margin-bottom: 50px; */
 }
 
 .outer-feed-container {

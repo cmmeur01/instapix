@@ -1,3 +1,7 @@
+.post-footer {
+  max-height: 190px;
+}
+
 .post-item {
   display: flex;
   flex-direction: column;

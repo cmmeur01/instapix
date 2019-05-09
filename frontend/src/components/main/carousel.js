@@ -1,22 +1,38 @@
 import React from "react";
+import Slider from "react-slick";
+
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
+import FollowButton from "../user_profile/follow_button";
 
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
 
     this.getUsers = this.getUsers.bind(this);
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.getUsers();
+  }
+
+  getCurrentUser() {
+    let currentUser;
+
+    this.props.users.forEach(user => {
+      if (user._id === this.props.currentUser.id) {
+        currentUser = user;
+      }
+    });
+
+    return currentUser;
   }
 
   getUsers() {
-    let users = [];
     if (this.props.users.length === 0) return null;
-
-    while (users.length < 5) {
-      let random = Math.floor(Math.random() * this.props.users.length);
-      users.push(this.props.users[random]);
-    }
+    let users = this.props.users.slice(0, 30);
 
     users = users.map((user, i) => {
       let popular;
@@ -25,10 +41,11 @@ class Carousel extends React.Component {
       } else {
         popular = <p className="carousel-follows">Popular</p>;
       }
+
       return (
-        <li className="card-info" key={i}>
+        <div className="card-info" key={i}>
           <div className="d-block">
-            <div>
+            <div className="caro-card">
               <div className="inner-caro-div">
                 <Link to={`users/${user.username}`}>
                   <img
@@ -42,12 +59,15 @@ class Carousel extends React.Component {
                 <Link to={`users/${user.username}`}>{user.username}</Link>
               </div>
               <div className="popular">{popular}</div>
-              <div className="btn-div">
-                <button className="carousel-btn">Follow</button>
+              <div className="btn-div carousel-btn">
+                <FollowButton
+                  currentUser={this.getCurrentUser()}
+                  owner={user}
+                />
               </div>
             </div>
           </div>
-        </li>
+        </div>
       );
     });
 
@@ -55,53 +75,16 @@ class Carousel extends React.Component {
   }
 
   render() {
-    return (
-      <div
-        id="carouselExampleControls"
-        className="carousel slide"
-        data-ride="carousel"
-        data-interval="false"
-      >
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <ul>{this.getUsers()}</ul>
-          </div>
-          <div className="carousel-item">
-            <ul>{this.getUsers()}</ul>
-          </div>{" "}
-          <div className="carousel-item">
-            <ul>{this.getUsers()}</ul>
-          </div>
-        </div>
+    var settings = {
+      infinite: true,
+      slidesToShow: 5,
+      slidesToScroll: 5,
+      arrows: true
+    };
 
-        <a
-          className="carousel-control-prev"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true">
-            <img
-              src="https://www.nicepng.com/png/detail/15-157899_free-download-of-up-arrow-icon-clipart-youtube.png"
-              alt="prev"
-            />
-          </span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true">
-            <img
-              src="https://www.nicepng.com/png/detail/15-157899_free-download-of-up-arrow-icon-clipart-youtube.png"
-              alt="next"
-            />
-          </span>
-          <span className="sr-only">Next</span>
-        </a>
+    return (
+      <div>
+        <Slider {...settings}>{this.getUsers()}</Slider>
       </div>
     );
   }
