@@ -192,27 +192,12 @@
 }
 
 .comment-btn {
-  opacity: 0.3;
-  /* pointer-events: none; */
   border: 0;
-  background: 0 0;
   color: #3897f0;
   display: inline;
   padding: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: block;
-  font-weight: 600;
-  text-align: center;
-  text-transform: inherit;
-  text-overflow: ellipsis;
-  user-select: none;
-  white-space: nowrap;
-  outline: 0 !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
   font-size: 14px;
-  line-height: 14px;
+  cursor: pointer;
 }
 
 .show-btn {

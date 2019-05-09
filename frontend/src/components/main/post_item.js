@@ -5,6 +5,8 @@ import * as heart from "./../../assets/images/heart.png";
 import * as redheart from "./../../assets/images/redheart.png";
 import * as bubble from "./../../assets/images/bubble.png";
 import * as upload from "./../../assets/images/igupload.png";
+import Textarea from "react-textarea-autosize";
+
 
 class PostItem extends React.Component {
   constructor(props) {
@@ -313,7 +315,10 @@ class PostItem extends React.Component {
           </footer>
           <section className="comment-box">
             <form className="comment-form2" onSubmit={this.commentSubmit}>
-              <textarea
+              <div>
+                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleChange} />
+              </div>
+              {/* <textarea
                 onChange={this.handleUpdate}
                 // onKeyDown={this.disableBtn}
                 aria-label="Add a comment…"
@@ -323,7 +328,7 @@ class PostItem extends React.Component {
                 autoCorrect="off"
                 id="myTextarea"
                 value={this.state.inputVal}
-              />
+              /> */}
               <button
                 id="comment-btn"
                 disabled={!this.state.inputVal}

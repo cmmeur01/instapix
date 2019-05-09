@@ -6,6 +6,7 @@ import * as heart from "./../../assets/images/heart.png";
 import * as redheart from "./../../assets/images/redheart.png";
 import * as bubble from "./../../assets/images/bubble.png";
 import * as upload from "./../../assets/images/igupload.png";
+import Textarea from 'react-textarea-autosize';
 
 class Comment extends React.Component {
   constructor(props) {
@@ -56,16 +57,16 @@ class Comment extends React.Component {
   handleChange(e) {
     this.setState({ text: e.target.value });
     // let textarea = document.getElementById("myTextarea");
-    let l = this.state.text.length;
-    if (l > 90) {
-      document.getElementById("myTextarea").style.height = "72px";
-    } else if (l > 60 && l <= 90) {
-      document.getElementById("myTextarea").style.height = "54px";
-    } else if (l > 30 && l <= 60) {
-      document.getElementById("myTextarea").style.height = "36px";
-    } else if (l <= 30) {
-      document.getElementById("myTextarea").style.height = "18px";
-    }
+    // let l = this.state.text.length;
+    // if (l > 90) {
+    //   document.getElementById("myTextarea").style.height = "72px";
+    // } else if (l > 60 && l <= 90) {
+    //   document.getElementById("myTextarea").style.height = "54px";
+    // } else if (l > 30 && l <= 60) {
+    //   document.getElementById("myTextarea").style.height = "36px";
+    // } else if (l <= 30) {
+    //   document.getElementById("myTextarea").style.height = "18px";
+    // }
     // textarea.scrollTop = textarea.scrollHeight;
   }
 
@@ -235,13 +236,9 @@ class Comment extends React.Component {
         </footer>
         <div className="post-comment-form">
           <form onSubmit={this.handleSubmit}>
-            <textarea
-              id="myTextarea"
-              rows="5"
-              cols="35"
-              placeholder="Add a comment..."
-              onChange={this.handleChange}
-            />
+            <div>
+              <Textarea className="textarea-auto" rows="5" cols="35" placeholder ="Add a comment..." onChange={this.handleChange}/>
+            </div>
             <button
               className={!this.state.text ? "disabled" : ""}
               disabled={!this.state.text}

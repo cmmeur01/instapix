@@ -132,7 +132,7 @@
   width: calc(100% - 24px);
 }
 
-.post-comment-form > form > textarea {
+.textarea-auto {
   font-size: 14px;
   background: 0 0;
   border: 0;
