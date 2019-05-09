@@ -1,7 +1,7 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
 import { Link } from 'react-router-dom';
-import { MoonLoader, BeatLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
 import ProfileModal from './../user_profile/modal';
