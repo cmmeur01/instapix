@@ -7,7 +7,6 @@ import * as bubble from "./../../assets/images/bubble.png";
 import * as upload from "./../../assets/images/igupload.png";
 import Textarea from "react-textarea-autosize";
 
-
 class PostItem extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +14,6 @@ class PostItem extends React.Component {
       inputVal: "",
       likeCount: 0,
       liked: false,
-      likers: [],
       comments: []
     };
 
@@ -27,93 +25,33 @@ class PostItem extends React.Component {
 
   componentDidMount() {
     if (this.props.post) {
-      // debugger
       this.setLocalState();
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    // if (this.props.comments !== prevProps.comments) {
-    //   this.setLocalState({ comments: this.props.comments });
-    // }
   }
 
   setLocalState() {
     this.setState({
       likeCount: this.props.post.likes.length,
       liked: this.props.post.likes.includes(this.props.currentUserId),
-      comments: this.props.comments.filter(comment => comment.post === this.props.post._id),
-      likers: this.props.post.likes
+      comments: this.props.comments.filter(comment => comment.post === this.props.post._id)
     });
   }
 
-  // handleUpdate(e) {
-  //   // debugger;
-  //   this.setState({ inputVal: e.target.value });
-  //   let button = document.getElementById("comment-btn");
-  //   button.disabled = false;
-  //   button.classList.add("show-btn");
-  // }
-
   handleUpdate(e) {
-    // debugger;
     this.setState({ inputVal: e.target.value });
-    // this.state.inputVal = e.target.value;
-    // debugger;
-    // let textarea = document.getElementById("myTextarea");
-    // let l = this.state.inputVal.length;
-    // if (l > 90) {
-    //   document.getElementById("myTextarea").style.height = "72px";
-    // } else if (l > 60 && l <= 90) {
-    //   document.getElementById("myTextarea").style.height = "54px";
-    // } else if (l > 30 && l <= 60) {
-    //   document.getElementById("myTextarea").style.height = "36px";
-    // } else if (l <= 30) {
-    //   document.getElementById("myTextarea").style.height = "18px";
-    // }
-    // debugger;
-
-    // let button = document.getElementById("comment-btn");
-    // if (l < 1) {
-    //   button.classList.remove("show-btn");
-    //   button.disabled = true;
-    // } else {
-    //   button.classList.add("show-btn");
-    //   button.disabled = false;
-    // }
-    // textarea.scrollTop = textarea.scrollHeight;
   }
 
-  // disableBtn(e) {
-  //   let button = document.getElementById("comment-btn");
-  //   if (e.keyCode === 8 && e.target.value === "") {
-  //     button.classList.remove("show-btn");
-  //     button.disabled = true;
-  //   }
-  // }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.text)
-  //     .then(this.setState({ text: '' }))
-  //     .then(() => document.getElementById("myTextarea").value = '');
-  // }
-
   commentSubmit(e) {
-
-    // debugger;
     e.preventDefault();
-
     this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
     .then(() => this.setState({ 
       comments: this.state.comments.concat({
-        body: this.state.inputVal, 
-        user:this.props.currentUserId}), 
+      body: this.state.inputVal, 
+      user:this.props.currentUserId}), 
       inputVal: '' }));
   }
 
   handleLike() {
-    // debugger;
     if (this.state.liked === true) {
       this.props
         .unlikePost({
@@ -137,8 +75,7 @@ class PostItem extends React.Component {
         .then(() =>
           this.setState({
             liked: true,
-            likeCount: this.state.likeCount + 1,
-            likers: this.state.likers.concat(this.props.currentUserId)
+            likeCount: this.state.likeCount + 1
           })
         );
     }
@@ -150,7 +87,6 @@ class PostItem extends React.Component {
 
   render() {
     let { user, post } = this.props;
-    // debugger;
     if (!user) return null;
 
     let heartButton = "";
@@ -205,7 +141,6 @@ class PostItem extends React.Component {
       let userTwo = this.props.users.filter(
         user => user._id === commentTwo.user
       )[0];
-      // debugger;
       postComments = (
         <div className="user-comments">
           {viewAll}
@@ -318,17 +253,6 @@ class PostItem extends React.Component {
               <div>
                 <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleChange} />
               </div>
-              {/* <textarea
-                onChange={this.handleUpdate}
-                // onKeyDown={this.disableBtn}
-                aria-label="Add a comment…"
-                placeholder="Add a comment…"
-                className="add-comment"
-                autoComplete="off"
-                autoCorrect="off"
-                id="myTextarea"
-                value={this.state.inputVal}
-              /> */}
               <button
                 id="comment-btn"
                 disabled={!this.state.inputVal}

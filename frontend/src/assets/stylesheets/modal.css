@@ -147,6 +147,11 @@
   padding-bottom: 0px;
 }
 
+.likes-li > img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .logout-modal-buttons {
   display: flex;
   flex-direction: column;

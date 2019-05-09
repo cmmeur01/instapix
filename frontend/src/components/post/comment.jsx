@@ -56,22 +56,9 @@ class Comment extends React.Component {
 
   handleChange(e) {
     this.setState({ text: e.target.value });
-    // let textarea = document.getElementById("myTextarea");
-    // let l = this.state.text.length;
-    // if (l > 90) {
-    //   document.getElementById("myTextarea").style.height = "72px";
-    // } else if (l > 60 && l <= 90) {
-    //   document.getElementById("myTextarea").style.height = "54px";
-    // } else if (l > 30 && l <= 60) {
-    //   document.getElementById("myTextarea").style.height = "36px";
-    // } else if (l <= 30) {
-    //   document.getElementById("myTextarea").style.height = "18px";
-    // }
-    // textarea.scrollTop = textarea.scrollHeight;
   }
 
   handleLike() {
-    // debugger;
     if (this.state.liked === true) {
       this.props
         .unlikePost({
@@ -237,7 +224,7 @@ class Comment extends React.Component {
         <div className="post-comment-form">
           <form onSubmit={this.handleSubmit}>
             <div>
-              <Textarea className="textarea-auto" rows="5" cols="35" placeholder ="Add a comment..." onChange={this.handleChange}/>
+              <Textarea className="textarea-auto" rows="5" cols="35" placeholder="Add a comment..." onChange={this.handleChange} />
             </div>
             <button
               className={!this.state.text ? "disabled" : ""}

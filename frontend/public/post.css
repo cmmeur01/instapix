@@ -179,6 +179,12 @@
 .post-comment-link {
   color: black;
   text-decoration: none;
+  text-transform: lowercase;
+}
+
+.post-comment-link:hover {
+  text-decoration: none;
+  color: black;
 }
 
 .new-post-title {
