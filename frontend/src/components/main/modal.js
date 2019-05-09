@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { closeModal } from './../../actions/modal_actions';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { logout } from './../../actions/session_actions';
 import React from 'react';
 import { findPost, findUsers } from './../../reducers/selectors';
@@ -10,6 +10,14 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.getLikes = this.getLikes.bind(this);
+    this.visitLiker = this.visitLiker.bind(this);
+  }
+
+  visitLiker(username) {
+    return e => {
+      this.props.closeModal();
+      this.props.history.push(`/users/${username}`);
+    }
   }
 
   getLikes() {
@@ -27,14 +35,14 @@ class Modal extends React.Component {
       }
       return (
         <li className="li-users" key={i}>
-          <div className="user-div likes-li">
-            <Link to={`/users/${user.name}`}>
+          <div className="user-div likes-li" onClick={this.visitLiker(user.username)}>
+            
               <img src={user.image_url} alt="avatar" />
               <div className="user-p">
                 <p className="first-p">{user.username}</p>
                 <p className="second-p">{user.name}</p>
               </div>
-            </Link>
+            
           </div>
           {followButton}
         </li>
@@ -108,4 +116,4 @@ const mdp = dispatch => {
   })
 }
 
-export default connect(msp, mdp)(Modal);
+export default withRouter(connect(msp, mdp)(Modal));

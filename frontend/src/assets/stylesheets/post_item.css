@@ -126,12 +126,14 @@
 
 .post-footer {
   padding-left: 15px;
+  min-height: 10px;
 }
 
 .user-comments {
   position: relative;
   /* top: -10px; */
   line-height: 10px;
+  /* min-height: 0; */
 }
 .user-comments:first-child {
   /* margin-top: 5px; */

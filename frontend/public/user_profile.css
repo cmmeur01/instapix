@@ -34,7 +34,8 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 0;
-  margin-bottom: 50px;
+  margin-block-end: 104px;
+/*   margin-bottom: 50px; */
 }
 
 .test-div {

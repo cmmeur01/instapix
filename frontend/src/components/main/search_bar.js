@@ -1,7 +1,7 @@
 import React from "react";
 import "./../../assets/stylesheets/searchbar.css";
 // import { fetchUsers } from "./../../actions/user_actions";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { searchUsers } from './../../actions/user_actions';
 

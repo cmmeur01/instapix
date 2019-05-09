@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { notFollowing, findCurrentUser } from './../../reducers/selectors';
 import "./../../assets/stylesheets/sidebar.css";
+import SidebarItem from './sidebar_item';
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -28,23 +29,7 @@ class SideBar extends React.Component {
   getSuggestions() {
     if (this.state.users === [] ) return null;
     let users = this.state.users;
-
-    const results = users.map((user, i) => {
-      return (
-        <li className="side-lis" key={i}>
-          <div className="user-div">
-            <Link to={`/users/${user.username}`}>
-              <img src={user.image_url} alt="avatar" />
-              <div className="user-p">
-                <p className="first-p">{user.username}</p>
-                <p className="second-p">{user.name}</p>
-              </div>
-            </Link>
-          </div>
-          <div className="side-follow-btn"><button>Follow</button></div>
-        </li>
-      );
-    });
+    const results = users.map((user, idx) => <SidebarItem user={user} key={idx} />);
     return results;
   }
 

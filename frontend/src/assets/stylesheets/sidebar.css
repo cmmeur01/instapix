@@ -111,4 +111,22 @@ ul.suggestions-list > li > div {
   cursor: pointer;
   font-size: 12px;
   outline: none;
+  font-weight: 700;
+}
+
+.side-unfollow-btn {
+  margin-right: 15px;
+}
+
+.side-unfollow-btn > button {
+  border: 0;
+  color: black;
+  display: inline;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  font-weight: 700;
 }
