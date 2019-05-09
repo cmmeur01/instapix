@@ -1,5 +1,5 @@
 .post-footer {
-  height: 190px;
+  max-height: 190px;
 }
 
 .post-item {
