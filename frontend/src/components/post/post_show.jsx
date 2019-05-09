@@ -1,6 +1,6 @@
 import React from 'react';
 import Comment from './comment_container';
-import { jsx, css } from "@emotion/core";
+import { css } from "@emotion/core";
 import { MoonLoader } from "react-spinners";
 
 

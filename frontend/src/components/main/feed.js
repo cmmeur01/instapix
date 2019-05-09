@@ -3,6 +3,14 @@ import PostItem from "./post_item_container";
 import SideBar from "./sidebar";
 import "./../../assets/stylesheets/feed.css";
 import Suggestions from './suggestions';
+import { MoonLoader } from "react-spinners";
+import { css } from "@emotion/core";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 class Feed extends React.Component {
   constructor(props) {
@@ -27,7 +35,21 @@ class Feed extends React.Component {
 
   render() {
     const { posts, users, comments } = this.state;
-    if (users.length === 0) return null;
+    if (users.length === 0) {
+      return (
+        <div className="stock-loading">
+
+          <MoonLoader
+            className={override}
+            sizeUnit={"px"}
+            size={25}
+            color={"#312F2D"}
+
+            loading={true}
+          />
+        </div>
+      )
+    };
     let feed = "";
     if (posts.length > 0) {
       feed = (

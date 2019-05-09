@@ -3,7 +3,7 @@ import UserProfile from './user_profile';
 import { fetchCurrentUser } from './../../actions/user_actions';
 import { fetchPostsByUserId } from './../../actions/post_actions';
 import {openProfileModal} from './../../actions/modal_actions';
-import { stat } from 'fs';
+// import { stat } from 'fs';
 import { openLogoutModal } from './../../actions/modal_actions';
 
 const msp = (state, ownProps) => {

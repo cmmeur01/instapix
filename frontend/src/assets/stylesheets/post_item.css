@@ -1,5 +1,5 @@
 .post-footer {
-  height: 190px;
+  max-height: 190px;
 }
 
 .post-item {
@@ -21,6 +21,7 @@
 .post-user-image > img {
   width: 34px;
   height: 34px;
+  border-radius: 50%;
 }
 
 .post-header > a {
@@ -32,7 +33,6 @@
 
 .post-user-image {
   padding: 16px;
-  border-radius: 50%;
 }
 
 .post-user-username {
