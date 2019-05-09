@@ -4,6 +4,11 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { sendPost } from './../../actions/post_actions';
 import Dropzone from "react-dropzone";
+import {
+  picLoaded,
+  picLoading
+} from "./../../actions/modal_actions";
+import * as progressBar from "./../../assets/images/ajax-loader.gif";
 
 
 class UploadComponent extends React.Component {
@@ -23,6 +28,7 @@ class UploadComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let that = this;
+    this.props.picLoading();
     this.cropper.getCroppedCanvas({
 
     }).toBlob(function (blob) {
@@ -30,9 +36,15 @@ class UploadComponent extends React.Component {
       formData.append('image', blob);
 
       axios.post("/api/users/images/upload", formData)
-        .then((url) => that.props.sendPost({ imgUrl: url.data.imageUrl, likes: [], user: that.state.user, description: that.state.description }))
-        .then((id) => that.props.history.push(`/posts/${id}`));
+        .then((url) => {
+          that.props.sendPost({ imgUrl: url.data.imageUrl, likes: [], user: that.state.user, description: that.state.description })
+            .then((id) => {
+              that.props.picLoaded();
+              that.props.history.push(`/posts/${id}`);
+            });
+        });
     });
+
   }
 
   handleFile(e) {
@@ -69,7 +81,15 @@ class UploadComponent extends React.Component {
   }
 
   render() {
-
+    let bar = <img src={progressBar} alt="" />;
+    if (this.props.modal.picLoading) {
+      return (
+        <div className="loading-bar">
+          <span>Uploading, please wait</span>
+          <div>{bar}</div>
+        </div>
+      );
+    } 
     return (
       <div className="outter-post">
         <div className="new-post-container">
@@ -78,10 +98,16 @@ class UploadComponent extends React.Component {
               {/* <input type="file" onChange={this.handleFile} /> */}
               <Dropzone onDrop={this.handleFile}>
                 {({ getRootProps, getInputProps }) => (
-                  <section className="dropzone-section" id="dropzone-section">
+                  <section
+                    className="dropzone-section"
+                    id="dropzone-section"
+                  >
                     <div {...getRootProps()} className="dropzone">
                       <input {...getInputProps()} />
-                        <h1>Drag 'n' drop some files here, or click to select files</h1>
+                      <h1>
+                        Drag 'n' drop some files here, or click to
+                        select files
+                      </h1>
                     </div>
                   </section>
                 )}
@@ -112,11 +138,14 @@ class UploadComponent extends React.Component {
 
 
 const msp = (state, ownProps) => ({
-  currentUserId: () => state.session.user.id
+  currentUserId: () => state.session.user.id,
+  modal: state.ui.modal
 });
 
 const mdp = dispatch => ({
-  sendPost: (post) => dispatch(sendPost(post))
+  sendPost: (post) => dispatch(sendPost(post)),
+  picLoading: () => dispatch(picLoading()),
+  picLoaded: () => dispatch(picLoaded())
 });
 
 export default connect(msp, mdp)(UploadComponent);

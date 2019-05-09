@@ -1,7 +1,7 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
 import { Link } from 'react-router-dom';
-import { MoonLoader } from "react-spinners";
+import { MoonLoader, BeatLoader } from "react-spinners";
 import FollowButton from './follow_button';
 import ProfilePostImageItem from './profile_post_image_item';
 import ProfileModal from './../user_profile/modal';
@@ -86,12 +86,6 @@ class UserProfile extends React.Component {
       });
     }
 
-    // let imageUrl;
-    // if (owner.posts.length > 0) {
-    //   imageUrl = `/posts/${owner.posts[0]}`;
-    // } else {
-    //   imageUrl = owner.image_url;
-    // }
     return (
       <div>
         {owner && posts ? (
