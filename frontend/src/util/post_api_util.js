@@ -27,3 +27,7 @@ export const unlikePost = likeData => {
 export const sendPost = (post) => {
   return axios.post(`/api/posts/new`, post);
 };
+
+export const fetchMorePosts = numPosts => {
+  return axios.get(`/api/posts/more?skipPosts=${numPosts}`);
+};

@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   .then(user => {  
      let following = user.following;
      following.push(user.id);
-     Post.find({ user: { $in: following }}).sort([['date', -1]])
+     Post.find({ user: { $in: following }}).sort([['date', -1]]).limit(20)
      .then(posts => {
        let postsObject = {};
        posts.forEach(post => postsObject[post._id] = post);
@@ -229,6 +229,31 @@ router.post("/new", (req, res) => {
       });
     });
   }
+});
+
+router.get("/more", (req, res) => {
+  console.log("here");
+  
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  User.findOne({ _id: user.id }).then(user => {
+    let following = user.following;
+    following.push(user.id);
+    Post.find({ user: { $in: following } })
+      .sort([["date", -1]])
+      .skip(parseInt(req.query.skipPosts))
+      .limit(10)
+      .then(posts => {
+        let postsObject = {};
+        posts.forEach(post => (postsObject[post._id] = post));
+        let postIds = Object.keys(postsObject);
+        Comment.find({ post: { $in: postIds } }).then(comments => {
+          let commentsObject = {};
+          comments.forEach(comment => (commentsObject[comment._id] = comment));
+          res.send({ posts: postsObject, comments: commentsObject });
+        });
+      });
+  });
 });
 
 

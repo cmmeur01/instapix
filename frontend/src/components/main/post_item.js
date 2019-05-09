@@ -260,9 +260,8 @@ class PostItem extends React.Component {
               <button
                 id="comment-btn"
                 disabled={!this.state.inputVal}
-                className={
-                  !this.state.inputVal ? "comment-btn" : "comment-btn show-btn"
-                }
+                className={!this.state.text ? "disabled" : ""}
+
               >
                 Post
               </button>
