@@ -114,9 +114,13 @@ class PostItem extends React.Component {
 
     let likeCounter = "";
     if (this.state.likeCount === 1) {
-      likeCounter = <h4>{this.state.likeCount} like</h4>;
+      likeCounter = <h4 className='likes-counter'>
+        {this.state.likeCount} like
+      </h4>;
     } else if (this.state.likeCount > 1) {
-      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+      likeCounter = <h4 className='likes-counter'>
+        {this.state.likeCount} likes
+      </h4>;
     }
 
     let viewAll = "";

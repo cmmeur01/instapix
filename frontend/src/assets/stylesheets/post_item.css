@@ -224,3 +224,11 @@
   top: -5px;
   /* margin-top: 3px; */
 }
+
+.likes-counter {
+  width: 60px;
+}
+
+.likes-counter:hover {
+  cursor: pointer;
+}

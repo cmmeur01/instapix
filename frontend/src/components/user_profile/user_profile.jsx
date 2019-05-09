@@ -77,11 +77,13 @@ class UserProfile extends React.Component {
     if (this.state.posts) {
       posts = Object.values(this.state.posts).map((post, id) => {
         return (
-          <ProfilePostImageItem
-            key={id}
-            currentUser={this.props.currentUser}
-            post={post}
-          />
+          <div className='profile-post-container' key={id}>
+            <ProfilePostImageItem
+              key={id}
+              currentUser={this.props.currentUser}
+              post={post}
+            />
+          </div >
         );
       });
     }
