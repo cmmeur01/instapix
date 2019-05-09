@@ -213,6 +213,10 @@
   color: #fff;
 }
 
+.comment-container {
+  margin-block-end: 104px;
+}
+
 .modal-inner-profile-edit {
   background-color: #fff;
   display: flex;

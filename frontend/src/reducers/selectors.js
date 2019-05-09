@@ -28,6 +28,11 @@ export const findUsers = state => {
   // return Object.values(state.entities.users);
 };
 
+export const findCurrentUser = state => {
+  let currentUserId = state.session.user.id;
+  return Object.values(state.entities.users).filter(user => user._id === currentUserId)[0];
+};
+
 // export const notFollowingExplore = state => {
 //   let allUsers = Object.values(state.entities.users);
 //   let currentUserId = state.session.user.id;

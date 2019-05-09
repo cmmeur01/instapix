@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { notFollowing } from './../../reducers/selectors';
+import { notFollowing, findCurrentUser } from './../../reducers/selectors';
 import "./../../assets/stylesheets/sidebar.css";
 
 class SideBar extends React.Component {
@@ -84,7 +84,7 @@ const mstp = state => {
   return {
     posts: state.entities.posts.posts,
     users: notFollowing(state),
-    currentUser: state.session.user
+    currentUser: findCurrentUser(state)
   };
 };
 

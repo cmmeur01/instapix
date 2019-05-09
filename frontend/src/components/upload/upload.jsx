@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { sendPost } from './../../actions/post_actions';
 import Dropzone from "react-dropzone";
+import * as ip from "./../../assets/images/ip.png";
 
 
 class UploadComponent extends React.Component {
@@ -81,9 +82,11 @@ class UploadComponent extends React.Component {
                   <section className="dropzone-section" id="dropzone-section">
                     <div {...getRootProps()} className="dropzone">
                       <input {...getInputProps()} />
-                        <h1>Drag 'n' drop some files here, or click to select files</h1>
+                        <div className="upload-img"><img src={ip} alt="new post" /></div>
+                        <h1>Drag a file here, or click to select file</h1>
                     </div>
                   </section>
+                  
                 )}
               </Dropzone>
             </div>
