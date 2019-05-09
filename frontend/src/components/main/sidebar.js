@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { notFollowing, findCurrentUser } from './../../reducers/selectors';
 import "./../../assets/stylesheets/sidebar.css";
-import FollowButton from './../user_profile/follow_button';
 import SidebarItem from './sidebar_item';
 
 class SideBar extends React.Component {

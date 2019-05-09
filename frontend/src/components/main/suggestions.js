@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { notFollowing } from './../../reducers/selectors';
-import { Link } from 'react-router-dom';
 import SuggestionItem from './suggestion_item';
 
 class Suggestions extends React.Component {

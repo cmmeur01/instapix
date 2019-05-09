@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { closeModal } from './../../actions/modal_actions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { logout } from './../../actions/session_actions';
 import React from 'react';
 import { findPost, findUsers } from './../../reducers/selectors';
