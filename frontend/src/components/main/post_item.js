@@ -120,7 +120,7 @@ class PostItem extends React.Component {
           postId: this.props.post._id,
           userId: this.props.currentUserId
         })
-        .then(() => this.props.fetchPost(this.props.post._id))
+        .then(() => this.props.fetchPosts())
         .then(() =>
           this.setState({
             liked: false,
@@ -133,7 +133,7 @@ class PostItem extends React.Component {
           postId: this.props.post._id,
           userId: this.props.currentUserId
         })
-        .then(() => this.props.fetchPost(this.props.post._id))
+        .then(() => this.props.fetchPosts())
         .then(() =>
           this.setState({
             liked: true,
