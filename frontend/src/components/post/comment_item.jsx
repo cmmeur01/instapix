@@ -9,7 +9,7 @@ const ProfilePostItem = ({ comment, user }) => {
         <img className="comment-user-pic" src={user.image_url} alt="img" />
       </Link>
       <span className="comment-body">
-        <Link className="post-comment-link" to={`/users/${user.username}`}><strong>{user.name}</strong></Link>  {comment.body}
+        <Link className="post-comment-link" to={`/users/${user.username}`}><strong>{user.username}</strong></Link>  {comment.body}
       </span>
     </li>
   );

@@ -249,6 +249,18 @@ class PostItem extends React.Component {
       date = months[month - 1] + " " + day + ", " + year;
     }
 
+    let postCaption;
+    if (post.description === "") {
+      postCaption = "";
+    } else {
+      postCaption = <div className="post-caption">
+        <Link to={`/users/${user.username}`}>
+          <span className="post-user-username">{user.username}</span>
+        </Link>
+        <span>{post.description}</span>
+      </div>;
+    }
+
     return (
       <div className="post-item-container">
         <article className="post-item">
@@ -282,12 +294,7 @@ class PostItem extends React.Component {
             <section className="likes-section" onClick={this.modalOpen}>
               {likeCounter}
             </section>
-            <div className="post-caption">
-              <Link to={`/users/${user.username}`}>
-                <span className="post-user-username">{user.username}</span>
-              </Link>
-              <span>{post.description}</span>
-            </div>
+            {postCaption}
             {postComments}
             <div className="post-item-date">
               <h4>{date}</h4>

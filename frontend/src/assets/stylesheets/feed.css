@@ -10,12 +10,14 @@
 
 .feed-list {
   list-style-type: none;
+  margin-block-end: 104px;
 }
 
 .outer-feed-container {
   display: flex;
   justify-content: center;
   list-style-type: none;
+  /* margin-block-end: 104px; */
 }
 
 .sug-container {

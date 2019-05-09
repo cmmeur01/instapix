@@ -64,6 +64,18 @@ class Comment extends React.Component {
       dot = ' •'
     }
 
+    let postDescription;
+    if (this.props.post.description === "") {
+      postDescription = '';
+    } else {
+      postDescription = <li className="comment-item">
+        <img className="comment-user-pic" src={owner.image_url} alt="img" />
+        {<span className="comment-body">
+          <strong>{owner.username}</strong> {this.props.post.description}
+        </span>}
+      </li>;
+    }
+
     return (
       <div className="comment-component">
         <div className="page-owner">
@@ -80,12 +92,7 @@ class Comment extends React.Component {
           {followButton}
         </div>
         <ul className="comment-index-component">
-          <li className="comment-item">
-            <img className="comment-user-pic" src={owner.image_url} alt="img" />
-            <span className="comment-body">
-              <strong>{owner.name}</strong> {this.props.post.description}
-            </span>
-          </li>
+          {postDescription}
           {postComments}
         </ul>
         <div className="post-comment-form">
