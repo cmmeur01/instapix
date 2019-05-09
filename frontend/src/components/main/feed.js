@@ -5,6 +5,7 @@ import "./../../assets/stylesheets/feed.css";
 import Suggestions from './suggestions';
 import { MoonLoader } from "react-spinners";
 import { css } from "@emotion/core";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const override = css`
   display: block;
@@ -20,10 +21,23 @@ class Feed extends React.Component {
       users: [],
       comments: []
     }
+    this.fetchMoreData = this.fetchMoreData.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchPosts()
+    .then(() => {
+      this.setState({
+        posts: this.props.posts,
+        users: this.props.users,
+        comments: this.props.comments
+      });
+    });
+  }
+
+  fetchMoreData() {
+    let numPosts = this.state.posts.length;
+    this.props.fetchMorePosts(numPosts)
     .then(() => {
       this.setState({
         posts: this.props.posts,
@@ -58,7 +72,12 @@ class Feed extends React.Component {
             let user = users.filter(user => user._id === post.user)[0];
             return (
               <li key={i}>
-                <PostItem post={post} user={user} users={users} comments={comments} />
+                <PostItem
+                  post={post}
+                  user={user}
+                  users={users}
+                  comments={comments}
+                />
               </li>
             );
           })}
@@ -74,9 +93,18 @@ class Feed extends React.Component {
 
     return (
       <div className="outer-feed-container">
-      <div className="feed-div">{feed}</div>
-       <SideBar /> 
-      </div> 
+        <div className="feed-div">
+          <InfiniteScroll
+            dataLength={this.state.posts.length}
+            next={this.fetchMoreData}
+            hasMore={true}
+            
+          >
+            {feed}
+          </InfiniteScroll>
+        </div>
+        <SideBar />
+      </div>
     );
   }
 }
