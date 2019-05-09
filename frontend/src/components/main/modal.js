@@ -5,6 +5,7 @@ import { logout } from './../../actions/session_actions';
 import React from 'react';
 import { findPost, findUsers } from './../../reducers/selectors';
 import './../../assets/stylesheets/modal.css';
+import LikesModalItem from './likes-modal-item';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -24,30 +25,7 @@ class Modal extends React.Component {
     if (!this.props.users) return null;
     let users = this.props.users;
 
-    
-
-    const results = users.map((user, i) => {
-      let followButton = '';
-      if (user._id !== this.props.currentUser.id) {
-        followButton = <div>
-          <button className="follow-btn">Follow</button>
-        </div>
-      }
-      return (
-        <li className="li-users" key={i}>
-          <div className="user-div likes-li" onClick={this.visitLiker(user.username)}>
-            
-              <img src={user.image_url} alt="avatar" />
-              <div className="user-p">
-                <p className="first-p">{user.username}</p>
-                <p className="second-p">{user.name}</p>
-              </div>
-            
-          </div>
-          {followButton}
-        </li>
-      );
-    });
+    const results = users.map((user, i) => <LikesModalItem user={user} key={i}/>);
     return results;
   }
 

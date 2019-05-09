@@ -114,9 +114,13 @@ class PostItem extends React.Component {
 
     let likeCounter = "";
     if (this.state.likeCount === 1) {
-      likeCounter = <h4>{this.state.likeCount} like</h4>;
+      likeCounter = <h4 className='likes-counter'>
+        {this.state.likeCount} like
+      </h4>;
     } else if (this.state.likeCount > 1) {
-      likeCounter = <h4>{this.state.likeCount} likes</h4>;
+      likeCounter = <h4 className='likes-counter'>
+        {this.state.likeCount} likes
+      </h4>;
     }
 
     let viewAll = "";
@@ -251,7 +255,7 @@ class PostItem extends React.Component {
           <section className="comment-box">
             <form className="comment-form2" onSubmit={this.commentSubmit}>
               <div>
-                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleUpdate} />
+                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleUpdate} value={this.state.inputVal} />
               </div>
               <button
                 id="comment-btn"

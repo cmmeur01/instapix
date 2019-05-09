@@ -9,7 +9,7 @@
 .inner-profile {
   padding: 60px 0px 0;
   /* width: calc(100% - 40px); */
-  max-width: 935px;
+  width: 935px;
   margin: auto;
 }
 
@@ -32,7 +32,7 @@
 .user-posts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   padding: 0;
   margin-block-end: 104px;
 /*   margin-bottom: 50px; */
@@ -54,9 +54,9 @@
   object-fit: cover;
 }
 
-.user-posts > a:nth-child(3n-1) {
+/* .user-posts > a:nth-child(3n-1) {
   margin: 0 10px 20px 10px;
-}
+} */
 
 .profile-picture > img {
   background-color: #fafafa;
@@ -284,4 +284,12 @@
 
 .remove-cur-btn {
   color: red;
+}
+
+.profile-post-container {
+  width: 33%;
+  padding-left: 12.5px;
+  padding-right: 2.5px;
+  padding-bottom: 15px;
+  box-sizing: border-box;
 }

@@ -46,6 +46,19 @@
   margin-bottom: 10px;
 }
 
+.sug-users-image {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sug-users-image:hover {
+  cursor: pointer;
+}
+
+.sug-users > .user-p:hover {
+  cursor: pointer;
+}
+
 .sug-users > .user-p > .second-p {
   color: #999;
 }
