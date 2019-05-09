@@ -86,12 +86,6 @@ class UserProfile extends React.Component {
       });
     }
 
-    // let imageUrl;
-    // if (owner.posts.length > 0) {
-    //   imageUrl = `/posts/${owner.posts[0]}`;
-    // } else {
-    //   imageUrl = owner.image_url;
-    // }
     return (
       <div>
         {owner && posts ? (
