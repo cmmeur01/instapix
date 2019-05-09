@@ -31,9 +31,9 @@ class PostItem extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.comments !== prevProps.comments) {
-      this.setLocalState({ comments: this.props.comments });
-    }
+    // if (this.props.comments !== prevProps.comments) {
+    //   this.setLocalState({ comments: this.props.comments });
+    // }
   }
 
   setLocalState() {
@@ -118,16 +118,27 @@ class PostItem extends React.Component {
           postId: this.props.post._id,
           userId: this.props.currentUserId
         })
+        .then(() => this.props.fetchPost(this.props.post._id))
         .then(() =>
-          this.setState({ liked: false, likeCount: this.state.likeCount - 1 })
+          this.setState({
+            liked: false,
+            likeCount: this.state.likeCount - 1
+          })
         );
     } else {
-      this.props.likePost({ postId: this.props.post._id, userId: this.props.currentUserId })
-      .then(() => this.setState({ 
-        liked: true, 
-        likeCount: this.state.likeCount + 1,
-        likers: this.state.likers.concat(this.props.currentUserId)
-      }));
+      this.props
+        .likePost({
+          postId: this.props.post._id,
+          userId: this.props.currentUserId
+        })
+        .then(() => this.props.fetchPost(this.props.post._id))
+        .then(() =>
+          this.setState({
+            liked: true,
+            likeCount: this.state.likeCount + 1,
+            likers: this.state.likers.concat(this.props.currentUserId)
+          })
+        );
     }
   }
 

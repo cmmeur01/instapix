@@ -272,3 +272,7 @@
   display: none;
 }
 
+.post-footer-show {
+  height: 130px;
+  padding: 5px;
+}

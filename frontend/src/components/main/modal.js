@@ -13,6 +13,7 @@ class Modal extends React.Component {
   }
 
   getLikes() {
+    debugger;
     if (!this.props.users) return null;
     let users = this.props.users;
 

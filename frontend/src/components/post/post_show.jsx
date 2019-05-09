@@ -12,6 +12,8 @@ const override = css`
 
 class ShowPost extends React.Component {
 
+  
+
   componentDidMount() {
     let username;
     this.props.fetchPost(this.props.match.params.postId)

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import PostItem from './post_item';
 import { likePost, unlikePost } from './../../util/post_api_util';
 import { openLikesModal } from './../../actions/modal_actions';
-import { postComment } from './../../actions/post_actions';
+import { postComment, fetchPost } from './../../actions/post_actions';
 
 const msp = state => {
   return({
@@ -11,12 +11,14 @@ const msp = state => {
 };
 
 const mdp = dispatch => {
-  return({
+  return {
     likePost: postId => likePost(postId),
     unlikePost: likeData => unlikePost(likeData),
     openLikesModal: postId => dispatch(openLikesModal(postId)),
-    postComment: (post_id, user_id, text) => dispatch(postComment(post_id, user_id, text))
-  });
+    postComment: (post_id, user_id, text) =>
+      dispatch(postComment(post_id, user_id, text)),
+    fetchPost: id => dispatch(fetchPost(id))
+  };
 };
 
 export default connect(msp, mdp)(PostItem);
