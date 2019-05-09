@@ -46,6 +46,11 @@
   margin-bottom: 10px;
 }
 
+.sug-users-image {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .sug-users > .user-p > .second-p {
   color: #999;
 }

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { followUser, unfollowUser } from './../../actions/user_actions';
+import "./../../assets/stylesheets/sidebar.css";
 
 
 class SidebarItem extends React.Component {
@@ -46,7 +47,7 @@ class SidebarItem extends React.Component {
       <li className="side-lis">
         <div className="user-div">
           <Link to={`/users/${user.username}`}>
-            <img src={user.image_url} alt="avatar" />
+            <img src={user.image_url} alt="avatar" className='sidebar-list-image'/>
             <div className="user-p">
               <p className="first-p">{user.username}</p>
               <p className="second-p">{user.name}</p>

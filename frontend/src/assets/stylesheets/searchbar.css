@@ -112,6 +112,8 @@
   display: block;
   align-self: center;
   flex: none;
+  object-fit: cover;
+  border-radius: 50%
 }
 
 .user-p {

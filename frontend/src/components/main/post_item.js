@@ -251,7 +251,7 @@ class PostItem extends React.Component {
           <section className="comment-box">
             <form className="comment-form2" onSubmit={this.commentSubmit}>
               <div>
-                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleChange} />
+                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleUpdate} value={this.state.inputVal} />
               </div>
               <button
                 id="comment-btn"

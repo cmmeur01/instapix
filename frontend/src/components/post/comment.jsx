@@ -119,7 +119,7 @@ class Comment extends React.Component {
           <CommentFollow owner={owner} currentUser={currentUser} />
         </div>
       );
-      dot = " •";
+      dot = " •  ";
     }
 
     let heartButton = "";
@@ -224,7 +224,7 @@ class Comment extends React.Component {
         <div className="post-comment-form">
           <form onSubmit={this.handleSubmit}>
             <div>
-              <Textarea className="textarea-auto" rows="5" cols="35" placeholder="Add a comment..." onChange={this.handleChange} />
+              <Textarea className="textarea-auto" rows="5" cols="35" placeholder="Add a comment..." onChange={this.handleChange} id='myTextarea' />
             </div>
             <button
               className={!this.state.text ? "disabled" : ""}

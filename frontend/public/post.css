@@ -59,12 +59,14 @@
   font-size: 14px;
   font-weight: 700;
   /* margin-top: 6px; */
+  margin-left: 2px;
 }
 
 .not-follow {
   font-size: 14px;
   font-weight: 700;
   color: #3897f0;
+  margin-left: 2px;
 }
 
 .owner-names {
