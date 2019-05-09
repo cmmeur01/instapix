@@ -3,6 +3,8 @@ import * as PostAPIUtil from "./../util/post_api_util";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_FEED_POSTS = "RECEIVE_FEED_POSTS";
 export const RECEIVE_POST = "RECEIVE_POST";
+export const RECEIVE_MORE_POSTS = "RECEIVE_MORE_POSTS";
+
 
 const receivePosts = posts => {
   return {
@@ -22,6 +24,13 @@ const receiveFeedPosts = data => {
   return {
     type: RECEIVE_FEED_POSTS,
     data
+  };
+};
+
+const receiveMorePosts = posts => {
+  return {
+    type: RECEIVE_MORE_POSTS,
+    posts
   };
 };
 
@@ -54,5 +63,11 @@ export const postComment = (post_id, user_id, text) => dispatch => {
 export const sendPost = post => dispatch => {
   return PostAPIUtil.sendPost(post).then(res => {
     return res.data.post._id;
+  });
+};
+
+export const fetchMorePosts = numPosts => dispatch => {
+  return PostAPIUtil.fetchMorePosts(numPosts).then(res => {
+    return dispatch(receiveMorePosts(res.data));
   });
 };

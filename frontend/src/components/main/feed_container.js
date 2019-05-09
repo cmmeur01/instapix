@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchPosts } from './../../actions/post_actions';
+import { fetchPosts, fetchMorePosts } from './../../actions/post_actions';
 import Feed from './feed';
 
 const mstp = state => {
@@ -11,9 +11,10 @@ const mstp = state => {
 };
 
 const mdtp = dispatch => {
-  return({
-    fetchPosts: () => dispatch(fetchPosts())
-  });
+  return {
+    fetchPosts: () => dispatch(fetchPosts()),
+    fetchMorePosts: (numPosts) => dispatch(fetchMorePosts(numPosts))
+  };
 };
 
 export default connect(mstp, mdtp)(Feed);
