@@ -23,7 +23,7 @@ class LikesModalItem extends React.Component {
     this.setState({
       followed: this.props.user.followers.includes(this.props.currentUser._id)
     });
-  };
+  }
 
   visitLiker(username) {
     return e => {
