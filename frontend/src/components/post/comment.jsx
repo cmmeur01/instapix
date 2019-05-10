@@ -42,9 +42,7 @@ class Comment extends React.Component {
     this.setState({
       likeCount: this.props.post.likes.length,
       liked: this.props.post.likes.includes(this.props.currentUserId),
-      comments: Object.values(this.props.comments).filter(
-        comment => comment.post === this.props.post._id
-      ),
+      comments: Object.values(this.props.comments),
       likers: this.props.post.likes
     });
   }
@@ -96,7 +94,13 @@ class Comment extends React.Component {
         this.props.currentUserId,
         this.state.text
       )
-      .then(this.setState({ text: "" }))
+      .then(() => this.setState({
+        comments: this.state.comments.concat({
+          body: this.state.text,
+          user: this.props.currentUserId
+        }),
+        text: ''
+      }))
       .then(() => (document.getElementById("myTextarea").value = ""));
   }
 
@@ -113,7 +117,7 @@ class Comment extends React.Component {
     let currentUser = users[this.props.currentUserId];
     let followButton = "";
     let dot = "";
-    if (this.props !== this.props.currentUserId) {
+    if (owner._id !== this.props.currentUserId) {
       followButton = (
         <div className="is-following">
           <CommentFollow owner={owner} currentUser={currentUser} />
