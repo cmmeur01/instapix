@@ -11,18 +11,21 @@ class SidebarItem extends React.Component {
     this.state = { followed: false };
     this.handleFollow = this.handleFollow.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
+    this.clicked = false;
   }
 
   handleFollow(e) {
     e.preventDefault();
+    this.setState({ clicked: true });
     this.props.followUser(this.props.currentUser, this.props.user._id)
-    .then(() => this.setState({ followed: true }));
+      .then(() => this.setState({ followed: true, clicked: false }));
   }
 
   handleUnfollow(e) {
     e.preventDefault();
+    this.setState({ clicked: true })
     this.props.unfollowUser(this.props.currentUser, this.props.user._id)
-    .then(() => this.setState({ followed: false }));
+      .then(() => this.setState({ followed: false, clicked: false }));
   }
 
   render() {
@@ -30,17 +33,21 @@ class SidebarItem extends React.Component {
 
     let followButton;
     if (!this.state.followed) {
-      followButton = <div className='side-follow-btn'>
-        <button onClick={this.handleFollow}>
-          Follow
-        </button>
-      </div>;
+      followButton = (
+        <div className="side-follow-btn">
+          <button disabled={this.state.clicked} onClick={this.handleFollow}>
+            Follow
+          </button>
+        </div>
+      );
     } else {
-      followButton = <div className='side-unfollow-btn'>
-        <button onClick={this.handleUnfollow}>
-          Following
-        </button>
-      </div>;
+      followButton = (
+        <div className="side-unfollow-btn">
+          <button disabled={this.state.clicked} onClick={this.handleUnfollow}>
+            Following
+          </button>
+        </div>
+      );
     }
 
     return (

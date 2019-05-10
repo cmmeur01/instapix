@@ -16,22 +16,25 @@ class ShowPost extends React.Component {
 
   componentDidMount() {
     let username;
+    let that = this;
     this.props.fetchPost(this.props.match.params.postId)
       .then( ({post}) => {
-        username = post.user.username;
+        username = post.user[post.post.user].username;
       })
-    // this.props.fetchComments(this.props.match.params.postId);
-      .then( () => this.props.fetchCurrentUser(this.props.currentUser, username));
+      .then( () => {
+        that.props.fetchCurrentUser(that.props.currentUserId, username);
+      });
   }
 
   componentDidUpdate(prevProps) {
+    let that = this;
     if (this.props.match.params.postId !== prevProps.match.params.postId) {
       let username;
       this.props.fetchPost(this.props.match.params.postId)
         .then(({ post }) => {
-          username = post.user.username;
+          username = post.user[post.post.user].username;
         });
-      this.props.fetchCurrentUser(this.props.currentUser, username);
+      that.props.fetchCurrentUser(that.props.currentUserId, username);
     }
   }
 

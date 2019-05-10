@@ -6,6 +6,7 @@ const Comment = require("../../models/Comment");
 const passport = require('passport');
 const jwt_decode = require('jwt-decode');
 
+
 router.get("/", (req, res) => {
   const token = req.headers.authorization;
   const user = jwt_decode(token);
@@ -22,6 +23,9 @@ router.get("/", (req, res) => {
        posts.forEach(post => {
          postsObject[post._id] = post;
          userIds.push(post.user);
+         for (let i = 0; i < post.likes.length; i++) {
+           userIds.push(post.likes[i]);
+         }
        });
        let postIds = Object.keys(postsObject);
        Comment.find({ post: { $in: postIds }})
@@ -258,6 +262,9 @@ router.get("/more", (req, res) => {
           posts.forEach(post => {
             postsObject[post._id] = post;
             userIds.push(post.user);
+            for (let i = 0; i < post.likes.length; i++) {
+              userIds.push(post.likes[i]);
+            }
           });
           let postIds = Object.keys(postsObject);
           Comment.find({ post: { $in: postIds } })

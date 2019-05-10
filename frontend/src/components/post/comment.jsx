@@ -205,6 +205,13 @@ class Comment extends React.Component {
             <div className="full-name">{owner.name}</div>
           </div>
           {followButton}
+          {/* {owner._id !== this.props.currentUserId ? (
+            <div className="is-following">
+              <CommentFollow owner={owner} currentUser={currentUser} />
+            </div>
+          ) : (
+            " •  "
+          )} */}
         </div>
         <ul className="comment-index-component">
           {postDescription}
@@ -229,7 +236,14 @@ class Comment extends React.Component {
         <div className="post-comment-form">
           <form onSubmit={this.handleSubmit}>
             <div>
-              <Textarea className="textarea-auto" rows="5" cols="35" placeholder="Add a comment..." onChange={this.handleChange} id='myTextarea' />
+              <Textarea
+                className="textarea-auto"
+                rows="5"
+                cols="35"
+                placeholder="Add a comment..."
+                onChange={this.handleChange}
+                id="myTextarea"
+              />
             </div>
             <button
               className={!this.state.text ? "disabled" : ""}
