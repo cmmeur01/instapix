@@ -33,9 +33,9 @@ class Comment extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.comments !== prevProps.comments) {
-    //   this.setLocalState({ comments: this.props.comments });
-    // }
+    if (this.props.comments !== prevProps.comments) {
+      this.setLocalState({ comments: this.props.comments });
+    }
   }
 
   setLocalState() {
