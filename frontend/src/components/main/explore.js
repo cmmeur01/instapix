@@ -3,32 +3,28 @@ import { connect } from "react-redux";
 // import { notFollowingExplore } from "./../../reducers/selectors";
 import { Link } from "react-router-dom";
 // import { fetchUsers } from "./../../actions/user_actions";
-import { fetchPosts } from "../../actions/post_actions";
+import { fetchExplorePosts } from "../../actions/post_actions";
 import "../../assets/stylesheets/explore.css";
 import Carousel from "./carousel";
 
 class Explore extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {posts: []};
     this.getPosts = this.getPosts.bind(this);
   }
 
   componentDidMount() {
     // this.props.fetchUsers().then(() =>{
-    //   this.props.fetchPosts();
+    //   this.props.fetchExplorePosts();
     // })
-    this.props.fetchPosts();
+    this.props.fetchExplorePosts()
+    .then(() => this.setState({posts: this.props.posts}))
   }
 
   getPosts() {
     // debugger
-    let posts = [];
-    this.props.posts.forEach(post => {
-      if (post.user !== this.props.currentUser.id) {
-        posts.push(post);
-      }
-    });
-
+    let {posts} = this.state;
     let allUserPosts = posts.map((post, i) => {
       return (
         <Link to={`/posts/${post._id}`}>
@@ -48,7 +44,7 @@ class Explore extends React.Component {
           <div className="carousel-header">
             <h5>Discover People</h5>
             <div className="carousel-container">
-              <Carousel currentUser={this.props.currentUser} />
+              <Carousel />
             </div>
           </div>
           <h2 className="explore">Explore</h2>
@@ -64,14 +60,14 @@ class Explore extends React.Component {
 const mstp = state => {
   return {
     // users: notFollowingExplore(state),
-    currentUser: state.session.user,
+    currentUser: state.entities.users[state.session.user.id],
     posts: Object.values(state.entities.posts)
   };
 };
 
 const mdtp = dispatch => ({
   // fetchUsers: () => dispatch(fetchUsers()),
-  fetchPosts: () => dispatch(fetchPosts())
+  fetchExplorePosts: () => dispatch(fetchExplorePosts())
 });
 
 export default connect(

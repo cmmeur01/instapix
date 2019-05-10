@@ -41,3 +41,7 @@ export const fetchSuggestions = () => {
 export const editProfile = (image_url, id) => {
   return axios.patch('/api/users/edit', { image_url: image_url, id: id });
 };
+
+export const fetchExploreUsers = () => {
+  return axios.get('/api/users/explore');
+};

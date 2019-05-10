@@ -31,3 +31,7 @@ export const sendPost = (post) => {
 export const fetchMorePosts = numPosts => {
   return axios.get(`/api/posts/more?skipPosts=${numPosts}`);
 };
+
+export const fetchExplorePosts = () => {
+  return axios.get('/api/posts/explore');
+};

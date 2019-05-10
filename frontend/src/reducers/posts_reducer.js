@@ -2,7 +2,8 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_FEED_POSTS,
-  RECEIVE_MORE_POSTS
+  RECEIVE_MORE_POSTS,
+  RECEIVE_EXPLORE_POSTS
 } from "./../actions/post_actions";
 // import { RECEIVE_CURRENT_USERS } from './../actions/user_actions';
 import { RECEIVE_USER_LOGOUT } from './../actions/session_actions';
@@ -24,7 +25,9 @@ const PostsReducer = (state = {}, action) => {
         return {};
     case RECEIVE_MORE_POSTS:
       return merge({}, state, action.posts.posts);
-   default:
+    case RECEIVE_EXPLORE_POSTS:
+      return action.posts;
+    default:
       return state;
   }
 }

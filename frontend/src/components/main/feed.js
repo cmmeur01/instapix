@@ -102,7 +102,6 @@ class Feed extends React.Component {
             dataLength={this.state.posts.length}
             next={this.fetchMoreData}
             hasMore={true}
-            
           >
             {feed}
           </InfiniteScroll>
