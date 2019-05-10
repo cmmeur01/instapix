@@ -23,13 +23,22 @@ const validateLoginInput = require('../../validation/login');
 //     .then(user => {
 //     let following = user.following;
 //     following.push(user.id);
+//     let usersObject = {};
 //     User.find({ _id: { $in: following } })
 //       .then(users => {
-//         users = users.map(user => {
+//         users = users.forEach(user => {
 //           user.password = '';
-//           return user;
+//           usersObject[user._id] = user;
 //         });
-//         res.send({ users });
+//         User.find({ _id: { $nin: following }}).limit(20)
+//         .then(users => {
+//           // debugger;
+//           users.forEach(user => {
+//             user.password = '';
+//             usersObject[user._id] = user;
+//           });
+//         });
+//         res.send({ users: usersObject });
 //       });
 //     }
 //   );
@@ -44,7 +53,7 @@ router.get('/', (req, res) => {
       user.password = '';
       hash[user.id] = user;
     });
-    res.send(hash);
+    res.send({ users: hash });
   }
 )});
 

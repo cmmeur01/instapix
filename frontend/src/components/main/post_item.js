@@ -258,10 +258,8 @@ class PostItem extends React.Component {
                 <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleUpdate} value={this.state.inputVal} />
               </div>
               <button
-                id="comment-btn"
                 disabled={!this.state.inputVal}
-                className={!this.state.text ? "disabled" : ""}
-
+                className={!this.state.inputVal ? "comment-btn" : "show-btn"}
               >
                 Post
               </button>

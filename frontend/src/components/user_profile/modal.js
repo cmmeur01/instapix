@@ -48,7 +48,7 @@ class ProfileModal extends React.Component {
   render() {
     return (
 
-      <div className="modal-bg" onClick={this.props.closeModal}>
+      <div className="modal-bg" onClick={this.props.closeProfileModal}>
         <div
           className="modal-inner-profile-edit"
           onClick={e => e.stopPropagation()}

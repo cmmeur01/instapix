@@ -207,6 +207,11 @@
 }
 
 .show-btn {
+  border: 0;
+  color: #3897f0;
+  display: inline;
+  padding: 0;
+  font-size: 14px;
   opacity: 1;
 }
 

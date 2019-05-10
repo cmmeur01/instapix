@@ -14,7 +14,7 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => ({
   postComment: (post_id, user_id, text) =>
-    dispatch(postComment(post_id, user_id, text)),
+  dispatch(postComment(post_id, user_id, text)),
   likePost: postId => likePost(postId),
   unlikePost: likeData => unlikePost(likeData),
   openLikesModal: postId => dispatch(openLikesModal(postId)),
