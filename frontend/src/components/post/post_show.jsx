@@ -12,9 +12,16 @@ const override = css`
 
 class ShowPost extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: false
+    }
+  }
   
 
   componentDidMount() {
+    this.setState({"loading": true});
     let username;
     let that = this;
     this.props.fetchPost(this.props.match.params.postId)
@@ -23,6 +30,7 @@ class ShowPost extends React.Component {
       })
       .then( () => {
         that.props.fetchCurrentUser(that.props.currentUserId, username);
+        that.setState({ "loading": false });
       });
   }
 
@@ -40,6 +48,19 @@ class ShowPost extends React.Component {
 
 
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="stock-loading">
+          <MoonLoader
+            className={override}
+            sizeUnit={"px"}
+            size={25}
+            color={"#312F2D"}
+            loading={true}
+          />
+        </div>
+      )
+    }
     let post;
     if (this.props.posts[this.props.match.params.postId]) {
       post = this.props.posts[this.props.match.params.postId];
