@@ -20,7 +20,6 @@ class LikesModalItem extends React.Component {
   }
 
   componentDidMount() {
-    debugger
     this.setState({
       followed: this.props.user.followers.includes(this.props.currentUser._id)
     });
@@ -52,7 +51,6 @@ class LikesModalItem extends React.Component {
     const { user, currentUser } = this.props;
 
     let followButton;
-    debugger
     if (user._id === currentUser._id) {
       followButton = ''
     } else if (!this.state.followed) {
