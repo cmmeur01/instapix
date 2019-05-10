@@ -9,6 +9,7 @@ const jwt_decode = require('jwt-decode');
 router.get("/", (req, res) => {
   const token = req.headers.authorization;
   const user = jwt_decode(token);
+  // let following = [];
   User.findOne({ _id: user.id })
   .then(user => {  
      let following = user.following;

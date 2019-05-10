@@ -4,7 +4,6 @@ import CommentFollow from "./comment_follow";
 import { Link } from "react-router-dom";
 import * as heart from "./../../assets/images/heart.png";
 import * as redheart from "./../../assets/images/redheart.png";
-import * as bubble from "./../../assets/images/bubble.png";
 import * as upload from "./../../assets/images/igupload.png";
 import Textarea from 'react-textarea-autosize';
 
@@ -102,7 +101,8 @@ class Comment extends React.Component {
   }
 
   render() {
-    let { comments, users, post } = this.props;
+    let { users, post } = this.props;
+    let { comments } = this.state;
 
     let postComments = Object.values(comments).map((comment, id) => {
       let user = users[comment.user];

@@ -81,7 +81,7 @@
 
 .second-p {
   margin-top: 3px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #999;
 }
 
@@ -164,7 +164,7 @@
   height: 50px;
   border: none;
   border-top: 0.5px solid lightgray;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .logout-modal-buttons > button:hover {

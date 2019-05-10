@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { followUser, unfollowUser } from './../../actions/user_actions';
 import "./../../assets/stylesheets/feed.css";
 import { closeModal } from './../../actions/modal_actions';
