@@ -96,7 +96,7 @@ router.get("/username", (req, res) => {
         posts.forEach((post) => {
           postsHash[post._id] = post;
         })
-        res.send(postsHash);
+        res.send({posts: postsHash});
       });
   }
 });
@@ -215,6 +215,18 @@ router.patch('/unlike', (req, res) => {
       });
     });
 
+});
+
+router.get('/explore', (req, res) => {
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  const following = user.following;
+  Post.find({ user: { $nin: following }}).limit(21)
+  .then(posts => {
+    let postsObject = {};
+    posts.forEach(post => postsObject[post._id] = post);
+    res.send({ posts: postsObject });
+  });
 });
 
 router.post("/new", (req, res) => {

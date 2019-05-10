@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 // import { notFollowingExplore } from "./../../reducers/selectors";
 import { Link } from "react-router-dom";
 // import { fetchUsers } from "./../../actions/user_actions";
-import { fetchPosts } from "../../actions/post_actions";
+import { fetchExplorePosts } from "../../actions/post_actions";
 import "../../assets/stylesheets/explore.css";
 import Carousel from "./carousel";
 
 class Explore extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { posts: []}
     this.getPosts = this.getPosts.bind(this);
   }
 
@@ -17,7 +18,8 @@ class Explore extends React.Component {
     // this.props.fetchUsers().then(() =>{
     //   this.props.fetchPosts();
     // })
-    this.props.fetchPosts();
+    this.props.fetchExplorePosts()
+    .then(() => this.setState({posts: this.props.posts}))
   }
 
   getPosts() {
@@ -71,7 +73,7 @@ const mstp = state => {
 
 const mdtp = dispatch => ({
   // fetchUsers: () => dispatch(fetchUsers()),
-  fetchPosts: () => dispatch(fetchPosts())
+  fetchExplorePosts: () => dispatch(fetchExplorePosts())
 });
 
 export default connect(

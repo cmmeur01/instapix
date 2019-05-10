@@ -45,7 +45,7 @@ const receiveSearchResults = users => {
 
 export const fetchUsers = () => dispatch => {
   return UserAPIUtil.fetchUsers().then(res => {
-    return dispatch(receiveUsers(res.data.users));
+    return dispatch(receiveUsers(res.data));
   });
 };
 
