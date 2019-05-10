@@ -34,7 +34,9 @@ class PostItem extends React.Component {
     this.setState({
       likeCount: this.props.post.likes.length,
       liked: this.props.post.likes.includes(this.props.currentUserId),
-      comments: this.props.comments.filter(comment => comment.post === this.props.post._id)
+      comments: this.props.comments.filter(
+        comment => comment.post === this.props.post._id
+      )
     });
   }
 
@@ -44,12 +46,21 @@ class PostItem extends React.Component {
 
   commentSubmit(e) {
     e.preventDefault();
-    this.props.postComment(this.props.post._id, this.props.currentUserId, this.state.inputVal)
-    .then(() => this.setState({ 
-      comments: this.state.comments.concat({
-      body: this.state.inputVal, 
-      user:this.props.currentUserId}), 
-      inputVal: '' }));
+    this.props
+      .postComment(
+        this.props.post._id,
+        this.props.currentUserId,
+        this.state.inputVal
+      )
+      .then(() =>
+        this.setState({
+          comments: this.state.comments.concat({
+            body: this.state.inputVal,
+            user: this.props.currentUserId
+          }),
+          inputVal: ""
+        })
+      );
   }
 
   handleLike() {
@@ -117,13 +128,13 @@ class PostItem extends React.Component {
 
     let likeCounter = "";
     if (this.state.likeCount === 1) {
-      likeCounter = <h4 className='likes-counter'>
-        {this.state.likeCount} like
-      </h4>;
+      likeCounter = (
+        <h4 className="likes-counter">{this.state.likeCount} like</h4>
+      );
     } else if (this.state.likeCount > 1) {
-      likeCounter = <h4 className='likes-counter'>
-        {this.state.likeCount} likes
-      </h4>;
+      likeCounter = (
+        <h4 className="likes-counter">{this.state.likeCount} likes</h4>
+      );
     }
 
     let viewAll = "";
@@ -142,15 +153,15 @@ class PostItem extends React.Component {
     let userTwo;
     let commentOne;
     let commentTwo;
-    let lastComment
+    let lastComment;
     if (this.state.comments.length >= 2) {
-       lastComment = this.state.comments.length - 1;
-       commentOne = this.state.comments[lastComment - 1];
-       userOne = this.props.users.filter(
+      lastComment = this.state.comments.length - 1;
+      commentOne = this.state.comments[lastComment - 1];
+      userOne = this.props.users.filter(
         user => user._id === commentOne.user
       )[0];
-       commentTwo = this.state.comments[lastComment];
-       userTwo = this.props.users.filter(
+      commentTwo = this.state.comments[lastComment];
+      userTwo = this.props.users.filter(
         user => user._id === commentTwo.user
       )[0];
       postComments = (
@@ -214,12 +225,14 @@ class PostItem extends React.Component {
     if (post.description === "") {
       postCaption = "";
     } else {
-      postCaption = <div className="post-caption">
-        <Link to={`/users/${user.username}`}>
-          <span className="post-user-username">{user.username}</span>
-        </Link>
-        <span>{post.description}</span>
-      </div>;
+      postCaption = (
+        <div className="post-caption">
+          <Link to={`/users/${user.username}`}>
+            <span className="post-user-username">{user.username}</span>
+          </Link>
+          <span>{post.description}</span>
+        </div>
+      );
     }
 
     return (
@@ -264,7 +277,14 @@ class PostItem extends React.Component {
           <section className="comment-box">
             <form className="comment-form2" onSubmit={this.commentSubmit}>
               <div>
-                <Textarea className="textarea-auto" rows="5" cols="75" placeholder="Add a comment..." onChange={this.handleUpdate} value={this.state.inputVal} />
+                <Textarea
+                  className="textarea-auto"
+                  rows="5"
+                  cols="75"
+                  placeholder="Add a comment..."
+                  onChange={this.handleUpdate}
+                  value={this.state.inputVal}
+                />
               </div>
               <button
                 disabled={!this.state.inputVal}

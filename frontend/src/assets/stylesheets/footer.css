@@ -46,6 +46,10 @@
   margin-right: 16px;
 }
 
+.footer-li > a {
+  color: black;
+}
+
 .copyright {
   font-size: 12px;
   font-weight: 600;
