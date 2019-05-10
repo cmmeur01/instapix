@@ -136,5 +136,12 @@ ul.suggestions-list > li > div {
 
 .sidebar-list-image {
   object-fit: cover;
-  border-radius: 50%
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 1900px) {
+  .side-feed-bar {
+    position: fixed;
+    right: 480px;
+  }
 }

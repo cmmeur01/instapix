@@ -2,7 +2,7 @@ import React from "react";
 import PostItem from "./post_item_container";
 import SideBar from "./sidebar";
 import "./../../assets/stylesheets/feed.css";
-import Suggestions from './suggestions';
+import Suggestions from "./suggestions";
 import { MoonLoader } from "react-spinners";
 import { css } from "@emotion/core";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -20,29 +20,26 @@ class Feed extends React.Component {
       posts: [],
       users: [],
       comments: []
-    }
+    };
     this.fetchMoreData = this.fetchMoreData.bind(this);
   }
 
   componentDidMount() {
     let that = this;
-    this.props.fetchUsers()
-    .then(() => {
-      that.props.fetchPosts()
-        .then(() => {
-          that.setState({
-            posts: that.props.posts,
-            users: that.props.users,
-            comments: that.props.comments
-          });
+    this.props.fetchUsers().then(() => {
+      that.props.fetchPosts().then(() => {
+        that.setState({
+          posts: that.props.posts,
+          users: that.props.users,
+          comments: that.props.comments
         });
+      });
     });
   }
 
   fetchMoreData() {
     let numPosts = this.state.posts.length;
-    this.props.fetchMorePosts(numPosts)
-    .then(() => {
+    this.props.fetchMorePosts(numPosts).then(() => {
       this.setState({
         posts: this.props.posts,
         users: this.props.users,
@@ -56,18 +53,16 @@ class Feed extends React.Component {
     if (users.length === 0) {
       return (
         <div className="stock-loading">
-
           <MoonLoader
             className={override}
             sizeUnit={"px"}
             size={25}
             color={"#312F2D"}
-
             loading={true}
           />
         </div>
-      )
-    };
+      );
+    }
     let feed = "";
     if (this.props.posts.length > 0) {
       feed = (
@@ -75,7 +70,7 @@ class Feed extends React.Component {
           {posts.map((post, i) => {
             let user = users.filter(user => user._id === post.user)[0];
             return (
-              <li key={i}>
+              <li className="pitems" key={i}>
                 <PostItem
                   post={post}
                   user={user}
@@ -89,15 +84,15 @@ class Feed extends React.Component {
       );
     } else {
       return (
-        <div className='outer-feed-container'>
+        <div className="outer-feed-container">
           <Suggestions />
         </div>
-      )
+      );
     }
 
     return (
-      <div className="outer-feed-container">
-        <div className="feed-div">
+      <div className="outer-feed-container ">
+        <div className="feed-div ">
           <InfiniteScroll
             dataLength={this.state.posts.length}
             next={this.fetchMoreData}
@@ -106,7 +101,9 @@ class Feed extends React.Component {
             {feed}
           </InfiniteScroll>
         </div>
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
       </div>
     );
   }

@@ -5,14 +5,14 @@
   margin-right: 340px;
 }
 
-.feed-div::-webkit-scrollbar {
+/* .feed-div::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .feed-list {
   list-style-type: none;
   margin-block-end: 104px;
-/*   margin-bottom: 50px; */
+  /*   margin-bottom: 50px; */
 }
 
 .outer-feed-container {
@@ -97,4 +97,7 @@
   text-align: center;
   font-size: 14px;
   outline: none;
+}
+
+@media screen and (min-width: 480px) {
 }
