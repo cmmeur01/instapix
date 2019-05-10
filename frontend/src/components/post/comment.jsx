@@ -181,7 +181,12 @@ class Comment extends React.Component {
       postDescription = <li className="comment-item">
         <img className="comment-user-pic" src={owner.image_url} alt="img" />
         {<span className="comment-body">
-          <strong>{owner.username}</strong> {this.props.post.description}
+          <strong>
+            <span className='post-show-owner'>
+              {owner.username}
+            </span>
+          </strong>
+          {this.props.post.description}
         </span>}
       </li>;
     }
