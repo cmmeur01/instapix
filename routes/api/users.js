@@ -247,4 +247,21 @@ router.post('/register', (req, res) => {
       });
   });
 
+router.get('/explore', (req, res) => {
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  User.find({ _id: user.id })
+  .then(user => {
+    const currentUser = user;
+    const following = user.following;
+    User.find({ _id: { $nin: following } }).limit(30)
+      .then(users => {
+        users = users.concat(currentUser);
+        let usersObject = {};
+        users.forEach(user => usersObject[user._id] = user);
+        res.send({ users: usersObject });
+    });
+  });
+});
+
 module.exports = router;

@@ -5,6 +5,7 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_CURRENT_USERS = "RECEIVE_CURRENT_USERS";
 export const UPDATE_FOLLOWING = "UPDATE_FOLLOWING";
 export const RECEIVE_SEARCH_RESULTS = "RECEIVE_SEARCH_RESULTS";
+export const RECEIVE_EXPLORE_USERS = 'RECEIVE_EXPLORE_USERS';
 
 const receiveUsers = users => {
   return {
@@ -43,9 +44,16 @@ const receiveSearchResults = users => {
   };
 };
 
+const receiveExploreUsers = users => {
+  return {
+    type: RECEIVE_EXPLORE_USERS,
+    users
+  };
+};
+
 export const fetchUsers = () => dispatch => {
   return UserAPIUtil.fetchUsers().then(res => {
-    return dispatch(receiveUsers(res.data.users));
+    return dispatch(receiveUsers(res.data));
   });
 };
 
@@ -82,5 +90,11 @@ export const searchUsers = searchTerm => dispatch => {
 export const editProfile = (url, id) => dispatch => {
   return UserAPIUtil.editProfile(url, id).then(res => {
     return dispatch(receiveCurrentUser(res.data));
+  });
+};
+
+export const fetchExploreUsers = () => dispatch => {
+  return UserAPIUtil.fetchExploreUsers().then(res => {
+    return dispatch(receiveExploreUsers(res.data));
   });
 };

@@ -4,6 +4,7 @@ export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_FEED_POSTS = "RECEIVE_FEED_POSTS";
 export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_MORE_POSTS = "RECEIVE_MORE_POSTS";
+export const RECEIVE_EXPLORE_POSTS = 'RECEIVE_EXPLORE_POSTS';
 
 
 const receivePosts = posts => {
@@ -30,6 +31,13 @@ const receiveFeedPosts = data => {
 const receiveMorePosts = posts => {
   return {
     type: RECEIVE_MORE_POSTS,
+    posts
+  };
+};
+
+const receiveExplorePosts = posts => {
+  return {
+    type: RECEIVE_EXPLORE_POSTS,
     posts
   };
 };
@@ -69,5 +77,11 @@ export const sendPost = post => dispatch => {
 export const fetchMorePosts = numPosts => dispatch => {
   return PostAPIUtil.fetchMorePosts(numPosts).then(res => {
     return dispatch(receiveMorePosts(res.data));
+  });
+};
+
+export const fetchExplorePosts = () => dispatch => {
+  return PostAPIUtil.fetchExplorePosts().then(res => {
+    return dispatch(receiveExplorePosts(res.data.posts));
   });
 };
