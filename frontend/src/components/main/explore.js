@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 // import { notFollowingExplore } from "./../../reducers/selectors";
 import { Link } from "react-router-dom";
-import { fetchUsers } from "./../../actions/user_actions";
+// import { fetchUsers } from "./../../actions/user_actions";
 import { fetchPosts } from "../../actions/post_actions";
 import "../../assets/stylesheets/explore.css";
 import Carousel from "./carousel";
@@ -14,14 +14,14 @@ class Explore extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUsers().then(() =>{
-      this.props.fetchPosts();
-    })
-    // this.props.fetchPosts();
+    // this.props.fetchUsers().then(() =>{
+    //   this.props.fetchPosts();
+    // })
+    this.props.fetchPosts();
   }
 
   getPosts() {
-    debugger
+    // debugger
     let posts = [];
     this.props.posts.forEach(post => {
       if (post.user !== this.props.currentUser.id) {
@@ -70,7 +70,7 @@ const mstp = state => {
 };
 
 const mdtp = dispatch => ({
-  fetchUsers: () => dispatch(fetchUsers()),
+  // fetchUsers: () => dispatch(fetchUsers()),
   fetchPosts: () => dispatch(fetchPosts())
 });
 
