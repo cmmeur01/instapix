@@ -52,6 +52,7 @@ class Feed extends React.Component {
   }
 
   render() {
+    debugger
     const { posts, users, comments } = this.state;
     if (users.length === 0) {
       return (

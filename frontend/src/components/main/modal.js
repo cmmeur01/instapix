@@ -24,7 +24,6 @@ class Modal extends React.Component {
   getLikes() {
     if (!this.props.users) return null;
     let users = this.props.users;
-
     const results = users.map((user, i) => <LikesModalItem user={user} key={i}/>);
     return results;
   }

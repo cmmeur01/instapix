@@ -36,3 +36,7 @@ img {
   font-size: 26px;
   font-family: Cookie;
 }
+
+.post-caption {
+  word-wrap: break-word;
+}

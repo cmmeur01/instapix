@@ -61,7 +61,10 @@ router.get("/id", (req, res) => {
           model: 'users'
         }
       })
+      .populate('likes')
       .then(post => {
+        // console.log(post.likes[0]);
+        let likes = post.likes;
         let comments = post.comments;
         let comment_ids = comments.map(ele => ele._id);
         post.comments = comment_ids;
@@ -72,18 +75,32 @@ router.get("/id", (req, res) => {
         comments.forEach((comment, i) => {
           comment.user = users_ids[i];
         });
- 
+
+        likesArr = likes.map(like => like._id);
+
+        // console.log(users);
+        // console.log(likes);
+        
+        // likes.forEach((user) =>{
+        //   users.concat(user);
+        // });
+        // users.concat(likes);
+        // console.log(users);
         let finalUsers = {};
+        likes.forEach((user) => {
+          finalUsers[user._id] = user;
+        });
         users.forEach(user => {
           finalUsers[user._id] = user;
         });
+        post.likes = likesArr;
         let user = post.user;
         post.user = user._id;
         let finalUser = { [user._id]: user };
         let hashComments = {};
         comments.forEach((comment) => {
           hashComments[comment._id] = comment;
-        })
+        });
         res.send( {post: post, user: finalUser, users: finalUsers, comments: hashComments});
       });
   }
