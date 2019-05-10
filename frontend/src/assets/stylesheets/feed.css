@@ -2,6 +2,7 @@
   /* height: 1600px;
   overflow: scroll; */
   margin-top: 50px;
+  margin-right: 340px;
 }
 
 .feed-div::-webkit-scrollbar {
@@ -23,9 +24,10 @@
 
 .sug-container {
   width: 598px;
-  position: relative;
-  top: 100px;
+  /* position: relative; */
+  margin-top: 100px;
   /* margin-block-end: 104px; */
+  /* padding-bottom: 104px; */
 }
 
 .sug-list-div {

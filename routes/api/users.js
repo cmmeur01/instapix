@@ -16,6 +16,7 @@ const validateLoginInput = require('../../validation/login');
 
 
 // SENDS ONLY CURRENT USER AND FOLLOWINGS 
+
 router.get('/', (req, res) => {
   const token = req.headers.authorization;
   const user = jwt_decode(token);
@@ -49,18 +50,6 @@ router.get('/', (req, res) => {
   );
 });
 
-// SENDS ALL USERS
-// router.get('/', (req, res) => {
-//   User.find({})
-//   .then(users => {
-//     let hash = {};
-//     users.forEach(user => {
-//       user.password = '';
-//       hash[user.id] = user;
-//     });
-//     res.send(hash);
-//   }
-// )});
 
 //send whole user back to redirect
 router.patch('/edit', (req, res) => {

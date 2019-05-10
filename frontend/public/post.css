@@ -29,6 +29,7 @@
   padding: 16px;
   right: 0;
   border-bottom: 1px solid #efefef;
+  margin-left: 4px;
 }
 
 .full-name {
@@ -36,10 +37,16 @@
   font-size: 12px;
 }
 
+.post-show-owner {
+  text-transform: lowercase;
+  padding-right: 5px;
+  margin-left: -1px;
+}
+
 .owner-username {
   font-size: 14px;
   font-weight: 700;
-  
+  text-transform: lowercase;
 }
 
 .owner-username > a:visited {
@@ -73,6 +80,7 @@
   display: flex;
   flex-direction: column;
   padding: 6px 0 6px 6px;
+  margin-left: 3px;
 }
 
 .comment-user-pic > img {
@@ -110,6 +118,7 @@
   height: 100%;
   overflow-y: scroll;
   margin: 5px 0;
+  margin-left: 8px;
   /* justify-content: space-between; */
 }
 
@@ -265,6 +274,7 @@
   cursor: pointer;
   height: 70vh;
   justify-content: center;
+  transition: 300ms;
 }
 /* 
 .upload-button {
@@ -290,6 +300,9 @@
     0%{background-position:0% 50%}
     50%{background-position:100% 51%}
     100%{background-position:0% 50%}
+ /* background: rgb(131,58,180);
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  transition: 300ms; */
 }
 
 .dropzone > img {
@@ -304,4 +317,5 @@
 .post-footer-show {
   height: 130px;
   padding: 5px;
+  margin-left: 15px;
 }
