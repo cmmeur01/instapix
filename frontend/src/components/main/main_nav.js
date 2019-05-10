@@ -7,9 +7,9 @@ import "./../../assets/stylesheets/main_nav.css";
 import * as ip from "./../../assets/images/ip.png";
 
 class MainNav extends React.Component {
-  componentWillMount() {
-    this.props.fetchUsers();
-  }
+  // componentWillMount() {
+  //   this.props.fetchUsers();
+  // }
 
   render() {
     if (!this.props.users) return null;

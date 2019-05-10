@@ -9,22 +9,35 @@ const jwt_decode = require('jwt-decode');
 router.get("/", (req, res) => {
   const token = req.headers.authorization;
   const user = jwt_decode(token);
+  let userIds = [];
+  let postsObject = {};
+  let commentsObject = {};
+  let usersObject = {};
   User.findOne({ _id: user.id })
   .then(user => {  
      let following = user.following;
      following.push(user.id);
      Post.find({ user: { $in: following }}).sort([['date', -1]]).limit(20)
      .then(posts => {
-       let postsObject = {};
-       posts.forEach(post => postsObject[post._id] = post);
+       posts.forEach(post => {
+         postsObject[post._id] = post;
+         userIds.push(post.user);
+       });
        let postIds = Object.keys(postsObject);
-      //  User.find({ _id: { $in: following } })
        Comment.find({ post: { $in: postIds }})
        .then(comments => {
-         let commentsObject = {};
-         comments.forEach(comment => commentsObject[comment._id] = comment);
-         res.send({posts: postsObject, comments: commentsObject});
-       })
+         comments.forEach(comment => {
+          commentsObject[comment._id] = comment;
+          userIds.push(comment.user);
+         });
+         User.find({ _id: { $in: userIds} })
+          .then((users) => {
+              users.forEach(user => {
+                usersObject[user._id] = user;
+              });
+          })
+           .then(() => res.send({ posts: postsObject, comments: commentsObject, users: usersObject }))
+       });
      });
      
   }) ;
@@ -36,7 +49,6 @@ router.get("/id", (req, res) => {
   if (user) {
     Post.findOne({ _id: req.query.id })
       .populate('user')
-      // .populate('comments')
       .populate({
         path: 'comments',
         model: 'comments',
@@ -80,14 +92,11 @@ router.get("/username", (req, res) => {
   if (user) {
     Post.find({ user: req.query.id }).sort({ "date": -1 })
       .then(posts => {
-        //new
         let postsHash = {}
         posts.forEach((post) => {
           postsHash[post._id] = post;
         })
         res.send(postsHash);
-        //end
-        // res.send(posts);
       });
   }
 });
@@ -232,28 +241,42 @@ router.post("/new", (req, res) => {
 });
 
 router.get("/more", (req, res) => {
-  console.log("here");
-  
   const token = req.headers.authorization;
   const user = jwt_decode(token);
-  User.findOne({ _id: user.id }).then(user => {
-    let following = user.following;
-    following.push(user.id);
-    Post.find({ user: { $in: following } })
-      .sort([["date", -1]])
+  let userIds = [];
+  let postsObject = {};
+  let commentsObject = {};
+  let usersObject = {};
+  User.findOne({ _id: user.id })
+    .then(user => {
+      let following = user.following;
+      following.push(user.id);
+      Post.find({ user: { $in: following } }).sort([['date', -1]])
       .skip(parseInt(req.query.skipPosts))
-      .limit(10)
-      .then(posts => {
-        let postsObject = {};
-        posts.forEach(post => (postsObject[post._id] = post));
-        let postIds = Object.keys(postsObject);
-        Comment.find({ post: { $in: postIds } }).then(comments => {
-          let commentsObject = {};
-          comments.forEach(comment => (commentsObject[comment._id] = comment));
-          res.send({ posts: postsObject, comments: commentsObject });
+      .limit(20)
+        .then(posts => {
+          posts.forEach(post => {
+            postsObject[post._id] = post;
+            userIds.push(post.user);
+          });
+          let postIds = Object.keys(postsObject);
+          Comment.find({ post: { $in: postIds } })
+            .then(comments => {
+              comments.forEach(comment => {
+                commentsObject[comment._id] = comment;
+                userIds.push(comment.user);
+              });
+              User.find({ _id: { $in: userIds } })
+                .then((users) => {
+                  users.forEach(user => {
+                    usersObject[user._id] = user;
+                  });
+                })
+                .then(() => res.send({ posts: postsObject, comments: commentsObject, users: usersObject }))
+            });
         });
-      });
-  });
+
+    });
 });
 
 
