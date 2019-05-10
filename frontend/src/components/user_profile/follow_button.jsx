@@ -29,7 +29,6 @@ class FollowButton extends React.Component {
   }
 
   render() {
-    debugger
     let {owner, currentUser} = this.props;
     // let text = owner.followers.includes(currentUser._id) ? "Unfollow" : "Follow";
     let button;
