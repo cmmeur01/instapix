@@ -25,13 +25,17 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchPosts()
+    let that = this;
+    this.props.fetchUsers()
     .then(() => {
-      this.setState({
-        posts: this.props.posts,
-        users: this.props.users,
-        comments: this.props.comments
-      });
+      that.props.fetchPosts()
+        .then(() => {
+          that.setState({
+            posts: that.props.posts,
+            users: that.props.users,
+            comments: that.props.comments
+          });
+        });
     });
   }
 
@@ -65,7 +69,7 @@ class Feed extends React.Component {
       )
     };
     let feed = "";
-    if (posts.length > 0) {
+    if (this.props.posts.length > 0) {
       feed = (
         <ul className="feed-list">
           {posts.map((post, i) => {

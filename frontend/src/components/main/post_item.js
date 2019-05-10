@@ -25,6 +25,7 @@ class PostItem extends React.Component {
 
   componentDidMount() {
     if (this.props.post) {
+      // debugger
       this.setLocalState();
     }
   }
@@ -86,7 +87,9 @@ class PostItem extends React.Component {
   }
 
   render() {
+    // debugger
     let { user, post } = this.props;
+    // debugger
     if (!user) return null;
 
     let heartButton = "";
@@ -135,14 +138,19 @@ class PostItem extends React.Component {
     }
 
     let postComments = "";
+    let userOne;
+    let userTwo;
+    let commentOne;
+    let commentTwo;
+    let lastComment
     if (this.state.comments.length >= 2) {
-      let lastComment = this.state.comments.length - 1;
-      let commentOne = this.state.comments[lastComment - 1];
-      let userOne = this.props.users.filter(
+       lastComment = this.state.comments.length - 1;
+       commentOne = this.state.comments[lastComment - 1];
+       userOne = this.props.users.filter(
         user => user._id === commentOne.user
       )[0];
-      let commentTwo = this.state.comments[lastComment];
-      let userTwo = this.props.users.filter(
+       commentTwo = this.state.comments[lastComment];
+       userTwo = this.props.users.filter(
         user => user._id === commentTwo.user
       )[0];
       postComments = (
@@ -163,17 +171,18 @@ class PostItem extends React.Component {
         </div>
       );
     } else if (this.state.comments.length === 1) {
-      let commentOne = this.state.comments[0];
-      let userOne = this.props.users.filter(
-        user => user._id === commentOne.user
+      let commmentOne = this.state.comments[0];
+      let userrOne = this.props.users.filter(
+        user => user._id === commmentOne.user
       )[0];
+      // debugger
       postComments = (
         <div className="user-comments">
           <p>
-            <Link to={`/users/${userOne.username}`}>
-              <span className="example">{userOne.username} </span>
+            <Link to={`/users/${userrOne.username}`}>
+              <span className="example">{userrOne.username} </span>
             </Link>
-            {commentOne.body}
+            {commmentOne.body}
           </p>
         </div>
       );

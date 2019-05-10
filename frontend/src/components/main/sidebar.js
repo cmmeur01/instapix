@@ -67,6 +67,7 @@ class SideBar extends React.Component {
 
 const mstp = state => {
   return {
+    posts: state.entities.posts,
     users: notFollowing(state),
     currentUser: findCurrentUser(state)
   };

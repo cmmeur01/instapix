@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchPosts, fetchMorePosts } from './../../actions/post_actions';
 import Feed from './feed';
+import { fetchUsers } from '../../actions/user_actions';
 
 const mstp = state => {
   return({
@@ -13,7 +14,8 @@ const mstp = state => {
 const mdtp = dispatch => {
   return {
     fetchPosts: () => dispatch(fetchPosts()),
-    fetchMorePosts: (numPosts) => dispatch(fetchMorePosts(numPosts))
+    fetchMorePosts: numPosts => dispatch(fetchMorePosts(numPosts)),
+    fetchUsers: () => dispatch(fetchUsers())
   };
 };
 

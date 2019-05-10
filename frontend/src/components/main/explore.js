@@ -14,11 +14,14 @@ class Explore extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.fetchUsers();
+    // this.props.fetchUsers().then(() =>{
+    //   this.props.fetchPosts();
+    // })
     this.props.fetchPosts();
   }
 
   getPosts() {
+    // debugger
     let posts = [];
     this.props.posts.forEach(post => {
       if (post.user !== this.props.currentUser.id) {

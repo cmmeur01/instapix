@@ -272,7 +272,7 @@
   font-family: Cookie;
   font-size: 30px;
   cursor: pointer;
-  height: 50vh;
+  height: 70vh;
   justify-content: center;
   transition: 300ms;
 }
@@ -287,9 +287,22 @@
 } */
 
 .dropzone:hover {
-  background: rgb(131,58,180);
+  background: linear-gradient(55deg, #dcf702, #f57900, #fb0404, #2005f7, #f605f7);
+  background-size: 1000% 1000%;
+
+  -webkit-animation: AnimationName 12s ease infinite;
+  -moz-animation: AnimationName 12s ease infinite;
+  animation: AnimationName 12s ease infinite;
+
+}
+
+@keyframes AnimationName { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+ /* background: rgb(131,58,180);
   background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-  transition: 300ms;
+  transition: 300ms; */
 }
 
 .dropzone > img {

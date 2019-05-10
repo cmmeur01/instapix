@@ -4,13 +4,27 @@ import { followUser, unfollowUser } from './../../actions/user_actions';
 
 class FollowButton extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      clicked: false
+    };
+  }
+
   handleClick(e) {
+    this.setState({"clicked": true});
     let { owner, currentUser } = this.props;
     e.preventDefault();
     if (owner.followers.includes(currentUser._id)) {
-      this.props.unfollowUser(currentUser, owner._id);
+      this.props.unfollowUser(currentUser, owner._id)
+        .then(() => {
+          this.setState({ "clicked": false});
+        });
     } else {
-      this.props.followUser(currentUser, owner._id);
+      this.props.followUser(currentUser, owner._id)
+        .then(() => {
+          this.setState({ "clicked": false });
+        });
     }
   }
 
@@ -23,6 +37,7 @@ class FollowButton extends React.Component {
     } else {
       button = (
         <button
+          disabled={this.state.clicked}
           onClick={this.handleClick.bind(this)}
           className="edit-profile-btn inactive"
         >

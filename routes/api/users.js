@@ -16,46 +16,40 @@ const validateLoginInput = require('../../validation/login');
 
 
 // SENDS ONLY CURRENT USER AND FOLLOWINGS 
-// router.get('/', (req, res) => {
-//   const token = req.headers.authorization;
-//   const user = jwt_decode(token);
-//   User.findOne({ _id: user.id })
-//     .then(user => {
-//     let following = user.following;
-//     following.push(user.id);
-//     let usersObject = {};
-//     User.find({ _id: { $in: following } })
-//       .then(users => {
-//         users = users.forEach(user => {
-//           user.password = '';
-//           usersObject[user._id] = user;
-//         });
-//         User.find({ _id: { $nin: following }}).limit(20)
-//         .then(users => {
-//           // debugger;
-//           users.forEach(user => {
-//             user.password = '';
-//             usersObject[user._id] = user;
-//           });
-//         });
-//         res.send({ users: usersObject });
-//       });
-//     }
-//   );
-// });
 
-// SENDS ALL USERS
 router.get('/', (req, res) => {
-  User.find({})
-  .then(users => {
-    let hash = {};
-    users.forEach(user => {
-      user.password = '';
-      hash[user.id] = user;
-    });
-    res.send({ users: hash });
-  }
-)});
+  const token = req.headers.authorization;
+  const user = jwt_decode(token);
+  User.findOne({ _id: user.id })
+    .then(user => {
+    let following = user.following;
+    following.push(user.id);
+    let usersObject = {};
+    User.find({ _id: { $in: following } })
+      .then(users => {
+        users = users.forEach(user => {
+          user.password = '';
+          usersObject[user._id] = user;
+        });
+        // console.log(Object.keys(usersObject).length);
+
+        User.find({ _id: { $nin: following }}).limit(20)
+        .then(users => {
+          users.forEach(user => {
+            user.password = '';
+            usersObject[user._id] = user;
+          });
+        })
+        .then(() => {
+          // console.log("here");
+
+          res.send(usersObject);
+        });
+      });
+    }
+  );
+});
+
 
 //send whole user back to redirect
 router.patch('/edit', (req, res) => {
