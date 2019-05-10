@@ -62,27 +62,27 @@ class Comment extends React.Component {
           postId: this.props.post._id,
           userId: this.props.currentUserId
         })
-        .then(() => this.props.fetchPost(this.props.post._id))
-        .then(() =>
-          this.setState({
-            liked: false,
-            likeCount: this.state.likeCount - 1
-          })
-        );
+        .then(() => this.props.fetchPost(this.props.post._id));
+        // .then(() =>
+        //   this.setState({
+        //     liked: false,
+        //     likeCount: this.state.likeCount - 1
+        //   })
+        // );
     } else {
       this.props
         .likePost({
           postId: this.props.post._id,
           userId: this.props.currentUserId
         })
-        .then(() => this.props.fetchPost(this.props.post._id))
-        .then(() =>
-          this.setState({
-            liked: true,
-            likeCount: this.state.likeCount + 1,
-            likers: this.state.likers.concat(this.props.currentUserId)
-          })
-        );
+        .then(() => this.props.fetchPost(this.props.post._id));
+        // .then(() =>
+        //   this.setState({
+        //     liked: true,
+        //     likeCount: this.state.likeCount + 1,
+        //     likers: this.state.likers.concat(this.props.currentUserId)
+        //   })
+        // );
     }
   }
 
@@ -94,13 +94,13 @@ class Comment extends React.Component {
         this.props.currentUserId,
         this.state.text
       )
-      .then(() => this.setState({
-        comments: this.state.comments.concat({
-          body: this.state.text,
-          user: this.props.currentUserId
-        }),
-        text: ''
-      }))
+      // .then(() => this.setState({
+      //   comments: this.state.comments.concat({
+      //     body: this.state.text,
+      //     user: this.props.currentUserId
+      //   }),
+      //   text: ''
+      // }))
       .then(() => (document.getElementById("myTextarea").value = ""));
   }
 
