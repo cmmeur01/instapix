@@ -27,7 +27,6 @@ class Carousel extends React.Component {
     //     currentUser = user;
     //   }
     // });
-    debugger;
     return this.props.currentUser;
   }
 
