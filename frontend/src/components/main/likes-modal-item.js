@@ -9,10 +9,14 @@ import { closeModal } from './../../actions/modal_actions';
 class LikesModalItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { followed: false };
+    this.state = {
+      followed: false,
+      clicked: false
+    };
     this.handleFollow = this.handleFollow.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
     this.visitLiker = this.visitLiker.bind(this);
+    
   }
 
   componentDidMount() {
@@ -30,14 +34,17 @@ class LikesModalItem extends React.Component {
 
   handleFollow(e) {
     e.preventDefault();
-    this.props.followUser(this.props.currentUser, this.props.user._id)
-      .then(() => this.setState({ followed: true }));
+    this.setState({ clicked: true });
+    this.props
+      .followUser(this.props.currentUser, this.props.user._id)
+      .then(() => this.setState({ followed: true, clicked: false }));
   }
 
   handleUnfollow(e) {
     e.preventDefault();
+    this.setState({ clicked: true });
     this.props.unfollowUser(this.props.currentUser, this.props.user._id)
-      .then(() => this.setState({ followed: false }));
+      .then(() => this.setState({ followed: false, clicked: false  }));
   }
 
   render() {
@@ -47,13 +54,25 @@ class LikesModalItem extends React.Component {
     if (user._id === currentUser._id) {
       followButton = ''
     } else if (!this.state.followed) {
-      followButton = <button onClick={this.handleFollow} className='edit-profile-btn inactive'>
-        Follow
+      followButton = (
+        <button
+          disabled={this.state.clicked}
+          onClick={this.handleFollow}
+          className="edit-profile-btn inactive"
+        >
+          Follow
         </button>
+      );
     } else {
-      followButton = <button onClick={this.handleUnfollow} className='edit-profile-btn'>
-        Following
+      followButton = (
+        <button
+          disabled={this.state.clicked}
+          onClick={this.handleUnfollow}
+          className="edit-profile-btn"
+        >
+          Following
         </button>
+      );
     }
 
     return (

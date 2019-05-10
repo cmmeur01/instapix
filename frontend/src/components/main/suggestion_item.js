@@ -11,18 +11,23 @@ class SuggestionItem extends React.Component {
     this.state = { followed: false };
     this.handleFollow = this.handleFollow.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
+    this.clicked = false;
   }
 
   handleFollow(e) {
     e.preventDefault();
-    this.props.followUser(this.props.currentUser, this.props.user._id)
-      .then(() => this.setState({ followed: true }));
+    this.setState({ "clicked": true });
+    this.props
+      .followUser(this.props.currentUser, this.props.user._id)
+      .then(() => this.setState({ followed: true, clicked: false }));
   }
 
   handleUnfollow(e) {
     e.preventDefault();
-    this.props.unfollowUser(this.props.currentUser, this.props.user._id)
-      .then(() => this.setState({ followed: false }));
+    this.setState({ "clicked": true });
+    this.props
+      .unfollowUser(this.props.currentUser, this.props.user._id)
+      .then(() => this.setState({ followed: false, clicked: false }));
   }
 
   render() {
@@ -30,13 +35,19 @@ class SuggestionItem extends React.Component {
 
     let followButton;
     if (!this.state.followed) {
-      followButton = <button onClick={this.handleFollow} className='edit-profile-btn inactive'>
+      followButton = <button disabled={this.state.clicked} onClick={this.handleFollow} className='edit-profile-btn inactive'>
           Follow
         </button>
     } else {
-      followButton = <button onClick={this.handleUnfollow} className='edit-profile-btn'>
+      followButton = (
+        <button
+          disabled={this.state.clicked}
+          onClick={this.handleUnfollow}
+          className="edit-profile-btn"
+        >
           Following
         </button>
+      );
     }
 
     return (
