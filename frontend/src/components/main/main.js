@@ -7,6 +7,7 @@ import UserProfile from "./../user_profile/user_profile_container";
 import ShowPost from "./../post/post_show_container";
 import UploadComponent from "./../upload/upload";
 import Explore from "./explore";
+import AboutUs from "../../components/footer/aboutus";
 
 const Main = () => (
   <div className="app-main-page">
@@ -18,6 +19,7 @@ const Main = () => (
       <Route path="/home" component={Feed} />
       <Route exact path="/newpost" component={UploadComponent} />
       <Route exact path="/explore" component={Explore} />
+      <Route exact path="/aboutus" component={AboutUs} />
     </Switch>
   </div>
 );

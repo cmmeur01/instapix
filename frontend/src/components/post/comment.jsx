@@ -63,6 +63,7 @@ class Comment extends React.Component {
           userId: this.props.currentUserId
         })
         .then(() => this.props.fetchPost(this.props.post._id))
+
         // .then(() =>
         //   this.setState({
         //     liked: false,
@@ -76,6 +77,7 @@ class Comment extends React.Component {
           userId: this.props.currentUserId
         })
         .then(() => this.props.fetchPost(this.props.post._id))
+
         // .then(() =>
         //   this.setState({
         //     liked: true,

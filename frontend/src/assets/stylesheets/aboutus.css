@@ -1,0 +1,46 @@
+.about-us {
+  text-align: center;
+  margin-bottom: 50px;
+  top: 100px;
+  margin-top: 78px;
+}
+
+.about-us > h4 {
+  line-height: 30px;
+}
+
+.about-us-list {
+  display: block;
+  margin: 30px auto;
+  width: 400px;
+}
+
+.about-us-list > li {
+  font-size: 20px;
+  list-style-type: disc;
+}
+
+.contact-us {
+  display: block;
+  margin: 30px auto;
+}
+
+.contact-us > li {
+  font-weight: bold;
+  font-size: 20px;
+  list-style-type: none;
+}
+
+.contact-us > li > h5 {
+  font-weight: bold;
+}
+
+.contact-us > li > p > a {
+  color: black;
+}
+
+.contact-us > li > p {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
