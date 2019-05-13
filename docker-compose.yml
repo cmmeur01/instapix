@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  db:
+    image: mongo:3.0.15
+    volumes: 
+      - type: volume
+        source: mongo-db
+        target: /data/db
+    networks:
+      instapix:
+        aliases:
+          - "mongo_db"
+  app:
+    build:
+      context: .
+    image: instapix
+    ports:
+      - 80:3000
+    networks:
+      instapix:
+    environment:
+      MONGO_URI: mongodb://mongo_db/nodeapp
+
+networks:
+  instapix:
+    driver: bridge
+
+volumes: 
+  mongo-db:

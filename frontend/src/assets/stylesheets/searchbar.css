@@ -7,6 +7,10 @@
   left: -10px;
 }
 
+.user-div:hover {
+  cursor: pointer;
+}
+
 .searchbar-div {
   height: 28px;
   flex: 0 1 auto;
